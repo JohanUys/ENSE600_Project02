@@ -1,22 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
-/**
- *
- * @author Chris
- */
 public class MainFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainFrame
-     */
+    // ========== PROPERTIES ==========
+    private MainPanel mainPanel; // Declare mainPanel as a member
+    
+    // ========== CONSTRUCTOR ==========
     public MainFrame() {
         initComponents();
+        mainPanel = new MainPanel(); // Create the main panel
+        setContentPane(mainPanel); // Set the frame to the main panel
     }
 
+    // ========== AUTO-GENERATED ==========
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,7 +22,19 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mainFrameMenuBar = new javax.swing.JMenuBar();
+        menuBarFile = new javax.swing.JMenu();
+        menuBarEdit = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        menuBarFile.setText("File");
+        mainFrameMenuBar.add(menuBarFile);
+
+        menuBarEdit.setText("Edit");
+        mainFrameMenuBar.add(menuBarEdit);
+
+        setJMenuBar(mainFrameMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -36,12 +44,13 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // ========== MAIN METHOD ==========
     /**
      * @param args the command line arguments
      */
@@ -76,7 +85,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    // ========== AUTO-GENERATED ==========
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar mainFrameMenuBar;
+    private javax.swing.JMenu menuBarEdit;
+    private javax.swing.JMenu menuBarFile;
     // End of variables declaration//GEN-END:variables
 }
