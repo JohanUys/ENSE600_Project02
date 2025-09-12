@@ -1,19 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package GUI;
+import LOGIC.*;
 
-/**
- *
- * @author Chris
- */
+
 public class CharacterOverlayPanel extends javax.swing.JPanel {
 
+    private Player player;
+    
     /**
      * Creates new form CharacterOverlayPanel
      */
-    public CharacterOverlayPanel() {
+    public CharacterOverlayPanel(Player player) {
+        this.player = player;
         initComponents();
     }
 
@@ -26,40 +23,42 @@ public class CharacterOverlayPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelCharacterPortrait = new javax.swing.JLabel();
+        labelPlayerName = new javax.swing.JLabel();
         labelPlayerGold = new javax.swing.JLabel();
 
-        labelCharacterPortrait.setBackground(new java.awt.Color(204, 204, 204));
-        labelCharacterPortrait.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCharacterPortrait.setText("Character Portrait");
+        labelPlayerName.setText(player.getName());
 
-        labelPlayerGold.setText("Player Gold");
+        labelPlayerGold.setText("Gold: " + String.valueOf(player.getGold()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelCharacterPortrait, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelPlayerGold)
-                .addContainerGap(226, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(164, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPlayerGold)
+                    .addComponent(labelPlayerName))
+                .addGap(165, 165, 165))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelPlayerGold)
-                    .addComponent(labelCharacterPortrait, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(207, Short.MAX_VALUE)
+                .addComponent(labelPlayerName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelPlayerGold)
+                .addGap(55, 55, 55))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //Update Gold Label
+    public void updateGold(int gold) {
+        labelPlayerGold.setText("Gold: " + String.valueOf(gold));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel labelCharacterPortrait;
     private javax.swing.JLabel labelPlayerGold;
+    private javax.swing.JLabel labelPlayerName;
     // End of variables declaration//GEN-END:variables
 }

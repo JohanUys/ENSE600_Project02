@@ -1,15 +1,22 @@
 package GUI;
 
+import LOGIC.*;
+import java.awt.BorderLayout;
+
 public class MainFrame extends javax.swing.JFrame {
 
     // ========== PROPERTIES ==========
-    private MainPanel mainPanel; // Declare mainPanel as a member
+    private MainPanel mainPanel;
+    private CharacterOverlayPanel overlayPanel;
+    private Player player;
     
     // ========== CONSTRUCTOR ==========
     public MainFrame() {
         initComponents();
-        mainPanel = new MainPanel(); // Create the main panel
-        setContentPane(mainPanel); // Set the frame to the main panel
+        player = new Player();      
+        initOverlayPanel();        
+        mainPanel = new MainPanel();
+        setContentPane(mainPanel);
     }
 
     // ========== AUTO-GENERATED ==========
@@ -84,6 +91,32 @@ public class MainFrame extends javax.swing.JFrame {
                 new MainFrame().setVisible(true);
             }
         });
+    }
+    
+    //Initialise CharacterOverlay
+    private void initOverlayPanel() {
+        overlayPanel = new CharacterOverlayPanel(player);
+        overlayPanel.setVisible(false); // Initialise hidden
+        add(overlayPanel, BorderLayout.EAST);
+    }
+    
+    //Add CharacterOverlay
+    public void onGameLoaded(Player player) {
+        // Create and show overlay panel once game is loaded
+        this.player = player;
+
+        overlayPanel.updateGold(player.getGold());
+        overlayPanel.setVisible(true);
+
+        revalidate(); // refresh layout
+        repaint();    // repaint UI
+    }
+    
+    //Updates Player Gold Display
+    public void updateGoldDisplay() {
+        if (player != null && overlayPanel != null) {
+            overlayPanel.updateGold(player.getGold());
+        }
     }
     
     // ========== AUTO-GENERATED ==========
