@@ -19,7 +19,8 @@ public class PortPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         labelPort = new javax.swing.JLabel();
         buttonViewMarket = new javax.swing.JButton();
@@ -29,6 +30,13 @@ public class PortPanel extends javax.swing.JPanel {
         labelPort.setText("WELCOME TO THE PORT");
 
         buttonViewMarket.setText("View Market");
+        buttonViewMarket.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonViewMarketActionPerformed(evt);
+            }
+        });
 
         buttonViewShipyard.setText("View Shipyard");
 
@@ -63,6 +71,12 @@ public class PortPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // ========== METHODS ==========
+    private void buttonViewMarketActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonViewMarketActionPerformed
+    {//GEN-HEADEREND:event_buttonViewMarketActionPerformed
+        mainPanel.showCard("MarketPanel");
+    }//GEN-LAST:event_buttonViewMarketActionPerformed
+
+
     
     
     // ========== AUTO-GENERATED ==========

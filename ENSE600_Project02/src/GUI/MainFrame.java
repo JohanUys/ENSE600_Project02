@@ -8,12 +8,21 @@ public class MainFrame extends javax.swing.JFrame {
     // ========== PROPERTIES ==========
     private MainPanel mainPanel;
     private CharacterOverlayPanel overlayPanel;
+    
+    private Map map;
     private Player player;
+    private Wind wind;
+    private Port port;
     
     // ========== CONSTRUCTOR ==========
     public MainFrame() {
         initComponents();
-        player = new Player();      
+          
+        map = new Map();
+        player = new Player();
+        wind = new Wind();
+        port = map.getPorts().get("Rhymek");
+        
         initOverlayPanel();        
         mainPanel = new MainPanel();
         setContentPane(mainPanel);

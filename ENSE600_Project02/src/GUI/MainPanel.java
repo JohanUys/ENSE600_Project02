@@ -13,9 +13,12 @@ public class MainPanel extends javax.swing.JPanel {
         setLayout(cardLayout);
 
         // Pass 'this' to child panels so they can control transitions
+        add(new WelcomePanel(this), "Welcome");
         add(new StartGamePanel(this), "StartGame");
         add(new PortPanel(this), "PortPanel");
-        add(new WelcomePanel(this), "Welcome");
+        add(new MarketPanel(this), "MarketPanel");
+        add(new ShipyardPanel(this), "ShipyardPanel");
+        
 
         cardLayout.show(this, "Welcome");
     }

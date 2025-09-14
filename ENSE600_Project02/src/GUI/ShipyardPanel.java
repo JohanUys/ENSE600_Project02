@@ -1,19 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package GUI;
 
-/**
- *
- * @author Chris
- */
 public class ShipyardPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ShipyardPanel
-     */
-    public ShipyardPanel() {
+    // ========== PROPERTIES ==========
+    private MainPanel mainPanel;
+
+    // ========== CONSTRUCTOR ==========
+    public ShipyardPanel(MainPanel mainPanel) {
+        
+        this.mainPanel = mainPanel;
         initComponents();
     }
 

@@ -21,21 +21,10 @@ public class Market {
     }
 
     // ========== GETTERS ==========
-    public double[] getPriceModifiers() {
-        return this.priceModifiers;
-    }
-
-    public ArrayList<Good> getGoods() {
-        return this.goods;
-    }
-
-    public int[] getNumStocks() {
-        return this.numStocks;
-    }
-
-    public String getPortName() {
-        return this.portName;
-    }
+    public double[] getPriceModifiers() {return this.priceModifiers;}
+    public ArrayList<Good> getGoods() {return this.goods;}
+    public int[] getNumStocks() {return this.numStocks;}
+    public String getPortName() {return this.portName;}
 
     // ========== BUY/SELL METHODS ==========
 
