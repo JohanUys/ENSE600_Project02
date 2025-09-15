@@ -1,14 +1,21 @@
-package GUI;
+package GUI.cards;
+
+import GUI.*;
+import LOGIC.*;
 
 public class PortPanel extends javax.swing.JPanel {
 
     // ========== PROPERTIES ==========
-    private MainPanel mainPanel;
-    
+    private CardsPanel cardsPanel;
+    private Game game;
+
     // ========== CONSTRUCTOR ==========
-    public PortPanel(MainPanel mainPanel) {
-        this.mainPanel = mainPanel;
+    public PortPanel(CardsPanel cardsPanel, Game game) 
+    {
         initComponents();
+        
+        this.game = game;
+        this.cardsPanel = cardsPanel;
     }
 
     // ========== AUTO-GENERATED =========
@@ -73,7 +80,7 @@ public class PortPanel extends javax.swing.JPanel {
     // ========== METHODS ==========
     private void buttonViewMarketActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonViewMarketActionPerformed
     {//GEN-HEADEREND:event_buttonViewMarketActionPerformed
-        mainPanel.showCard("MarketPanel");
+        cardsPanel.showCard("MarketPanel");
     }//GEN-LAST:event_buttonViewMarketActionPerformed
 
 

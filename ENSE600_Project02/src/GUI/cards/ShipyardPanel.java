@@ -1,17 +1,23 @@
 
-package GUI;
+package GUI.cards;
+
+import GUI.*;
+import LOGIC.*;
 
 public class ShipyardPanel extends javax.swing.JPanel {
 
     // ========== PROPERTIES ==========
-    private MainPanel mainPanel;
+    private CardsPanel cardsPanel;
+    private Game game;
 
     // ========== CONSTRUCTOR ==========
-    public ShipyardPanel(MainPanel mainPanel) {
-        
-        this.mainPanel = mainPanel;
+    public ShipyardPanel(CardsPanel cardsPanel, Game game) 
+    {
         initComponents();
-    }
+        
+        this.game = game;
+        this.cardsPanel = cardsPanel;
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -20,7 +26,8 @@ public class ShipyardPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

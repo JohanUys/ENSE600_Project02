@@ -1,4 +1,7 @@
-package GUI;
+package GUI.cards;
+
+import GUI.*;
+import LOGIC.*;
 
 import java.awt.event.*;
 import javax.swing.*;
@@ -6,9 +9,12 @@ import javax.swing.*;
 public class WelcomePanel extends javax.swing.JPanel {
 
     // ========== PROPERTIES ==========
+    private final CardsPanel cardsPanel;
+    private final Game game;
+    
+    
     private Timer timer;
     private int currentIndex;
-    private final MainPanel mainPanel;
     private final String fullText = 
             """
             Welcome to the high seas, captain!
@@ -24,10 +30,13 @@ public class WelcomePanel extends javax.swing.JPanel {
             """;
 
     // ========== CONSTRUCTOR ==========
-    public WelcomePanel(MainPanel mainPanel) {
+    public WelcomePanel(CardsPanel cardsPanel, Game game) {
 
-        this.mainPanel = mainPanel;
         initComponents();
+        
+        this.game = game;
+        this.cardsPanel = cardsPanel;
+        
         
         currentIndex = 0;
          
@@ -57,7 +66,8 @@ public class WelcomePanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         textAreaWelcome = new javax.swing.JTextArea();
@@ -67,8 +77,10 @@ public class WelcomePanel extends javax.swing.JPanel {
         textAreaWelcome.setLineWrap(true);
         textAreaWelcome.setRows(5);
         textAreaWelcome.setWrapStyleWord(true);
-        textAreaWelcome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        textAreaWelcome.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 textAreaWelcomeKeyPressed(evt);
             }
         });
@@ -102,8 +114,8 @@ public class WelcomePanel extends javax.swing.JPanel {
             textAreaWelcome.setText(fullText);
         } else {
             // Typing is done, proceed to StartGame panel
-            if (mainPanel != null) {
-            mainPanel.showCard("StartGame");
+            if (cardsPanel != null) {
+            cardsPanel.showCard("StartGame");
             } else {
                 System.err.println("mainPanel is null!");
             }

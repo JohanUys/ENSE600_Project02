@@ -1,16 +1,22 @@
-package GUI;
+package GUI.cards;
+
+import GUI.*;
+import LOGIC.*;
 
 public class StartGamePanel extends javax.swing.JPanel {
 
     // ========== PROPERTIES ==========
-    private MainPanel mainPanel;
-    
-    // ========== CONSTRUCTOR =========
-    public StartGamePanel(MainPanel mainPanel) {
-        this.mainPanel = mainPanel;
+    private CardsPanel cardsPanel;
+    private Game game;
+
+    // ========== CONSTRUCTOR ==========
+    public StartGamePanel(CardsPanel cardsPanel, Game game) 
+    {
         initComponents();
         
-    }
+        this.game = game;
+        this.cardsPanel = cardsPanel;
+    }   
 
     // ========== AUTO-GENERATED ==========
     /**
@@ -20,7 +26,8 @@ public class StartGamePanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         buttonNewGame = new javax.swing.JButton();
         buttonLoadGame = new javax.swing.JButton();
@@ -28,8 +35,10 @@ public class StartGamePanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         buttonNewGame.setText("New Game");
-        buttonNewGame.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonNewGame.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonNewGameActionPerformed(evt);
             }
         });
@@ -61,7 +70,8 @@ public class StartGamePanel extends javax.swing.JPanel {
     // ========== METHODS ==========
     //New Game button clicked
     private void buttonNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewGameActionPerformed
-        mainPanel.showCard("PortPanel"); //Start game in a port
+        cardsPanel.showCard("PortPanel"); //Start game in a port
+        
     }//GEN-LAST:event_buttonNewGameActionPerformed
 
     // ========== AUTO-GENERATED ==========

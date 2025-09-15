@@ -1,31 +1,35 @@
 package GUI;
 
-import LOGIC.*;
+import LOGIC.Game;
 import java.awt.BorderLayout;
 
 public class MainFrame extends javax.swing.JFrame {
 
     // ========== PROPERTIES ==========
-    private MainPanel mainPanel;
-    private CharacterOverlayPanel overlayPanel;
+    private final Game game;
     
-    private Map map;
-    private Player player;
-    private Wind wind;
-    private Port port;
+    private final CardsPanel cardsPanel;
+    private final PlayerPanel playerPanel;
     
     // ========== CONSTRUCTOR ==========
-    public MainFrame() {
+    public MainFrame() 
+    {
         initComponents();
-          
-        map = new Map();
-        player = new Player();
-        wind = new Wind();
-        port = map.getPorts().get("Rhymek");
+        setLayout(new BorderLayout());
         
-        initOverlayPanel();        
-        mainPanel = new MainPanel();
-        setContentPane(mainPanel);
+        //Initialize a game to store all of the game data and objects
+        game = new Game();
+        
+        //Initialize the panels that will be added to the MainFrame 
+        cardsPanel = new CardsPanel(this);
+        playerPanel = new PlayerPanel(this);
+        
+        //Add the panels to the MainFrame 
+        add(cardsPanel, BorderLayout.WEST);
+        add(playerPanel, BorderLayout.EAST);
+        
+        //Set player panel to be initially invisible
+        playerPanel.setVisible(false);
     }
 
     // ========== AUTO-GENERATED ==========
@@ -36,7 +40,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         mainFrameMenuBar = new javax.swing.JMenuBar();
         menuBarFile = new javax.swing.JMenu();
@@ -67,9 +72,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // ========== MAIN METHOD ==========
-    /**
-     * @param args the command line arguments
-     */
+    // Runs constructor. 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -95,38 +98,40 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable() 
+        {
+            public void run() 
+            {
+                //Runs MainFrame constructor. This is the entry point to thep program
                 new MainFrame().setVisible(true);
             }
         });
     }
     
-    //Initialise CharacterOverlay
-    private void initOverlayPanel() {
-        overlayPanel = new CharacterOverlayPanel(player);
-        overlayPanel.setVisible(false); // Initialise hidden
-        add(overlayPanel, BorderLayout.EAST);
-    }
+    public Game getGame() {return this.game;}
+    public CardsPanel getCardsPanel() {return this.cardsPanel;}
+    public PlayerPanel getPlayerPanel() {return this.playerPanel;}
     
-    //Add CharacterOverlay
-    public void onGameLoaded(Player player) {
-        // Create and show overlay panel once game is loaded
-        this.player = player;
-
-        overlayPanel.updateGold(player.getGold());
-        overlayPanel.setVisible(true);
-
-        revalidate(); // refresh layout
-        repaint();    // repaint UI
-    }
+    // ========= METHODS ===============
     
-    //Updates Player Gold Display
-    public void updateGoldDisplay() {
-        if (player != null && overlayPanel != null) {
-            overlayPanel.updateGold(player.getGold());
-        }
-    }
+//    //Add CharacterOverlay
+//    public void onGameLoaded(Player player) {
+//        // Create and show overlay panel once game is loaded
+//        this.player = player;
+//
+//        overlayPanel.updateGold(player.getGold());
+//        overlayPanel.setVisible(true);
+//
+//        revalidate(); // refresh layout
+//        repaint();    // repaint UI
+//    }
+//    
+//    //Updates Player Gold Display
+//    public void updateGoldDisplay() {
+//        if (player != null && overlayPanel != null) {
+//            overlayPanel.updateGold(player.getGold());
+//        }
+//    }
     
     // ========== AUTO-GENERATED ==========
     // Variables declaration - do not modify//GEN-BEGIN:variables

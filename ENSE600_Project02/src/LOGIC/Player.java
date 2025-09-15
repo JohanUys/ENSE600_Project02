@@ -5,7 +5,7 @@ import LOGIC.ships.*;
 public class Player
 {
     //========== PROPERTIES ==========
-    private String name;
+    private String name = "DefaultName";
     private int gold;
     private Ship ship;
     public enum GameStatus 
@@ -44,7 +44,6 @@ public class Player
     {
         if (this.gold < amount) 
         {
-            System.out.println("Not enough gold!");
             return;
         }
         this.gold -= amount;

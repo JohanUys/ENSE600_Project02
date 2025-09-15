@@ -9,7 +9,6 @@ import java.util.Random;
 public class Ship
 {
     //========== PROPERTIES ==========
-    
     protected String name;
     
     //Ship inherent properties
