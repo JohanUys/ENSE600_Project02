@@ -32,11 +32,9 @@ public class WelcomePanel extends javax.swing.JPanel {
     // ========== CONSTRUCTOR ==========
     public WelcomePanel(CardsPanel cardsPanel, Game game) {
 
-        initComponents();
-        
         this.game = game;
         this.cardsPanel = cardsPanel;
-        
+        initComponents();
         
         currentIndex = 0;
          

@@ -1,11 +1,12 @@
 package GUI;
 
 import LOGIC.*;
+import javax.swing.DefaultListModel;
 
 public class PlayerPanel extends javax.swing.JPanel {
 
-    private MainFrame frame;
-    private Game game;
+    private final Game game;
+    private final MainFrame frame;
     
     public PlayerPanel(MainFrame frame) 
     {
@@ -13,6 +14,8 @@ public class PlayerPanel extends javax.swing.JPanel {
         this.game = frame.getGame();
         
         initComponents();
+        
+        showShip();
     }
     
     public MainFrame getMainFrame() {return this.frame;}
@@ -29,57 +32,156 @@ public class PlayerPanel extends javax.swing.JPanel {
 
         labelPlayerName = new javax.swing.JLabel();
         labelPlayerGold = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        panelPlayerShip = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listHold = new javax.swing.JList<>();
+        labelMyShip = new javax.swing.JLabel();
+        labelShipType = new javax.swing.JLabel();
+        labelShipGuns = new javax.swing.JLabel();
+        labelShipMaxSpeed = new javax.swing.JLabel();
+        labelShipHoldSpace = new javax.swing.JLabel();
 
         labelPlayerName.setText(game.getPlayer().getName());
 
         labelPlayerGold.setText("Gold: " + String.valueOf(game.getPlayer().getGold()));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>()
+        listHold.addMouseListener(new java.awt.event.MouseAdapter()
         {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                listHoldMouseClicked(evt);
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane2.setViewportView(listHold);
+
+        labelMyShip.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelMyShip.setText("My Ship:");
+
+        labelShipType.setText("Ship Type: " + game.getPlayer().getShip().getName()
+        );
+
+        labelShipGuns.setText("Guns: " + game.getPlayer().getShip().getGuns()
+        );
+
+        labelShipMaxSpeed.setText("Max Speed: " + game.getPlayer().getShip().getMaxSpeed()
+        );
+
+        labelShipHoldSpace.setText("Hold Space: (" + game.getPlayer().getShip().getHold().size() + "/" + game.getPlayer().getShip().getMaxHoldSpace() + ")"
+        );
+
+        javax.swing.GroupLayout panelPlayerShipLayout = new javax.swing.GroupLayout(panelPlayerShip);
+        panelPlayerShip.setLayout(panelPlayerShipLayout);
+        panelPlayerShipLayout.setHorizontalGroup(
+            panelPlayerShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPlayerShipLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelPlayerShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPlayerShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelPlayerShipLayout.createSequentialGroup()
+                            .addComponent(labelShipGuns)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelShipHoldSpace))
+                        .addGroup(panelPlayerShipLayout.createSequentialGroup()
+                            .addGroup(panelPlayerShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelMyShip))
+                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(panelPlayerShipLayout.createSequentialGroup()
+                        .addComponent(labelShipType)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelShipMaxSpeed)))
+                .addContainerGap())
+        );
+        panelPlayerShipLayout.setVerticalGroup(
+            panelPlayerShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPlayerShipLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelMyShip)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelPlayerShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelShipType)
+                    .addComponent(labelShipMaxSpeed))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelPlayerShipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelShipGuns)
+                    .addComponent(labelShipHoldSpace))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(234, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelPlayerName, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelPlayerGold, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelPlayerGold)
+                            .addComponent(labelPlayerName))
+                        .addGap(112, 112, 112))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 329, Short.MAX_VALUE)
+                        .addComponent(panelPlayerShip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(147, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelPlayerName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelPlayerGold)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(labelPlayerName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelPlayerGold)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelPlayerShip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void listHoldMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_listHoldMouseClicked
+    {//GEN-HEADEREND:event_listHoldMouseClicked
+        int index = listHold.getSelectedIndex();
+        game.getPort().getMarket().sell(index, game.getPlayer());
+        
+        showShip();
+        frame.getCardsPanel().getMarketPanel().showGoods();
+    }//GEN-LAST:event_listHoldMouseClicked
+
+    public final void showShip()
+    {
+        //Show the hold Space
+        labelShipHoldSpace.setText("Hold Space: (" + game.getPlayer().getShip().getHold().size() + "/" + game.getPlayer().getShip().getMaxHoldSpace() + ")"
+        );
+        
+        //Initialize a default list model to store the goods
+        DefaultListModel<String> dlm = new DefaultListModel();
+        //Add each good into the default list model
+        for(Good g : game.getPlayer().getShip().getHold())
+        {
+            int adjustedPrice = g.getAdjustedPrice(game.getPort().getMarket());
+            dlm.addElement(g.getName() + " : $" + adjustedPrice + " (Maximum price : " + (int)g.getMaxPrice() + ")");
+        }
+        //Set the list to default list model.
+        listHold.setModel(dlm);
+    }
+    
     //Update Gold Label
     public void updateGold(int gold) {
         labelPlayerGold.setText("Gold: " + String.valueOf(gold));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelMyShip;
     private javax.swing.JLabel labelPlayerGold;
     private javax.swing.JLabel labelPlayerName;
+    private javax.swing.JLabel labelShipGuns;
+    private javax.swing.JLabel labelShipHoldSpace;
+    private javax.swing.JLabel labelShipMaxSpeed;
+    private javax.swing.JLabel labelShipType;
+    private javax.swing.JList<String> listHold;
+    private javax.swing.JPanel panelPlayerShip;
     // End of variables declaration//GEN-END:variables
 }

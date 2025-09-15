@@ -9,25 +9,32 @@ import javax.swing.DefaultListModel;
 public class MarketPanel extends javax.swing.JPanel {
 
     // ========== PROPERTIES ==========
-    private CardsPanel cardsPanel;
-    private Game game;
+    private final CardsPanel cardsPanel;
+    private final Game game;
 
     // ========== CONSTRUCTOR ==========
     public MarketPanel(CardsPanel cardsPanel, Game game) 
-    {
-        initComponents();
-        
+    {   
         this.game = game;
         this.cardsPanel = cardsPanel;
+        initComponents();
         
-        
+        showGoods();
+    }
+    
+    //=========== METHODS ==============
+    
+    public final void showGoods()
+    {
+        //Initialize a default list model to store the goods
         DefaultListModel<String> dlm = new DefaultListModel();
-        
+        //Add each good into the default list model
         for(Good g : game.getPort().getMarket().getGoods())
         {
-            dlm.addElement(g.getName());
+            int adjustedPrice = g.getAdjustedPrice(game.getPort().getMarket());
+            dlm.addElement(g.getName() + " : $" + adjustedPrice + " (Maximum price : " + (int)g.getMaxPrice() + ")");
         }
-        
+        //Set the list to default list model.
         listGoods.setModel(dlm);
     }
 
@@ -44,39 +51,72 @@ public class MarketPanel extends javax.swing.JPanel {
         labelPortMarket = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listGoods = new javax.swing.JList<>();
+        buttonLeaveMarket = new javax.swing.JButton();
 
-        labelPortMarket.setText("Port Market");
+        labelPortMarket.setText(game.getPort().getName() + " Market"
+        );
         labelPortMarket.setName("labelPortNameMarket"); // NOI18N
 
+        listGoods.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                listGoodsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listGoods);
+
+        buttonLeaveMarket.setText("Leave Market");
+        buttonLeaveMarket.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonLeaveMarketActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(labelPortMarket))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(267, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonLeaveMarket)
+                    .addComponent(labelPortMarket))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(labelPortMarket)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buttonLeaveMarket)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonLeaveMarketActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonLeaveMarketActionPerformed
+    {//GEN-HEADEREND:event_buttonLeaveMarketActionPerformed
+        cardsPanel.showCard("PortPanel");
+    }//GEN-LAST:event_buttonLeaveMarketActionPerformed
+
+    private void listGoodsMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_listGoodsMouseClicked
+    {//GEN-HEADEREND:event_listGoodsMouseClicked
+        int index = listGoods.getSelectedIndex();
+        game.getPort().getMarket().buy(index, game.getPlayer());
+        
+        showGoods();
+        cardsPanel.getMainFrame().getPlayerPanel().showShip();
+    }//GEN-LAST:event_listGoodsMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonLeaveMarket;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelPortMarket;
     private javax.swing.JList<String> listGoods;

@@ -6,16 +6,15 @@ import LOGIC.*;
 public class StartGamePanel extends javax.swing.JPanel {
 
     // ========== PROPERTIES ==========
-    private CardsPanel cardsPanel;
-    private Game game;
+    private final CardsPanel cardsPanel;
+    private final Game game;
 
     // ========== CONSTRUCTOR ==========
     public StartGamePanel(CardsPanel cardsPanel, Game game) 
     {
-        initComponents();
-        
         this.game = game;
         this.cardsPanel = cardsPanel;
+        initComponents();
     }   
 
     // ========== AUTO-GENERATED ==========
@@ -71,6 +70,7 @@ public class StartGamePanel extends javax.swing.JPanel {
     //New Game button clicked
     private void buttonNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewGameActionPerformed
         cardsPanel.showCard("PortPanel"); //Start game in a port
+        cardsPanel.getMainFrame().getPlayerPanel().setVisible(true);
         
     }//GEN-LAST:event_buttonNewGameActionPerformed
 

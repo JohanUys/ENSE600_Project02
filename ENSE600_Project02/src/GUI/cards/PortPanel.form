@@ -24,7 +24,7 @@
                   <Component id="buttonViewShipyard" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonTravel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="263" max="32767" attributes="0"/>
+              <EmptySpace pref="288" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,7 +47,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="labelPort">
       <Properties>
-        <Property name="text" type="java.lang.String" value="WELCOME TO THE PORT"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="game.getPort().getName()&#xd;&#xa;" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="buttonViewMarket">

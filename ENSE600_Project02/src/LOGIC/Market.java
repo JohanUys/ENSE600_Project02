@@ -28,9 +28,9 @@ public class Market {
 
     // ========== BUY/SELL METHODS ==========
 
-    public boolean buy(Player player, String input) {
+    public boolean buy(int index, Player player) {
         try {
-            Good good = Good.valueOf(input.toUpperCase());
+            Good good = goods.get(index);
             int adjustedPrice = good.getAdjustedPrice(this);
 
             if (!stocks(good)) return false;
@@ -47,9 +47,9 @@ public class Market {
         }
     }
 
-    public boolean sell(Player player, String input) {
+    public boolean sell(int index, Player player) {
         try {
-            Good good = Good.valueOf(input.toUpperCase());
+            Good good = player.getShip().getHold().get(index);
 
             if (!player.getShip().hasInHold(good)) return false;
 
@@ -82,7 +82,7 @@ public class Market {
         return this.goods.contains(good);
     }
 
-    public void generateStock() {
+    public final void generateStock() {
         goods.clear();
 
         Random random = new Random();

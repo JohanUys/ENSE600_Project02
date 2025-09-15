@@ -6,16 +6,15 @@ import LOGIC.*;
 public class PortPanel extends javax.swing.JPanel {
 
     // ========== PROPERTIES ==========
-    private CardsPanel cardsPanel;
-    private Game game;
+    private final CardsPanel cardsPanel;
+    private final Game game;
 
     // ========== CONSTRUCTOR ==========
     public PortPanel(CardsPanel cardsPanel, Game game) 
     {
-        initComponents();
-        
         this.game = game;
         this.cardsPanel = cardsPanel;
+        initComponents();
     }
 
     // ========== AUTO-GENERATED =========
@@ -34,7 +33,8 @@ public class PortPanel extends javax.swing.JPanel {
         buttonViewShipyard = new javax.swing.JButton();
         buttonTravel = new javax.swing.JButton();
 
-        labelPort.setText("WELCOME TO THE PORT");
+        labelPort.setText(game.getPort().getName()
+        );
 
         buttonViewMarket.setText("View Market");
         buttonViewMarket.addActionListener(new java.awt.event.ActionListener()
@@ -60,7 +60,7 @@ public class PortPanel extends javax.swing.JPanel {
                     .addComponent(buttonViewMarket)
                     .addComponent(buttonViewShipyard)
                     .addComponent(buttonTravel))
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

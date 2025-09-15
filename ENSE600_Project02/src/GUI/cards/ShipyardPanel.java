@@ -7,16 +7,16 @@ import LOGIC.*;
 public class ShipyardPanel extends javax.swing.JPanel {
 
     // ========== PROPERTIES ==========
-    private CardsPanel cardsPanel;
-    private Game game;
+    private final CardsPanel cardsPanel;
+    private final Game game;
 
     // ========== CONSTRUCTOR ==========
     public ShipyardPanel(CardsPanel cardsPanel, Game game) 
-    {
-        initComponents();
-        
+    {        
         this.game = game;
         this.cardsPanel = cardsPanel;
+        initComponents();
+
     }   
 
     /**
