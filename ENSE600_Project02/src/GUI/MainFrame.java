@@ -33,6 +33,11 @@ public class MainFrame extends javax.swing.JFrame {
         playerPanel.setVisible(false);
     }
     
+    // GETTERS =================================================================
+    public Game getGame() {return this.game;}
+    public CardsPanel getCardsPanel() {return this.cardsPanel;}
+    public PlayerPanel getPlayerPanel() {return this.playerPanel;}
+    
     // METHODS =================================================================
     public void displayMessage(String message)
     {
@@ -108,11 +113,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
-    // GETTERS =================================================================
-    public Game getGame() {return this.game;}
-    public CardsPanel getCardsPanel() {return this.cardsPanel;}
-    public PlayerPanel getPlayerPanel() {return this.playerPanel;}
     
     // AUTO GENERATED ==========================================================
     // Variables declaration - do not modify//GEN-BEGIN:variables

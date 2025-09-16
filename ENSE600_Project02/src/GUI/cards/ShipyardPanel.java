@@ -4,9 +4,8 @@ package GUI.cards;
 import GUI.*;
 import LOGIC.*;
 
-public class ShipyardPanel extends javax.swing.JPanel
-{
-
+public class ShipyardPanel extends javax.swing.JPanel {
+    
     // PROPERTIES ==============================================================
     private final CardsPanel cardsPanel;
     private final Game game;

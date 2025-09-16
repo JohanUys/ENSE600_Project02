@@ -3,8 +3,8 @@ package GUI.cards;
 import GUI.*;
 import LOGIC.*;
 
-public class PortPanel extends javax.swing.JPanel
-{
+public class PortPanel extends javax.swing.JPanel {
+    
     // PROPERTIES ==============================================================
     private final CardsPanel cardsPanel;
     private final Game game;

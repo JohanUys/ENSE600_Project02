@@ -12,11 +12,11 @@ public class PlayerPanel extends javax.swing.JPanel {
     // CONSTRUCTOR =============================================================
     public PlayerPanel(MainFrame frame) 
     {
+        //Store frame and game as fields 
         this.frame = frame;
         this.game = frame.getGame();
         
         initComponents();
-        
         updateDisplay();
     }
     

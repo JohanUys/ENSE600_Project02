@@ -6,8 +6,8 @@ import LOGIC.*;
 
 import javax.swing.DefaultListModel;
 
-public class MarketPanel extends javax.swing.JPanel
-{
+public class MarketPanel extends javax.swing.JPanel {
+    
     // PROPERTIES ==============================================================
     private final CardsPanel cardsPanel;
     private final Game game;
