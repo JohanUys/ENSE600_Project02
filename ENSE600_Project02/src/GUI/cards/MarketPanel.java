@@ -106,7 +106,13 @@ public class MarketPanel extends javax.swing.JPanel
         //Find index of item to buy
         int index = listGoods.getSelectedIndex();
         //Buy that item 
-        game.getPort().getMarket().buy(index, game.getPlayer());
+        String message = game.getPort().getMarket().buy(index, game.getPlayer());
+        
+        if(message != null)
+        {
+            //Display message to user.
+            cardsPanel.getMainFrame().displayMessage(message);
+        }
         
         //Update displays
         updateDisplay();

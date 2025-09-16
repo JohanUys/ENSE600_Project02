@@ -28,40 +28,34 @@ public class Market {
 
     // ========== BUY/SELL METHODS ==========
 
-    public boolean buy(int index, Player player) {
-        try {
-            Good good = goods.get(index);
-            int adjustedPrice = good.getAdjustedPrice(this);
+    public String buy(int index, Player player) 
+    {
+        Good good = goods.get(index);
+        int adjustedPrice = good.getAdjustedPrice(this);
 
-            if (!stocks(good)) return false;
-            if (!player.getShip().hasHoldSpace()) return false;
-            if (player.getGold() < adjustedPrice) return false;
+        if (!stocks(good)) return "We don't sell that here!";
+        if (!player.getShip().hasHoldSpace()) return "No more space in the hold, captain!";
+        if (player.getGold() < adjustedPrice) return "We don't have enough gold for that!";
 
-            player.subtractGold(adjustedPrice);
-            unstock(good);
-            player.getShip().load(good);
+        player.subtractGold(adjustedPrice);
+        unstock(good);
+        player.getShip().load(good);
 
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+        return null;
     }
 
-    public boolean sell(int index, Player player) {
-        try {
-            Good good = player.getShip().getHold().get(index);
+    public String sell(int index, Player player) 
+    {
+        Good good = player.getShip().getHold().get(index);
 
-            if (!player.getShip().hasInHold(good)) return false;
+        if (!player.getShip().hasInHold(good)) return "We don't have any of that!";
 
-            int adjustedPrice = good.getAdjustedPrice(this);
-            player.getShip().unload(good);
-            stock(good);
-            player.addGold(adjustedPrice);
+        int adjustedPrice = good.getAdjustedPrice(this);
+        player.getShip().unload(good);
+        stock(good);
+        player.addGold(adjustedPrice);
 
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+        return null;
     }
 
     // ========== STOCK CONTROL ==========

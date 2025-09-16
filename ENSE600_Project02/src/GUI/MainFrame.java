@@ -2,6 +2,7 @@ package GUI;
 
 import LOGIC.Game;
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -30,6 +31,12 @@ public class MainFrame extends javax.swing.JFrame {
         
         //Set player panel to be initially invisible
         playerPanel.setVisible(false);
+    }
+    
+    // METHODS =================================================================
+    public void displayMessage(String message)
+    {
+        JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
 
     // AUTO GENERATED ==========================================================
@@ -106,7 +113,6 @@ public class MainFrame extends javax.swing.JFrame {
     public Game getGame() {return this.game;}
     public CardsPanel getCardsPanel() {return this.cardsPanel;}
     public PlayerPanel getPlayerPanel() {return this.playerPanel;}
-    
     
     // AUTO GENERATED ==========================================================
     // Variables declaration - do not modify//GEN-BEGIN:variables

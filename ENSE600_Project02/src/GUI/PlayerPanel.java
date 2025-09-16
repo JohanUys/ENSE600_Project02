@@ -26,7 +26,7 @@ public class PlayerPanel extends javax.swing.JPanel {
     // METHODS =================================================================
     public final void updateDisplay()
     {
-        //Update labels 
+        //Update components 
         labelPlayerName.setText(game.getPlayer().getName());
         labelPlayerGold.setText("Gold: " + String.valueOf(game.getPlayer().getGold()));
         labelShipType.setText("Ship Type: " + game.getPlayer().getShip().getName());
@@ -34,6 +34,7 @@ public class PlayerPanel extends javax.swing.JPanel {
         labelShipMaxSpeed.setText("Max Speed: " + game.getPlayer().getShip().getMaxSpeed());
         labelShipHoldSpace.setText("Hold Space: (" + game.getPlayer().getShip().getHold().size() + "/" + game.getPlayer().getShip().getMaxHoldSpace() + ")");
         
+        //DISPLAY THE HOLD
         //Initialize a default list model to store the goods
         DefaultListModel<String> dlm = new DefaultListModel();
         //Add each good into the default list model
@@ -171,7 +172,12 @@ public class PlayerPanel extends javax.swing.JPanel {
             //Find the index of the item to sell
             int index = listHold.getSelectedIndex();
             //Sell that item
-            game.getPort().getMarket().sell(index, game.getPlayer());
+            String message = game.getPort().getMarket().sell(index, game.getPlayer());
+            
+            if(message != null)
+            {
+                frame.displayMessage(message);
+            }
 
             //Update displays
             updateDisplay();
