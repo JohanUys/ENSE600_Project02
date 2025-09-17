@@ -1,7 +1,9 @@
 package GUI.cards;
 
+import GUI.canvases.MapCanvas;
 import GUI.*;
 import LOGIC.*;
+
 import java.awt.Dimension;
 import java.awt.Point;
 import javax.swing.SwingUtilities;
@@ -9,21 +11,26 @@ import javax.swing.SwingUtilities;
 public class MapPanel extends javax.swing.JPanel {
 
     // PROPERTIES ==============================================================
-    private final MainFrame mainFrame;
     private final CardsPanel cardsPanel;
-    private final PlayerPanel playerPanel;
     private final Game game;
+    
+    private final PlayerPanel playerPanel;
     private final Map map;
     private final MapCanvas mapCanvas;
 
     // CONSTRUCTOR =============================================================
-    public MapPanel(MainFrame mainFrame, CardsPanel cardsPanel, Game game) {
-        this.mainFrame = mainFrame;
-        this.cardsPanel = cardsPanel;
+    public MapPanel(CardsPanel cardsPanel, Game game) 
+    {
         this.game = game;
+        this.cardsPanel = cardsPanel;
+        
         this.map = game.getMap();
+        
+        //Initialize the map canvas
         this.mapCanvas = new MapCanvas(map);
-        this.playerPanel = mainFrame.getPlayerPanel();
+        mapCanvas.setCurrentPort(game.getPort());
+        
+        this.playerPanel = cardsPanel.getMainFrame().getPlayerPanel();
         initComponents();
         if (!map.getPorts().isEmpty()) {
             Port currentPort = game.getPort();

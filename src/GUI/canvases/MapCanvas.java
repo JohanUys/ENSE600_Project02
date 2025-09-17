@@ -1,7 +1,8 @@
-package GUI.cards;
+package GUI.canvases;
 
 import LOGIC.Map;
 import LOGIC.Port;
+
 import java.awt.*;
 
 public class MapCanvas extends javax.swing.JPanel {
@@ -106,7 +107,8 @@ public class MapCanvas extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         setMinimumSize(new java.awt.Dimension(1200, 1200));
         setPreferredSize(new java.awt.Dimension(1200, 1200));

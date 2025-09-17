@@ -99,7 +99,7 @@ public class PortPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonViewShipyardActionPerformed
     // When 'Travel' button is clicked set map canvas and change to 'MapPanel' card
     private void buttonTravelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTravelActionPerformed
-        cardsPanel.getMapCanvas().setCurrentPort(game.getPort());
+
         cardsPanel.showCard("MapPanel");
     }//GEN-LAST:event_buttonTravelActionPerformed
 

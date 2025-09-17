@@ -1,7 +1,8 @@
 package GUI;
 
-import GUI.cards.CompassInlayCanvas;
+import GUI.canvases.CompassInlayCanvas;
 import LOGIC.*;
+
 import javax.swing.DefaultListModel;
 
 // PANEL CONTAINING PLAYER INFORMATION
@@ -10,6 +11,7 @@ public class PlayerPanel extends javax.swing.JPanel {
     // PROPERTIES ==============================================================
     private final Game game;
     private final MainFrame frame;
+    
     private final CompassInlayCanvas compassInlay;
     
     // CONSTRUCTOR =============================================================

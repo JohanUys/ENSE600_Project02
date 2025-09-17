@@ -49,7 +49,8 @@ public class MainFrame extends javax.swing.JFrame {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         mainFrameMenuBar = new javax.swing.JMenuBar();
         menuBarFile = new javax.swing.JMenu();

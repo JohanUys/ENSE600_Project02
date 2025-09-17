@@ -1,8 +1,9 @@
-package GUI.cards;
+package GUI.canvases;
 
-import java.awt.*;
 import LOGIC.Wind;
 import LOGIC.Direction;
+
+import java.awt.*;
 
 public class CompassInlayCanvas extends javax.swing.JPanel {
 
@@ -76,7 +77,8 @@ public class CompassInlayCanvas extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
