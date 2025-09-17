@@ -92,7 +92,8 @@ public class CardsPanel extends javax.swing.JPanel {
 
     // AUTO GENERATED ==========================================================
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         setPreferredSize(new java.awt.Dimension(260, 400));
 
@@ -100,11 +101,11 @@ public class CardsPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 497, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

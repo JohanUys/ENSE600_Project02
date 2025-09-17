@@ -48,7 +48,7 @@ public class StartGamePanel extends javax.swing.JPanel {
                 .addComponent(buttonNewGame)
                 .addGap(32, 32, 32)
                 .addComponent(buttonLoadGame)
-                .addGap(90, 90, 90))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,8 +65,7 @@ public class StartGamePanel extends javax.swing.JPanel {
     //New Game button clicked
     private void buttonNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewGameActionPerformed
         cardsPanel.showCard("PortPanel"); //Start game in a port
-        cardsPanel.getMainFrame().getPlayerPanel().setVisible(true);
-        
+        cardsPanel.getMainFrame().getPlayerPanel().setVisible(true); 
     }//GEN-LAST:event_buttonNewGameActionPerformed
 
     // AUTO GENERATED ==========================================================

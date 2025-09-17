@@ -31,6 +31,5 @@ public class Game
 
         // Reset the market when arriving at a new port
         destination.resetMarket();
-
     }
 }

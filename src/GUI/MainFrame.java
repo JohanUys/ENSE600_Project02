@@ -1,7 +1,7 @@
 package GUI;
 
 import LOGIC.Game;
-import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 
 // PROJECT MAIN FRAME
@@ -17,7 +17,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() 
     {
         initComponents();
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+        setLayout(new BorderLayout());
 
         //Initialize a game to store all of the game data and objects
         game = new Game();
@@ -28,8 +28,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         
         //Add the panels to the MainFrame 
-        add(cardsPanel);
-        add(playerPanel);
+        add(cardsPanel, BorderLayout.CENTER);
+        add(playerPanel, BorderLayout.EAST);
         
         //Set player panel to be initially invisible
         playerPanel.setVisible(false);    
@@ -71,11 +71,11 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+            .addGap(0, 695, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 426, Short.MAX_VALUE)
         );
 
         pack();

@@ -35,7 +35,6 @@ public class MapPanel extends javax.swing.JPanel {
         if (!map.getPorts().isEmpty()) {
             Port currentPort = game.getPort();
             mapCanvas.setCurrentPort(currentPort);
-            updateDistanceList();
         }
         populatePortComboBox();
     }
@@ -117,68 +116,68 @@ public class MapPanel extends javax.swing.JPanel {
         scrollPaneMap.getViewport().setViewPosition(new Point(viewX, viewY));
     }
 
-    // Add distances and travel times from the player's current port to other ports to the text area
-    private void updateDistanceList() {
-        Port currentPort = game.getPort();
-        if (currentPort == null) return;
-
-        String currentPortName = currentPort.getName();
-        java.util.HashMap<String, Port> allPorts = map.getPorts();
-
-        // Get wind and ship informatuion for travel time
-        Wind currentWind = game.getWind();
-        Ship currentShip = game.getPlayer().getShip();
-
-        StringBuilder distanceText = new StringBuilder();
-        distanceText.append("Port Distances:\n");
-
-        // Append distance and travel times for each available port
-        for (String portName : allPorts.keySet()) {
-            if (!portName.equals(currentPortName)) {
-                int distance = map.calculatePortDistance(currentPortName, portName);
-                int travelTimeHours = map.calculatePortTravelTime(currentPortName, portName, currentWind, currentShip);
-
-                int days = travelTimeHours / 24;
-                int hours = travelTimeHours % 24;
-
-                distanceText.append(portName)
-                            .append(": ")
-                            .append(distance)
-                            .append(" nmi.")
-                            .append(" Travel time: ");
-
-                // Build day(s)/hour(s) string depending on the values
-                if (days > 0) {
-                    distanceText.append(days)
-                                .append(" day")
-                                .append(days > 1 ? "s" : "");
-
-                    if (hours > 0) {
-                        distanceText.append(" and ");
-                    }
-                }
-
-                if (hours > 0 || days == 0) {
-                    distanceText.append(hours)
-                                .append(" hour")
-                                .append(hours != 1 ? "s" : "");
-                }
-
-                distanceText.append(".\n");
-            }
-        }
-
-        textAreaDistanceList.setText(distanceText.toString());
-    }
+//    // Add distances and travel times from the player's current port to other ports to the text area
+//    private void updateDistanceList() {
+//        Port currentPort = game.getPort();
+//        if (currentPort == null) return;
+//
+//        String currentPortName = currentPort.getName();
+//        java.util.HashMap<String, Port> allPorts = map.getPorts();
+//
+//        // Get wind and ship informatuion for travel time
+//        Wind currentWind = game.getWind();
+//        Ship currentShip = game.getPlayer().getShip();
+//
+//        StringBuilder distanceText = new StringBuilder();
+//        distanceText.append("Port Distances:\n");
+//
+//        // Append distance and travel times for each available port
+//        for (String portName : allPorts.keySet()) {
+//            if (!portName.equals(currentPortName)) {
+//                int distance = map.calculatePortDistance(currentPortName, portName);
+//                int travelTimeHours = map.calculatePortTravelTime(currentPortName, portName, currentWind, currentShip);
+//
+//                int days = travelTimeHours / 24;
+//                int hours = travelTimeHours % 24;
+//
+//                distanceText.append(portName)
+//                            .append(": ")
+//                            .append(distance)
+//                            .append(" nmi.")
+//                            .append(" Travel time: ");
+//
+//                // Build day(s)/hour(s) string depending on the values
+//                if (days > 0) {
+//                    distanceText.append(days)
+//                                .append(" day")
+//                                .append(days > 1 ? "s" : "");
+//
+//                    if (hours > 0) {
+//                        distanceText.append(" and ");
+//                    }
+//                }
+//
+//                if (hours > 0 || days == 0) {
+//                    distanceText.append(hours)
+//                                .append(" hour")
+//                                .append(hours != 1 ? "s" : "");
+//                }
+//
+//                distanceText.append(".\n");
+//            }
+//        }
+//
+//        textAreaDistanceList.setText(distanceText.toString());
+//    }
     
-    // Add the player's travel information to the dialogue text area
-    public void updateTravelDialogue(String currentPortName, Wind wind, String destinationPortName) {
-        textAreaTravelDialogue.setText(""); // clear previous dialogue
-
-        textAreaTravelDialogue.append("You set sail from " + currentPortName + ".\n");
-        textAreaTravelDialogue.append("The wind is blowing " + wind.getDirection().getName() + " at " + wind.getSpeed() + " knots.\n");
-        textAreaTravelDialogue.append("You arrive at " + destinationPortName + " after a smooth voyage.\n");
-    }
+//    // Add the player's travel information to the dialogue text area
+//    public void updateTravelDialogue(String currentPortName, Wind wind, String destinationPortName) {
+//        textAreaTravelDialogue.setText(""); // clear previous dialogue
+//
+//        textAreaTravelDialogue.append("You set sail from " + currentPortName + ".\n");
+//        textAreaTravelDialogue.append("The wind is blowing " + wind.getDirection().getName() + " at " + wind.getSpeed() + " knots.\n");
+//        textAreaTravelDialogue.append("You arrive at " + destinationPortName + " after a smooth voyage.\n");
+//    }
 
 
     /**
@@ -188,77 +187,66 @@ public class MapPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         scrollPaneMap = new javax.swing.JScrollPane();
         comboBoxPortList = new javax.swing.JComboBox<>();
         buttonTravel = new javax.swing.JButton();
-        buttonViewPort = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        textAreaDistanceList = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textAreaTravelDialogue = new javax.swing.JTextArea();
+        buttonStayInPort = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(394, 299));
 
         scrollPaneMap.setViewportView(mapCanvas);
 
         buttonTravel.setText("Travel");
-        buttonTravel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonTravel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonTravelActionPerformed(evt);
             }
         });
 
-        buttonViewPort.setText("View Port");
-        buttonViewPort.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonViewPortActionPerformed(evt);
+        buttonStayInPort.setText("Stay in " + game.getPort().getName());
+        buttonStayInPort.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonStayInPortActionPerformed(evt);
             }
         });
-
-        textAreaDistanceList.setColumns(20);
-        textAreaDistanceList.setRows(5);
-        textAreaDistanceList.setMinimumSize(new java.awt.Dimension(100, 20));
-        jScrollPane1.setViewportView(textAreaDistanceList);
-
-        textAreaTravelDialogue.setColumns(20);
-        textAreaTravelDialogue.setRows(5);
-        jScrollPane2.setViewportView(textAreaTravelDialogue);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(scrollPaneMap, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollPaneMap, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonTravel)
-                            .addComponent(comboBoxPortList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonViewPort)))
-                    .addComponent(jScrollPane2))
-                .addContainerGap(48, Short.MAX_VALUE))
+                            .addComponent(comboBoxPortList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(buttonStayInPort))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPaneMap)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(comboBoxPortList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollPaneMap, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addComponent(buttonTravel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonViewPort))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                        .addComponent(comboBoxPortList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addComponent(buttonStayInPort)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -266,30 +254,27 @@ public class MapPanel extends javax.swing.JPanel {
     // Component Methods========================================================
     // When the 'travel' button is clicked the player panel is updated and the player travels to the selected port
     private void buttonTravelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTravelActionPerformed
-        updateTravelDialogue(game.getPort().getName(),game.getWind(), (String) comboBoxPortList.getSelectedItem()); // Update text area to show travel information
+
         travelToSelectedPort(comboBoxPortList.getSelectedItem()); // Travel to port
-        updateDistanceList(); // Update distance and travel time to available ports
         populatePortComboBox();// Update available ports
         // Update compass
         playerPanel.updateDisplay();
         playerPanel.getCompassInlay().repaint();
+        buttonStayInPort.setText("Stay in " + game.getPort().getName());
+        cardsPanel.showCard("PortPanel");
     }//GEN-LAST:event_buttonTravelActionPerformed
     // When the 'view port' button is clicked the port, marlet and shipyard panels are updated and the card changes to the current port
-    private void buttonViewPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonViewPortActionPerformed
+    private void buttonStayInPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStayInPortActionPerformed
         cardsPanel.showCard("PortPanel");
         cardsPanel.updateAllPanels();
-    }//GEN-LAST:event_buttonViewPortActionPerformed
+    }//GEN-LAST:event_buttonStayInPortActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonStayInPort;
     private javax.swing.JButton buttonTravel;
-    private javax.swing.JButton buttonViewPort;
     private javax.swing.JComboBox<String> comboBoxPortList;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane scrollPaneMap;
-    private javax.swing.JTextArea textAreaDistanceList;
-    private javax.swing.JTextArea textAreaTravelDialogue;
     // End of variables declaration//GEN-END:variables
 }
 
