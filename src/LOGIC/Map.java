@@ -31,31 +31,44 @@ public class Map
     public final void generateMap()
     {
         Random random = new Random();
+        final int minDistance = 50;
 
-        //For each port
         for(String portName : portNames)
         {
-            //GENERATE COORDINATES----------------------------------------------
-            
-            //generate location
             int latitude = random.nextInt(mapSize);
             int longitude = random.nextInt(mapSize);
-            
-            //check if location is reserved
-            while(this.map[latitude][longitude] == 1)
+
+            // Check if location is reserved or too close to existing ports
+            while(this.map[latitude][longitude] == 1 || isTooClose(latitude, longitude, minDistance))
             {
                 latitude = random.nextInt(mapSize);
                 longitude = random.nextInt(mapSize);
             }
-            
-            //reserve the map location
+
+            // Reserve the map location
             this.map[latitude][longitude] = 1;
-            
-           
-            //CREATE PORT-------------------------------------------------------
+
+            // Create port
             Port port = new Port(portName, latitude, longitude);
             ports.put(portName, port);  
         }
+    }
+
+    // Method to check minimum distance to all existing ports
+    private boolean isTooClose(int latitude, int longitude, int minDistance)
+    {
+        for (Port existingPort : ports.values())
+        {
+            int latDiff = latitude - existingPort.getLatitude();
+            int longDiff = longitude - existingPort.getLongitude();
+            int distance = (int)Math.round(Math.sqrt(latDiff * latDiff + longDiff * longDiff));
+
+            if (distance < minDistance)
+            {
+                return true;  // Too close to an existing port
+            }
+        }
+        return false;
     }
     
     public int calculatePortDistance(String port1, String port2)

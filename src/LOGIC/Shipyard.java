@@ -65,6 +65,11 @@ public class Shipyard
         return null;
     }
     
+    // Method to reset shipyard by generating ships
+    public void resetShipyard(){
+        generateShips();
+    }
+    
     private void generateShips()
     {
         Random random = new Random();

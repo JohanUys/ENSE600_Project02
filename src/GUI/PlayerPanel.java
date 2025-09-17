@@ -30,6 +30,7 @@ public class PlayerPanel extends javax.swing.JPanel {
         //Update components 
         labelPlayerName.setText(game.getPlayer().getName());
         labelPlayerGold.setText("Gold: $" + String.valueOf(game.getPlayer().getGold()));
+        labelPlayerPort.setText("Port: " + String.valueOf(game.getPort().getName()));
         labelMyShip.setText("My " + game.getPlayer().getShip().getName());
         labelShipPrice.setText("Worth: $" + game.getPlayer().getShip().getPrice());
         labelShipGuns.setText("Guns: " + game.getPlayer().getShip().getGuns());
@@ -52,8 +53,7 @@ public class PlayerPanel extends javax.swing.JPanel {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         labelPlayerName = new javax.swing.JLabel();
         labelPlayerGold = new javax.swing.JLabel();
@@ -64,15 +64,14 @@ public class PlayerPanel extends javax.swing.JPanel {
         labelShipMaxSpeed = new javax.swing.JLabel();
         labelShipHoldSpace = new javax.swing.JLabel();
         labelShipPrice = new javax.swing.JLabel();
+        labelPlayerPort = new javax.swing.JLabel();
 
         labelPlayerName.setText(game.getPlayer().getName());
 
         labelPlayerGold.setText("Gold: $" + String.valueOf(game.getPlayer().getGold()));
 
-        listHold.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        listHold.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listHoldMouseClicked(evt);
             }
         });
@@ -91,6 +90,8 @@ public class PlayerPanel extends javax.swing.JPanel {
         );
 
         labelShipPrice.setText("Worth: $" + game.getPlayer().getShip().getPrice());
+
+        labelPlayerPort.setText("Port: " + String.valueOf(game.getPort().getName()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -111,7 +112,8 @@ public class PlayerPanel extends javax.swing.JPanel {
                                     .addComponent(labelShipMaxSpeed)
                                     .addComponent(labelShipGuns)))
                             .addComponent(labelPlayerName)
-                            .addComponent(labelPlayerGold))
+                            .addComponent(labelPlayerGold)
+                            .addComponent(labelPlayerPort))
                         .addGap(49, 49, 49))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,7 +126,9 @@ public class PlayerPanel extends javax.swing.JPanel {
                 .addComponent(labelPlayerName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelPlayerGold)
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(labelPlayerPort)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelMyShip)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -136,7 +140,7 @@ public class PlayerPanel extends javax.swing.JPanel {
                     .addComponent(labelShipMaxSpeed))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -169,6 +173,7 @@ public class PlayerPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labelMyShip;
     private javax.swing.JLabel labelPlayerGold;
     private javax.swing.JLabel labelPlayerName;
+    private javax.swing.JLabel labelPlayerPort;
     private javax.swing.JLabel labelShipGuns;
     private javax.swing.JLabel labelShipHoldSpace;
     private javax.swing.JLabel labelShipMaxSpeed;

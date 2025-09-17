@@ -17,11 +17,18 @@ public class PortPanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    // Methods =================================================================
+    public void updateDisplay() {
+        labelPort.setText(game.getPort().getName());
+        repaint();
+        revalidate();
+    }
+
+    
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         labelPort = new javax.swing.JLabel();
         buttonViewMarket = new javax.swing.JButton();
@@ -32,24 +39,25 @@ public class PortPanel extends javax.swing.JPanel {
         );
 
         buttonViewMarket.setText("View Market");
-        buttonViewMarket.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonViewMarket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonViewMarketActionPerformed(evt);
             }
         });
 
         buttonViewShipyard.setText("View Shipyard");
-        buttonViewShipyard.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonViewShipyard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonViewShipyardActionPerformed(evt);
             }
         });
 
         buttonTravel.setText("Travel");
+        buttonTravel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTravelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,6 +97,11 @@ public class PortPanel extends javax.swing.JPanel {
     {//GEN-HEADEREND:event_buttonViewShipyardActionPerformed
         cardsPanel.showCard("ShipyardPanel");
     }//GEN-LAST:event_buttonViewShipyardActionPerformed
+    // When 'Travel' button is clicked set map canvas and change to 'MapPanel' card
+    private void buttonTravelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTravelActionPerformed
+        cardsPanel.getMapCanvas().setCurrentPort(game.getPort());
+        cardsPanel.showCard("MapPanel");
+    }//GEN-LAST:event_buttonTravelActionPerformed
 
     // AUTO GENERATED ==========================================================
     // Variables declaration - do not modify//GEN-BEGIN:variables

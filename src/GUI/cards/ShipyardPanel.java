@@ -22,6 +22,7 @@ public class ShipyardPanel extends javax.swing.JPanel {
     // METHODS =================================================================
     public void updateDisplay()
     {
+        labelPortShipyard.setText(game.getPort().getName() + " Shipyard");
         //Initialize a default list model to store the ships
         DefaultListModel<String> dlm = new DefaultListModel();
         //For Each ship

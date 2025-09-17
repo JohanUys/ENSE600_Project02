@@ -25,8 +25,8 @@ public class Port
     
     //========== GETTERS&SETTERS ==========
     public String getName() {return this.name;}
-    public int getLongitude() {return this.latitude;}
-    public int getLatitude() {return this.longitude;}
+    public int getLongitude() {return this.longitude;}
+    public int getLatitude() {return this.latitude;}
     public Market getMarket() {return this.market;}
     public Shipyard getShipyard() {return this.shipyard;}
     
@@ -36,4 +36,10 @@ public class Port
     {
         this.market.generateStock();
     }
+    
+    public void resetShipyard()
+    {
+        this.shipyard.resetShipyard();
+    }
+
 }

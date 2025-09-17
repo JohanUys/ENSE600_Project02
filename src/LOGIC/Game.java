@@ -22,4 +22,15 @@ public class Game
     public Port getPort() {return this.port;}
     
     public void setPort(Port port) {this.port = port;}
+    
+    // Travel to selected Port and reset market upon arrival
+    public void travelToPort(Port destination) {
+        if (destination == null) return;
+
+        setPort(destination);
+
+        // Reset the market when arriving at a new port
+        destination.resetMarket();
+
+    }
 }

@@ -25,6 +25,7 @@ public class MarketPanel extends javax.swing.JPanel {
     // METHODS =================================================================
     public final void updateDisplay()
     {
+        labelPortMarket.setText(game.getPort().getName() + " Market");
         //Initialize a default list model to store the goods
         DefaultListModel<String> dlm = new DefaultListModel();
         //Add each good into the default list model

@@ -1,7 +1,7 @@
 package GUI;
 
 import LOGIC.Game;
-import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 
 // PROJECT MAIN FRAME
@@ -17,21 +17,22 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() 
     {
         initComponents();
-        setLayout(new BorderLayout());
-        
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+
         //Initialize a game to store all of the game data and objects
         game = new Game();
         
         //Initialize the panels that will be added to the MainFrame 
-        cardsPanel = new CardsPanel(this);
         playerPanel = new PlayerPanel(this);
+        cardsPanel = new CardsPanel(this);
+
         
         //Add the panels to the MainFrame 
-        add(cardsPanel, BorderLayout.WEST);
-        add(playerPanel, BorderLayout.EAST);
+        add(cardsPanel);
+        add(playerPanel);
         
         //Set player panel to be initially invisible
-        playerPanel.setVisible(false);
+        playerPanel.setVisible(false);    
     }
     
     // GETTERS =================================================================
@@ -48,14 +49,14 @@ public class MainFrame extends javax.swing.JFrame {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         mainFrameMenuBar = new javax.swing.JMenuBar();
         menuBarFile = new javax.swing.JMenu();
         menuBarEdit = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 600));
 
         menuBarFile.setText("File");
         mainFrameMenuBar.add(menuBarFile);

@@ -22,6 +22,8 @@ public class CardsPanel extends javax.swing.JPanel {
     private final PortPanel portPanel;
     private final MarketPanel marketPanel;
     private final ShipyardPanel shipyardPanel;
+    private final MapPanel mapPanel;
+    private final MapCanvas mapCanvas;
 
     // CONSTRUCTOR =============================================================
     public CardsPanel(MainFrame frame) 
@@ -40,6 +42,8 @@ public class CardsPanel extends javax.swing.JPanel {
         this.portPanel = new PortPanel(this, game);
         this.marketPanel = new MarketPanel(this, game);
         this.shipyardPanel = new ShipyardPanel(this, game);
+        this.mapPanel = new MapPanel(frame, this, game);
+        this.mapCanvas = new MapCanvas(game.getMap());
 
         //Add cards panels to card layout 
         add(welcomePanel, "WelcomePanel");
@@ -47,6 +51,7 @@ public class CardsPanel extends javax.swing.JPanel {
         add(portPanel, "PortPanel");
         add(marketPanel, "MarketPanel");
         add(shipyardPanel, "ShipyardPanel");
+        add(mapPanel, "MapPanel");
         
         //Show welcome panel
         showCard("WelcomePanel"); 
@@ -58,6 +63,8 @@ public class CardsPanel extends javax.swing.JPanel {
     public PortPanel getPortPanel() {return this.portPanel;}
     public MarketPanel getMarketPanel() {return this.marketPanel;}
     public ShipyardPanel getShipYardPanel() {return this.shipyardPanel;}
+    public MapPanel getMapPanel() {return this.mapPanel;}
+    public MapCanvas getMapCanvas() {return this.mapCanvas;}
     
     // METHODS =================================================================
     public final void showCard(String name) {
@@ -66,7 +73,20 @@ public class CardsPanel extends javax.swing.JPanel {
         
         marketPanel.updateDisplay();
         shipyardPanel.updateDisplay();
+        
+        // Center map on default port
+        if ("MapPanel".equals(name)) {
+            mapPanel.centerMapOnInitialPort();
+        }
     }
+    
+    // Update panels
+    public void updateAllPanels() {
+        portPanel.updateDisplay();
+        marketPanel.updateDisplay();
+        shipyardPanel.updateDisplay();
+    }
+
     
     public boolean isShown(String name)
     {
@@ -75,8 +95,7 @@ public class CardsPanel extends javax.swing.JPanel {
 
     // AUTO GENERATED ==========================================================
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         setPreferredSize(new java.awt.Dimension(260, 400));
 
@@ -84,11 +103,11 @@ public class CardsPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 368, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
