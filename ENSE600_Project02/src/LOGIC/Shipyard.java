@@ -8,7 +8,7 @@ import java.util.Random;
 public class Shipyard
 {
     //========== PROPERTIES ==========
-    private String portName;
+    private final String portName;
     private final ArrayList<Ship> ships = new ArrayList<>(); 
     
     //========== CONSTRUCTOR ========== 
@@ -25,20 +25,44 @@ public class Shipyard
     //========== METHODS ========== 
     
     // Handles ship trading logic
-    private void tradeShip(Player player, Ship selectedShip) 
+    public String tradeShip(int index, Player player) 
     {
         Ship currentShip = player.getShip();
+        Ship selectedShip = ships.get(index);
+        
+        // Ensure selected ship can hold current cargo
+        if (selectedShip.getMaxHoldSpace() < currentShip.getHold().size()) 
+        {
+            return "Not enough space for the cargo in your old ship! Maybe sell some.";
+        }
+
+        // Calculate final cost
+        int tradeInValue = currentShip.getPrice();
+        int cost = selectedShip.getPrice() - tradeInValue;
+
+        if (cost > player.getGold()) 
+        {
+            return "You don't have enough gold, mate! Ships aint cheap!";
+        }
 
         // PERFORM THE TRADE
         
         //load your cargo into the hold of the new ship.
-        selectedShip.setHold(currentShip.getHold());
+        for(Good g : currentShip.getHold())
+        {
+            selectedShip.load(g);
+        }
         currentShip.getHold().clear();
         
         //trade the ships
+        player.setShip(selectedShip);
         ships.add(currentShip);
         ships.remove(selectedShip);
-        player.setShip(selectedShip);
+        
+        // Pay for the ship
+        player.subtractGold(cost);
+        
+        return null;
     }
     
     private void generateShips()

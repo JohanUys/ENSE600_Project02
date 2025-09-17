@@ -108,6 +108,7 @@ public class MarketPanel extends javax.swing.JPanel {
         //Buy that item 
         String message = game.getPort().getMarket().buy(index, game.getPlayer());
         
+        //If an error message found, display that error message
         if(message != null)
         {
             //Display message to user.

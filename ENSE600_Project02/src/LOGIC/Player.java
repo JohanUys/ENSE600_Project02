@@ -5,7 +5,7 @@ import LOGIC.ships.*;
 public class Player
 {
     //========== PROPERTIES ==========
-    private String name = "DefaultName";
+    private final String name = "DefaultName";
     private int gold;
     private Ship ship;
     public enum GameStatus 
@@ -19,7 +19,7 @@ public class Player
     // Default player constructor
     public Player() 
     {
-        this(20, new Cutter());
+        this(2000, new Cutter());
     }
 
     public Player(int gold, Ship ship) 

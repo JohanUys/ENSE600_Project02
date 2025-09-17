@@ -105,7 +105,22 @@ public class ShipyardPanel extends javax.swing.JPanel {
 
     private void listShipsMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_listShipsMouseClicked
     {//GEN-HEADEREND:event_listShipsMouseClicked
-        // TODO add your handling code here:
+        //Find index of item to buy
+        int index = listShips.getSelectedIndex();
+        //Buy that item 
+        String message = game.getPort().getShipyard().tradeShip(index, game.getPlayer());
+        
+        //If an error message found, display that error message
+        if(message != null)
+        {
+            //Display message to user.
+            cardsPanel.getMainFrame().displayMessage(message);
+        }
+        else cardsPanel.getMainFrame().displayMessage("Successful Trade!");
+        
+        //Update displays
+        updateDisplay();
+        cardsPanel.getMainFrame().getPlayerPanel().updateDisplay();
     }//GEN-LAST:event_listShipsMouseClicked
    
     // AUTO GENERATED ==========================================================

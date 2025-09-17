@@ -30,6 +30,7 @@ public class PlayerPanel extends javax.swing.JPanel {
         //Update components 
         labelPlayerName.setText(game.getPlayer().getName());
         labelPlayerGold.setText("Gold: $" + String.valueOf(game.getPlayer().getGold()));
+        labelMyShip.setText("My " + game.getPlayer().getShip().getName());
         labelShipPrice.setText("Worth: $" + game.getPlayer().getShip().getPrice());
         labelShipGuns.setText("Guns: " + game.getPlayer().getShip().getGuns());
         labelShipMaxSpeed.setText("Max Speed: " + game.getPlayer().getShip().getMaxSpeed() + " knots");
@@ -150,6 +151,7 @@ public class PlayerPanel extends javax.swing.JPanel {
             //Sell that item
             String message = game.getPort().getMarket().sell(index, game.getPlayer());
             
+            //If an error message found, display that error message
             if(message != null)
             {
                 frame.displayMessage(message);
