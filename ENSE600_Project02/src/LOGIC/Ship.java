@@ -1,6 +1,4 @@
-package LOGIC.ships;
-
-import LOGIC.*;
+package LOGIC;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,7 +11,7 @@ public class Ship
     
     //Ship inherent properties
     protected int price;
-    protected int speed;
+    protected int maxSpeed;
     protected int maxHoldSpace;
     protected int guns;
     
@@ -29,7 +27,7 @@ public class Ship
     //========== GETTERS AND SETTERS ==========
     public String getName() {return this.name;}
     public int getPrice() {return this.price;}
-    public int getMaxSpeed() {return this.speed;}
+    public int getMaxSpeed() {return this.maxSpeed;}
     public int getMaxHoldSpace() {return this.maxHoldSpace;}
     public int getGuns() {return this.guns;}
     public ArrayList<Good> getHold() {return this.hold;}
@@ -44,7 +42,7 @@ public class Ship
         
         //Generate semi-random ship properties
         this.price = basePrice += random.nextInt(50); //0-49
-        this.speed = baseMaxSpeed += random.nextInt(6); //0-5
+        this.maxSpeed = baseMaxSpeed += random.nextInt(6); //0-5
         this.maxHoldSpace = baseMaxHoldSize += random.nextInt(4);//0-3
         this.guns = baseGuns + 2*random.nextInt(11); //0-20 (even only)
     }

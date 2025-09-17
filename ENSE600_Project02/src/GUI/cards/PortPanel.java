@@ -41,6 +41,13 @@ public class PortPanel extends javax.swing.JPanel {
         });
 
         buttonViewShipyard.setText("View Shipyard");
+        buttonViewShipyard.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonViewShipyardActionPerformed(evt);
+            }
+        });
 
         buttonTravel.setText("Travel");
 
@@ -77,6 +84,11 @@ public class PortPanel extends javax.swing.JPanel {
     {//GEN-HEADEREND:event_buttonViewMarketActionPerformed
         cardsPanel.showCard("MarketPanel");
     }//GEN-LAST:event_buttonViewMarketActionPerformed
+
+    private void buttonViewShipyardActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonViewShipyardActionPerformed
+    {//GEN-HEADEREND:event_buttonViewShipyardActionPerformed
+        cardsPanel.showCard("ShipyardPanel");
+    }//GEN-LAST:event_buttonViewShipyardActionPerformed
 
     // AUTO GENERATED ==========================================================
     // Variables declaration - do not modify//GEN-BEGIN:variables

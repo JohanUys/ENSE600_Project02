@@ -1,6 +1,6 @@
 package LOGIC.ships;
 
-
+import LOGIC.Ship;
 
 //Warship
 //Level 4

@@ -1,6 +1,5 @@
 package LOGIC;
 
-import LOGIC.ships.Ship;
 import java.util.HashMap;
 import java.util.Random;
 

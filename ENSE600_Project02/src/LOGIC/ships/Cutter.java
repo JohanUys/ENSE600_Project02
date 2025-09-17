@@ -1,5 +1,7 @@
 package LOGIC.ships;
 
+import LOGIC.Ship;
+
 //Merchant or Warship 
 //Level 1
 

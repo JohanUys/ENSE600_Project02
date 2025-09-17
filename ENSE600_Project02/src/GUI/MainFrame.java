@@ -4,6 +4,7 @@ import LOGIC.Game;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 
+// PROJECT MAIN FRAME
 public class MainFrame extends javax.swing.JFrame {
 
     // PROPERTIES ==============================================================
