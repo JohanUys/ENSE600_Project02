@@ -74,10 +74,10 @@ public class Map
     public int calculatePortDistance(String port1, String port2)
     {
         //store coordinates of both ports
-        int port1Longitude = this.ports.get(port1).getLatitude();
-        int port1Latitude = this.ports.get(port1).getLongitude();
-        int port2Longitude = this.ports.get(port2).getLatitude();
-        int port2Latitude = this.ports.get(port2).getLongitude();
+        int port1Longitude = this.ports.get(port1).getLongitude();
+        int port1Latitude = this.ports.get(port1).getLatitude();
+        int port2Longitude = this.ports.get(port2).getLongitude();
+        int port2Latitude = this.ports.get(port2).getLatitude();
         
         //Find differences in coordinates
         double latitudeDifference = Math.abs(port1Latitude - port2Latitude);
@@ -92,10 +92,10 @@ public class Map
     public Direction calculatePortDirection(String port1, String port2)
     {
         //store coordinates of both ports
-        int port1Longitude = this.ports.get(port1).getLatitude();
-        int port1Latitude = this.ports.get(port1).getLongitude();
-        int port2Longitude = this.ports.get(port2).getLatitude();
-        int port2Latitude = this.ports.get(port2).getLongitude();
+        int port1Longitude = this.ports.get(port1).getLongitude();
+        int port1Latitude = this.ports.get(port1).getLatitude();
+        int port2Longitude = this.ports.get(port2).getLongitude();
+        int port2Latitude = this.ports.get(port2).getLatitude();
         
         //Find differences in coordinates
         double latitudeDifference = port2Latitude - port1Latitude;

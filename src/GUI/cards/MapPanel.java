@@ -63,21 +63,33 @@ public class MapPanel extends javax.swing.JPanel {
     // Player travels to the selected port and the map is updated
     private void travelToSelectedPort(Object selectedItem) {
         if (selectedItem == null) return;
+
+        // Get the selected port
         Port selectedPort = map.getPorts().get((String) selectedItem);
-        centerMapOnPort(selectedPort);
         if (selectedPort == null) return;
 
+        // Capture current port traveling
+        Port originPort = game.getPort();
+
+        // Travel
         game.travelToPort(selectedPort);
 
-        // Update the map canvas highlight
+        // Update map canvas and center on destination
         mapCanvas.setCurrentPort(selectedPort);
-        
-        // Center map on current port
         centerMapOnPort(selectedPort);
-
-        // Refresh UI
         repaint();
+
+        // Show travel info
+        String travelInfo = travelInformationDialogue(originPort, selectedPort);
+        cardsPanel.getMainFrame().getDialoguePanel().displayText(travelInfo);
+        
+        // Determine travel time
+        int travelTimeInHours = game.calculatePortTravelTime(originPort, selectedPort);
+        EventManager.triggerEvents(game, travelTimeInHours, cardsPanel);
+
+
     }
+
     
     // Center the scrollpane's viewport on the initial port
     public void centerMapOnInitialPort() {
@@ -115,69 +127,44 @@ public class MapPanel extends javax.swing.JPanel {
 
         scrollPaneMap.getViewport().setViewPosition(new Point(viewX, viewY));
     }
-
-//    // Add distances and travel times from the player's current port to other ports to the text area
-//    private void updateDistanceList() {
-//        Port currentPort = game.getPort();
-//        if (currentPort == null) return;
-//
-//        String currentPortName = currentPort.getName();
-//        java.util.HashMap<String, Port> allPorts = map.getPorts();
-//
-//        // Get wind and ship informatuion for travel time
-//        Wind currentWind = game.getWind();
-//        Ship currentShip = game.getPlayer().getShip();
-//
-//        StringBuilder distanceText = new StringBuilder();
-//        distanceText.append("Port Distances:\n");
-//
-//        // Append distance and travel times for each available port
-//        for (String portName : allPorts.keySet()) {
-//            if (!portName.equals(currentPortName)) {
-//                int distance = map.calculatePortDistance(currentPortName, portName);
-//                int travelTimeHours = map.calculatePortTravelTime(currentPortName, portName, currentWind, currentShip);
-//
-//                int days = travelTimeHours / 24;
-//                int hours = travelTimeHours % 24;
-//
-//                distanceText.append(portName)
-//                            .append(": ")
-//                            .append(distance)
-//                            .append(" nmi.")
-//                            .append(" Travel time: ");
-//
-//                // Build day(s)/hour(s) string depending on the values
-//                if (days > 0) {
-//                    distanceText.append(days)
-//                                .append(" day")
-//                                .append(days > 1 ? "s" : "");
-//
-//                    if (hours > 0) {
-//                        distanceText.append(" and ");
-//                    }
-//                }
-//
-//                if (hours > 0 || days == 0) {
-//                    distanceText.append(hours)
-//                                .append(" hour")
-//                                .append(hours != 1 ? "s" : "");
-//                }
-//
-//                distanceText.append(".\n");
-//            }
-//        }
-//
-//        textAreaDistanceList.setText(distanceText.toString());
-//    }
     
-//    // Add the player's travel information to the dialogue text area
-//    public void updateTravelDialogue(String currentPortName, Wind wind, String destinationPortName) {
-//        textAreaTravelDialogue.setText(""); // clear previous dialogue
-//
-//        textAreaTravelDialogue.append("You set sail from " + currentPortName + ".\n");
-//        textAreaTravelDialogue.append("The wind is blowing " + wind.getDirection().getName() + " at " + wind.getSpeed() + " knots.\n");
-//        textAreaTravelDialogue.append("You arrive at " + destinationPortName + " after a smooth voyage.\n");
-//    }
+    // Travel information dialogue
+    private String travelInformationDialogue(Port originPort, Port destinationPort) {
+        if (originPort == null || destinationPort == null) {
+            return "Travel information is unavailable.";
+        }
+
+        String originName = originPort.getName();
+        String destinationName = destinationPort.getName();
+
+        Wind wind = game.getWind();
+        Ship ship = game.getPlayer().getShip();
+
+        int distance = map.calculatePortDistance(originName, destinationName);
+        int travelTimeHours = map.calculatePortTravelTime(originName, destinationName, wind, ship);
+
+        int days = travelTimeHours / 24;
+        int hours = travelTimeHours % 24;
+
+        StringBuilder info = new StringBuilder();
+        info.append("You depart from ").append(originName).append(".\n");
+        info.append("The wind is blowing ").append(wind.getDirection().getName())
+            .append(" at ").append(wind.getSpeed()).append(" knots.\n");
+        info.append("You have arrived at ").append(destinationName).append(", a distance of ")
+            .append(distance).append(" nautical miles.\n");
+        info.append("The journey took: ");
+
+        if (days > 0) {
+            info.append(days).append(" day").append(days > 1 ? "s" : "");
+            if (hours > 0) info.append(" and ");
+        }
+        if (hours > 0 || days == 0) {
+            info.append(hours).append(" hour").append(hours != 1 ? "s" : "");
+        }
+
+        info.append(".\nSafe travels, captain!");
+        return info.toString();
+    }
 
 
     // AUTO GENERATED ==========================================================

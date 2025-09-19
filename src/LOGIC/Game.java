@@ -32,4 +32,15 @@ public class Game
         // Reset the market when arriving at a new port
         destination.resetMarket();
     }
+    // Calculates travel time using the calculation in the map class
+    public int calculatePortTravelTime(Port origin, Port destination) {
+        if (origin == null || destination == null) return 0;
+
+        String originName = origin.getName();
+        String destinationName = destination.getName();
+
+        Ship ship = player.getShip();
+        return map.calculatePortTravelTime(originName, destinationName, wind, ship);
+    }
+
 }
