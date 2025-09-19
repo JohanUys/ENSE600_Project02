@@ -1,6 +1,5 @@
 package GUI;
 
-import GUI.canvases.MapCanvas;
 import GUI.cards.*;
 import LOGIC.*;
 
@@ -24,6 +23,7 @@ public class CardsPanel extends javax.swing.JPanel {
     private final MarketPanel marketPanel;
     private final ShipyardPanel shipyardPanel;
     private final MapPanel mapPanel;
+    private final TravelPanel travelPanel;
 
     // CONSTRUCTOR =============================================================
     public CardsPanel(MainFrame frame) 
@@ -43,6 +43,7 @@ public class CardsPanel extends javax.swing.JPanel {
         this.marketPanel = new MarketPanel(this, game);
         this.shipyardPanel = new ShipyardPanel(this, game);
         this.mapPanel = new MapPanel(this, game);
+        this.travelPanel = new TravelPanel(this, game);
 
         //Add cards panels to card layout 
         add(welcomePanel, "WelcomePanel");
@@ -51,6 +52,7 @@ public class CardsPanel extends javax.swing.JPanel {
         add(marketPanel, "MarketPanel");
         add(shipyardPanel, "ShipyardPanel");
         add(mapPanel, "MapPanel");
+        add(travelPanel, "TravelPanel");
         
         //Show welcome panel
         showCard("WelcomePanel"); 
@@ -74,6 +76,9 @@ public class CardsPanel extends javax.swing.JPanel {
         // Center map on default port
         if ("MapPanel".equals(name)) {
             mapPanel.centerMapOnInitialPort();
+        }
+        if ("TravelPanel".equals(name)) {
+            travelPanel.handleTravel();
         }
     }
     

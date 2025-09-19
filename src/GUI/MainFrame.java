@@ -25,11 +25,12 @@ public class MainFrame extends javax.swing.JFrame {
         //Initialize the panels that will be added to the MainFrame 
         playerPanel = new PlayerPanel(this);
         cardsPanel = new CardsPanel(this);
-
         
+
         //Add the panels to the MainFrame 
         add(cardsPanel, BorderLayout.CENTER);
         add(playerPanel, BorderLayout.EAST);
+        
         
         //Set player panel to be initially invisible
         playerPanel.setVisible(false);    
@@ -111,7 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
         {
             public void run() 
             {
-                //Runs MainFrame constructor. This is the entry point to thep program
+                //Runs MainFrame constructor. This is the entry point to the program
                 new MainFrame().setVisible(true);
             }
         });
