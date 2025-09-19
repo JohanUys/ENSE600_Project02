@@ -70,7 +70,7 @@ public class PortPanel extends javax.swing.JPanel {
                     .addComponent(buttonViewMarket)
                     .addComponent(buttonViewShipyard)
                     .addComponent(buttonTravel))
-                .addContainerGap(288, Short.MAX_VALUE))
+                .addContainerGap(849, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,7 +83,7 @@ public class PortPanel extends javax.swing.JPanel {
                 .addComponent(buttonViewShipyard)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonTravel)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(611, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

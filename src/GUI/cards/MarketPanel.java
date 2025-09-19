@@ -41,8 +41,7 @@ public class MarketPanel extends javax.swing.JPanel {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         labelPortMarket = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -53,20 +52,16 @@ public class MarketPanel extends javax.swing.JPanel {
         );
         labelPortMarket.setName("labelPortNameMarket"); // NOI18N
 
-        listGoods.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        listGoods.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listGoodsMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(listGoods);
 
         buttonLeaveMarket.setText("Leave Market");
-        buttonLeaveMarket.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonLeaveMarket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonLeaveMarketActionPerformed(evt);
             }
         });
@@ -83,7 +78,7 @@ public class MarketPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(labelPortMarket)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(597, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

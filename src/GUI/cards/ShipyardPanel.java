@@ -44,8 +44,7 @@ public class ShipyardPanel extends javax.swing.JPanel {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         buttonLeaveShipyard = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -53,18 +52,14 @@ public class ShipyardPanel extends javax.swing.JPanel {
         labelPortShipyard = new javax.swing.JLabel();
 
         buttonLeaveShipyard.setText("Leave Shipyard");
-        buttonLeaveShipyard.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonLeaveShipyard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonLeaveShipyardActionPerformed(evt);
             }
         });
 
-        listShips.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        listShips.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listShipsMouseClicked(evt);
             }
         });
@@ -84,7 +79,7 @@ public class ShipyardPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(labelPortShipyard)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(611, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

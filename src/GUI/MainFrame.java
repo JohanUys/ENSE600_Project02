@@ -1,7 +1,8 @@
 package GUI;
 
 import LOGIC.Game;
-import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import javax.swing.JOptionPane;
 
 // PROJECT MAIN FRAME
@@ -9,75 +10,106 @@ public class MainFrame extends javax.swing.JFrame {
 
     // PROPERTIES ==============================================================
     private final Game game;
-    
     private final CardsPanel cardsPanel;
     private final PlayerPanel playerPanel;
+    private final DialoguePanel dialoguePanel;
     
     // CONSTRUCTOR =============================================================
-    public MainFrame() 
-    {
-        initComponents();
-        setLayout(new BorderLayout());
+    public MainFrame() {
+        initComponents(); // Sets up menu bar
 
-        //Initialize a game to store all of the game data and objects
+        // Initialize a game to store all of the game data and the game objects
         game = new Game();
         
-        //Initialize the panels that will be added to the MainFrame 
+        // Initialize the panels that will be added to the mainframe
         playerPanel = new PlayerPanel(this);
+        dialoguePanel = new DialoguePanel();
         cardsPanel = new CardsPanel(this);
-        
 
-        //Add the panels to the MainFrame 
-        add(cardsPanel, BorderLayout.CENTER);
-        add(playerPanel, BorderLayout.EAST);
-        
-        
-        //Set player panel to be initially invisible
-        playerPanel.setVisible(false);    
+        // Layout manager
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        // --------- CardsPanel (75% width, 85% height) ---------
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.75;
+        gbc.weighty = 0.85;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        getContentPane().add(cardsPanel, gbc);
+
+        // --------- DialoguePanel (75% width, 15% height) ---------
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0.75;
+        gbc.weighty = 0.15;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
+        getContentPane().add(dialoguePanel, gbc);
+
+        // --------- PlayerPanel (25% width, full height) ---------
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 2;
+        gbc.weightx = 0.25;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.EAST;
+        getContentPane().add(playerPanel, gbc);
+
+        // Set visibility and sizing
+        playerPanel.setVisible(false);
+        dialoguePanel.setVisible(false);
+
+        setPreferredSize(new Dimension(960, 720));
+        pack();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-    
+
     // GETTERS =================================================================
     public Game getGame() {return this.game;}
     public CardsPanel getCardsPanel() {return this.cardsPanel;}
     public PlayerPanel getPlayerPanel() {return this.playerPanel;}
+    public DialoguePanel getDialoguePanel() {return this.dialoguePanel;}
     
     // METHODS =================================================================
     public void displayMessage(String message)
     {
         JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    public void showDialogue(String text, Runnable onComplete) {
+        dialoguePanel.displayText(text);
+        dialoguePanel.setVisible(true);
+    }
 
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
-        mainFrameMenuBar = new javax.swing.JMenuBar();
-        menuBarFile = new javax.swing.JMenu();
-        menuBarEdit = new javax.swing.JMenu();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 600));
+        setResizable(false);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        menuBarFile.setText("File");
-        mainFrameMenuBar.add(menuBarFile);
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
 
-        menuBarEdit.setText("Edit");
-        mainFrameMenuBar.add(menuBarEdit);
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
-        setJMenuBar(mainFrameMenuBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
-        );
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -120,8 +152,8 @@ public class MainFrame extends javax.swing.JFrame {
     
     // AUTO GENERATED ==========================================================
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuBar mainFrameMenuBar;
-    private javax.swing.JMenu menuBarEdit;
-    private javax.swing.JMenu menuBarFile;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

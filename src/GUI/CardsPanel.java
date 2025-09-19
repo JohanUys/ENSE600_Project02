@@ -17,13 +17,11 @@ public class CardsPanel extends javax.swing.JPanel {
     private String cardShown;
     
     //Card Layout Panels
-    private final WelcomePanel welcomePanel;
     private final StartGamePanel startGamePanel;
     private final PortPanel portPanel;
     private final MarketPanel marketPanel;
     private final ShipyardPanel shipyardPanel;
     private final MapPanel mapPanel;
-    private final TravelPanel travelPanel;
 
     // CONSTRUCTOR =============================================================
     public CardsPanel(MainFrame frame) 
@@ -37,25 +35,21 @@ public class CardsPanel extends javax.swing.JPanel {
         setLayout(cardLayout);
         
         //Initialize card panels
-        this.welcomePanel = new WelcomePanel(this, game);
         this.startGamePanel = new StartGamePanel (this,game);
         this.portPanel = new PortPanel(this, game);
         this.marketPanel = new MarketPanel(this, game);
         this.shipyardPanel = new ShipyardPanel(this, game);
         this.mapPanel = new MapPanel(this, game);
-        this.travelPanel = new TravelPanel(this, game);
 
-        //Add cards panels to card layout 
-        add(welcomePanel, "WelcomePanel");
+        //Add cards panels to card layout
         add(startGamePanel, "StartGamePanel");
         add(portPanel, "PortPanel");
         add(marketPanel, "MarketPanel");
         add(shipyardPanel, "ShipyardPanel");
         add(mapPanel, "MapPanel");
-        add(travelPanel, "TravelPanel");
         
-        //Show welcome panel
-        showCard("WelcomePanel"); 
+        // Start game
+        showCard("StartGamePanel");
     }
     
     // GETTERS =================================================================
@@ -70,15 +64,25 @@ public class CardsPanel extends javax.swing.JPanel {
     public final void showCard(String name) {
         cardLayout.show(this, name);
         cardShown = name;
-        
+
+        // Show PlayerPanel and DialoguePanel only if not StartGamePanel
+        if (!name.equals("StartGamePanel")) {
+            frame.getPlayerPanel().setVisible(true);
+            frame.getDialoguePanel().setVisible(true);
+        } else {
+            frame.getPlayerPanel().setVisible(false);
+            frame.getDialoguePanel().setVisible(false);
+        }
+        frame.getPlayerPanel().revalidate();
+        frame.getPlayerPanel().repaint();
+        frame.getDialoguePanel().revalidate();
+        frame.getDialoguePanel().repaint();
+
         updateAllPanels();
-        
+
         // Center map on default port
         if ("MapPanel".equals(name)) {
             mapPanel.centerMapOnInitialPort();
-        }
-        if ("TravelPanel".equals(name)) {
-            travelPanel.handleTravel();
         }
     }
     
@@ -97,21 +101,10 @@ public class CardsPanel extends javax.swing.JPanel {
 
     // AUTO GENERATED ==========================================================
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         setPreferredSize(new java.awt.Dimension(260, 400));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
-        );
+        setLayout(new java.awt.GridBagLayout());
     }// </editor-fold>//GEN-END:initComponents
 
     // AUTO GENERATED ==========================================================

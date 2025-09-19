@@ -24,7 +24,7 @@
                   <Component id="buttonViewShipyard" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonTravel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="288" max="32767" attributes="0"/>
+              <EmptySpace pref="849" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -39,7 +39,7 @@
               <Component id="buttonViewShipyard" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="buttonTravel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="191" max="32767" attributes="0"/>
+              <EmptySpace pref="611" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
