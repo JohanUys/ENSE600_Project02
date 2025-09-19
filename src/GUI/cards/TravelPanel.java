@@ -4,12 +4,17 @@ package GUI.cards;
 import GUI.*;
 import LOGIC.*;
 
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
+
 public class TravelPanel extends javax.swing.JPanel {
     
     // PROPERTIES ==============================================================
     private final CardsPanel cardsPanel;
     private final Game game;
     
+    Timer timer;
+    int currentIndex;
     
     // CONSTRUCTOR =============================================================
     public TravelPanel(CardsPanel cardsPanel, Game game)
@@ -26,6 +31,8 @@ public class TravelPanel extends javax.swing.JPanel {
         
         write(message);
         
+        //Johan, if you uncomment this, the main thread will keep going and display the port panel instantly.
+        //Timer is a seperate thread that runs concurrently.
         //cardsPanel.showCard("PortPanel");
     }
     
@@ -33,27 +40,21 @@ public class TravelPanel extends javax.swing.JPanel {
     public final void write(String message)
     {
         textAreaTravel.setText(""); // Clear text area for typing effect
-        
-        //Type the entire message
-        for(int i = 0 ; i<message.length() ; i++)
-        {
-            textAreaTravel.append(String.valueOf(message.charAt(i)));
-            
-            delay();
-        }
-    }
-    
-    private void delay()
-    {
-        //Delay
-        try
-        {
-            Thread.sleep(20);
-        }
-        catch(InterruptedException err)
-        {
-            System.out.println("Error in thread sleeping!");
-        }
+
+        // Timer happens every 50 milliseconds (adjust for text speed)
+        timer = new Timer(20, (ActionEvent e) -> {
+            // Add one character at a time
+            if (currentIndex < message.length()) {
+                textAreaTravel.append(String.valueOf(message.charAt(currentIndex)));
+                currentIndex++;
+            } else {
+                // Stop timer when done
+                timer.stop();
+            }
+        });
+
+        // Start typing effect
+        timer.start();
     }
 
     // AUTO GENERATED ==========================================================
