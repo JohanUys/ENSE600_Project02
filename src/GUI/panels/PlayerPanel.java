@@ -1,17 +1,18 @@
-package GUI;
+package GUI.panels;
 
+import GUI.MainFrame;
 import GUI.canvases.CompassInlayCanvas;
 import LOGIC.*;
-import java.awt.Color;
 
+import java.awt.Color;
 import javax.swing.DefaultListModel;
 
 // PANEL CONTAINING PLAYER INFORMATION
 public class PlayerPanel extends javax.swing.JPanel {
 
     // PROPERTIES ==============================================================
-    private final Game game;
     private final MainFrame frame;
+    private final Game game;
     
     private final CompassInlayCanvas compassInlay;
     
@@ -71,7 +72,8 @@ public class PlayerPanel extends javax.swing.JPanel {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         labelPlayerName = new javax.swing.JLabel();
         labelPlayerGold = new javax.swing.JLabel();
@@ -89,8 +91,10 @@ public class PlayerPanel extends javax.swing.JPanel {
 
         labelPlayerGold.setText("Gold: $" + String.valueOf(game.getPlayer().getGold()));
 
-        listHold.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        listHold.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 listHoldMouseClicked(evt);
             }
         });
@@ -187,7 +191,7 @@ public class PlayerPanel extends javax.swing.JPanel {
     private void listHoldMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_listHoldMouseClicked
     {//GEN-HEADEREND:event_listHoldMouseClicked
         //If market panel is being displayed
-        if(frame.getCardsPanel().isShown("MarketPanel"))
+        if(frame.getCardsPanel().isShown("MarketCard"))
         {
             //Find the index of the item to sell
             int index = listHold.getSelectedIndex();

@@ -3,19 +3,21 @@ package GUI.cards;
 
 import GUI.*;
 import LOGIC.*;
+
 import javax.swing.DefaultListModel;
 
-public class ShipyardPanel extends javax.swing.JPanel {
+public class ShipyardCard extends javax.swing.JPanel {
     
     // PROPERTIES ==============================================================
-    private final CardsPanel cardsPanel;
+    private final MainFrame frame;
     private final Game game;
 
     // CONSTRUCTOR =============================================================
-    public ShipyardPanel(CardsPanel cardsPanel, Game game) 
+    public ShipyardCard(MainFrame frame) 
     {        
-        this.game = game;
-        this.cardsPanel = cardsPanel;
+        this.frame = frame;
+        this.game = frame.getGame();
+        
         initComponents();
     } 
     
@@ -44,7 +46,8 @@ public class ShipyardPanel extends javax.swing.JPanel {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         buttonLeaveShipyard = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -52,14 +55,18 @@ public class ShipyardPanel extends javax.swing.JPanel {
         labelPortShipyard = new javax.swing.JLabel();
 
         buttonLeaveShipyard.setText("Leave Shipyard");
-        buttonLeaveShipyard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonLeaveShipyard.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonLeaveShipyardActionPerformed(evt);
             }
         });
 
-        listShips.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        listShips.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 listShipsMouseClicked(evt);
             }
         });
@@ -98,7 +105,7 @@ public class ShipyardPanel extends javax.swing.JPanel {
     // COMPONENT METHODS =======================================================
     private void buttonLeaveShipyardActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonLeaveShipyardActionPerformed
     {//GEN-HEADEREND:event_buttonLeaveShipyardActionPerformed
-        cardsPanel.showCard("PortPanel");
+        frame.getCardsPanel().showCard("PortCard");
     }//GEN-LAST:event_buttonLeaveShipyardActionPerformed
 
     private void listShipsMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_listShipsMouseClicked
@@ -112,13 +119,13 @@ public class ShipyardPanel extends javax.swing.JPanel {
         if(message != null)
         {
             //Display message to user.
-            cardsPanel.getMainFrame().displayMessage(message);
+            frame.displayMessage(message);
         }
-        else cardsPanel.getMainFrame().displayMessage("Successful Trade!");
+        else frame.displayMessage("Successful Trade!");
         
         //Update displays
         updateDisplay();
-        cardsPanel.getMainFrame().getPlayerPanel().updateDisplay();
+        frame.getPlayerPanel().updateDisplay();
     }//GEN-LAST:event_listShipsMouseClicked
    
     // AUTO GENERATED ==========================================================

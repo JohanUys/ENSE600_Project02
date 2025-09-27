@@ -1,5 +1,6 @@
 package LOGIC.events;
 
+import GUI.panels.CardsPanel;
 import java.util.Random;
 import LOGIC.*;
 import GUI.*;

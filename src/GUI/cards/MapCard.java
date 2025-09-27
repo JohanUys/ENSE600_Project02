@@ -8,31 +8,26 @@ import java.awt.Dimension;
 import java.awt.Point;
 import javax.swing.SwingUtilities;
 
-public class MapPanel extends javax.swing.JPanel {
+public class MapCard extends javax.swing.JPanel {
 
     // PROPERTIES ==============================================================
-    private final CardsPanel cardsPanel;
+    private final MainFrame frame;
     private final Game game;
     
-    private final PlayerPanel playerPanel;
-    private final Map map;
     private final MapCanvas mapCanvas;
 
     // CONSTRUCTOR =============================================================
-    public MapPanel(CardsPanel cardsPanel, Game game) 
+    public MapCard(MainFrame frame) 
     {
-        this.game = game;
-        this.cardsPanel = cardsPanel;
-        
-        this.map = game.getMap();
+        this.frame = frame;
+        this.game = frame.getGame();
         
         //Initialize the map canvas
-        this.mapCanvas = new MapCanvas(map);
+        this.mapCanvas = new MapCanvas(game.getMap());
         mapCanvas.setCurrentPort(game.getPort());
         
-        this.playerPanel = cardsPanel.getMainFrame().getPlayerPanel();
         initComponents();
-        if (!map.getPorts().isEmpty()) {
+        if (!game.getMap().getPorts().isEmpty()) {
             Port currentPort = game.getPort();
             mapCanvas.setCurrentPort(currentPort);
         }
@@ -48,7 +43,7 @@ public class MapPanel extends javax.swing.JPanel {
         if (currentPort == null) return;
 
         String currentPortName = currentPort.getName();
-        for (String portName : map.getPorts().keySet()) {
+        for (String portName : game.getMap().getPorts().keySet()) {
             if (!portName.equals(currentPortName)) {
                 comboBoxPortList.addItem(portName);
             }
@@ -65,12 +60,14 @@ public class MapPanel extends javax.swing.JPanel {
         if (selectedItem == null) return;
 
         // Get the selected port
-        Port selectedPort = map.getPorts().get((String) selectedItem);
+        Port selectedPort = game.getMap().getPorts().get((String) selectedItem);
         if (selectedPort == null) return;
 
         // Capture current port traveling
         Port originPort = game.getPort();
 
+        // THIS STUFF COULD BE DONE IN A TRAVEL PANEL
+        
         // Travel
         game.travelToPort(selectedPort);
 
@@ -81,19 +78,19 @@ public class MapPanel extends javax.swing.JPanel {
 
         // Show travel info
         String travelInfo = travelInformationDialogue(originPort, selectedPort);
-        cardsPanel.getMainFrame().getDialoguePanel().displayText(travelInfo);
+        frame.getDialoguePanel().displayText(travelInfo);
         
         // Determine travel time
         int travelTimeInHours = game.calculatePortTravelTime(originPort, selectedPort);
-        EventManager.triggerEvents(game, travelTimeInHours, cardsPanel);
-
-
+        
+        // Trigger any events that may occur.
+        EventManager.triggerEvents(game, travelTimeInHours, frame.getCardsPanel());
     }
 
     
     // Center the scrollpane's viewport on the initial port
     public void centerMapOnInitialPort() {
-        if (!map.getPorts().isEmpty()) {
+        if (!game.getMap().getPorts().isEmpty()) {
             Port currentPort = game.getPort();
             mapCanvas.setCurrentPort(currentPort);
 
@@ -128,6 +125,7 @@ public class MapPanel extends javax.swing.JPanel {
         scrollPaneMap.getViewport().setViewPosition(new Point(viewX, viewY));
     }
     
+    // Could be moved to a travel panel 
     // Travel information dialogue
     private String travelInformationDialogue(Port originPort, Port destinationPort) {
         if (originPort == null || destinationPort == null) {
@@ -140,8 +138,8 @@ public class MapPanel extends javax.swing.JPanel {
         Wind wind = game.getWind();
         Ship ship = game.getPlayer().getShip();
 
-        int distance = map.calculatePortDistance(originName, destinationName);
-        int travelTimeHours = map.calculatePortTravelTime(originName, destinationName, wind, ship);
+        int distance = game.getMap().calculatePortDistance(originName, destinationName);
+        int travelTimeHours = game.getMap().calculatePortTravelTime(originName, destinationName, wind, ship);
 
         int days = travelTimeHours / 24;
         int hours = travelTimeHours % 24;
@@ -170,7 +168,8 @@ public class MapPanel extends javax.swing.JPanel {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         scrollPaneMap = new javax.swing.JScrollPane();
         comboBoxPortList = new javax.swing.JComboBox<>();
@@ -182,15 +181,19 @@ public class MapPanel extends javax.swing.JPanel {
         scrollPaneMap.setViewportView(mapCanvas);
 
         buttonTravel.setText("Travel");
-        buttonTravel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonTravel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonTravelActionPerformed(evt);
             }
         });
 
         buttonStayInPort.setText("Stay in " + game.getPort().getName());
-        buttonStayInPort.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonStayInPort.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonStayInPortActionPerformed(evt);
             }
         });
@@ -222,7 +225,7 @@ public class MapPanel extends javax.swing.JPanel {
                     .addComponent(comboBoxPortList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonTravel)
                     .addComponent(buttonStayInPort))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -233,17 +236,17 @@ public class MapPanel extends javax.swing.JPanel {
         travelToSelectedPort(comboBoxPortList.getSelectedItem()); // Travel to port
         populatePortComboBox();// Update available ports
         // Update compass
-        playerPanel.updateDisplay();
-        playerPanel.getCompassInlay().repaint();
+        frame.getPlayerPanel().updateDisplay();
+        frame.getPlayerPanel().getCompassInlay().repaint();
         buttonStayInPort.setText("Stay in " + game.getPort().getName());
         
-        cardsPanel.showCard("TravelPanel");
+        //frame.getCardsPanel().showCard("TravelPanel");
     }//GEN-LAST:event_buttonTravelActionPerformed
     
     // When the 'view port' button is clicked the port, marlet and shipyard panels are updated and the card changes to the current port
     private void buttonStayInPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStayInPortActionPerformed
-        cardsPanel.showCard("PortPanel");
-        cardsPanel.updateAllPanels();
+        frame.getCardsPanel().showCard("PortCard");
+        frame.getCardsPanel().updateAllPanels();
     }//GEN-LAST:event_buttonStayInPortActionPerformed
 
     // AUTO GENERATED ==========================================================

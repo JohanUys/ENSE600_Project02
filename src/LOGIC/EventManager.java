@@ -1,6 +1,6 @@
 package LOGIC;
 
-import GUI.CardsPanel;
+import GUI.panels.CardsPanel;
 import LOGIC.events.PirateEvent;
 import LOGIC.events.StormEvent;
 import java.util.List;

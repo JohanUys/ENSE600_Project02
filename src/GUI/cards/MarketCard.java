@@ -6,17 +6,17 @@ import LOGIC.*;
 
 import javax.swing.DefaultListModel;
 
-public class MarketPanel extends javax.swing.JPanel {
+public class MarketCard extends javax.swing.JPanel {
     
     // PROPERTIES ==============================================================
-    private final CardsPanel cardsPanel;
+    private final MainFrame frame;
     private final Game game;
 
     // CONSTRUCTOR =============================================================
-    public MarketPanel(CardsPanel cardsPanel, Game game) 
+    public MarketCard(MainFrame frame) 
     {   
-        this.game = game;
-        this.cardsPanel = cardsPanel;
+        this.frame = frame;
+        this.game = frame.getGame();
         initComponents();
         
         updateDisplay();
@@ -41,7 +41,8 @@ public class MarketPanel extends javax.swing.JPanel {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         labelPortMarket = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -52,16 +53,20 @@ public class MarketPanel extends javax.swing.JPanel {
         );
         labelPortMarket.setName("labelPortNameMarket"); // NOI18N
 
-        listGoods.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        listGoods.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 listGoodsMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(listGoods);
 
         buttonLeaveMarket.setText("Leave Market");
-        buttonLeaveMarket.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonLeaveMarket.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonLeaveMarketActionPerformed(evt);
             }
         });
@@ -96,7 +101,7 @@ public class MarketPanel extends javax.swing.JPanel {
     // COMPONENT METHODS =======================================================
     private void buttonLeaveMarketActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonLeaveMarketActionPerformed
     {//GEN-HEADEREND:event_buttonLeaveMarketActionPerformed
-        cardsPanel.showCard("PortPanel");
+        frame.getCardsPanel().showCard("PortCard");
     }//GEN-LAST:event_buttonLeaveMarketActionPerformed
 
     private void listGoodsMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_listGoodsMouseClicked
@@ -110,12 +115,12 @@ public class MarketPanel extends javax.swing.JPanel {
         if(message != null)
         {
             //Display message to user.
-            cardsPanel.getMainFrame().displayMessage(message);
+            frame.getCardsPanel().getMainFrame().displayMessage(message);
         }
         
         //Update displays
         updateDisplay();
-        cardsPanel.getMainFrame().getPlayerPanel().updateDisplay();
+        frame.getCardsPanel().getMainFrame().getPlayerPanel().updateDisplay();
     }//GEN-LAST:event_listGoodsMouseClicked
 
     // AUTO GENERATED ==========================================================

@@ -1,5 +1,6 @@
-package GUI;
+package GUI.panels;
 
+import GUI.*;
 import GUI.cards.*;
 import LOGIC.*;
 
@@ -9,19 +10,22 @@ import java.awt.CardLayout;
 public class CardsPanel extends javax.swing.JPanel {
     
     // PROPERTIES ==============================================================
-    private final Game game;
     private final MainFrame frame;
+    private final Game game;
     
     //Card Layout
     private final CardLayout cardLayout;
     private String cardShown;
     
     //Card Layout Panels
-    private final StartGamePanel startGamePanel;
-    private final PortPanel portPanel;
-    private final MarketPanel marketPanel;
-    private final ShipyardPanel shipyardPanel;
-    private final MapPanel mapPanel;
+    private final StartCard startCard;
+    private final PortCard portCard;
+    private final MarketCard marketCard;
+    private final ShipyardCard shipyardCard;
+    private final MapCard mapCard;
+    private final EventMerchantCard eventMerchantCard;
+    private final EventPirateCard eventPirateCard;
+    private final EventStormCard eventStormCard;
 
     // CONSTRUCTOR =============================================================
     public CardsPanel(MainFrame frame) 
@@ -35,30 +39,36 @@ public class CardsPanel extends javax.swing.JPanel {
         setLayout(cardLayout);
         
         //Initialize card panels
-        this.startGamePanel = new StartGamePanel (this,game);
-        this.portPanel = new PortPanel(this, game);
-        this.marketPanel = new MarketPanel(this, game);
-        this.shipyardPanel = new ShipyardPanel(this, game);
-        this.mapPanel = new MapPanel(this, game);
+        this.startCard = new StartCard (frame);
+        this.portCard = new PortCard(frame);
+        this.marketCard = new MarketCard(frame);
+        this.shipyardCard = new ShipyardCard(frame);
+        this.mapCard = new MapCard(frame);
+        this.eventMerchantCard = new EventMerchantCard(frame);
+        this.eventPirateCard = new EventPirateCard(frame);
+        this.eventStormCard = new EventStormCard(frame);
 
         //Add cards panels to card layout
-        add(startGamePanel, "StartGamePanel");
-        add(portPanel, "PortPanel");
-        add(marketPanel, "MarketPanel");
-        add(shipyardPanel, "ShipyardPanel");
-        add(mapPanel, "MapPanel");
+        add(startCard, "StartCard");
+        add(portCard, "PortCard");
+        add(marketCard, "MarketCard");
+        add(shipyardCard, "ShipyardCard");
+        add(mapCard, "MapCard");
+        add(eventMerchantCard, "EventMerchantCard");
+        add(eventPirateCard, "EventPirateCard");
+        add(eventStormCard, "EventStormCard");
         
         // Start game
-        showCard("StartGamePanel");
+        showCard("StartCard");
     }
     
     // GETTERS =================================================================
     public MainFrame getMainFrame() {return this.frame;}
     
-    public PortPanel getPortPanel() {return this.portPanel;}
-    public MarketPanel getMarketPanel() {return this.marketPanel;}
-    public ShipyardPanel getShipYardPanel() {return this.shipyardPanel;}
-    public MapPanel getMapPanel() {return this.mapPanel;}
+    public PortCard getPortPanel() {return this.portCard;}
+    public MarketCard getMarketPanel() {return this.marketCard;}
+    public ShipyardCard getShipYardPanel() {return this.shipyardCard;}
+    public MapCard getMapPanel() {return this.mapCard;}
     
     // METHODS =================================================================
     public final void showCard(String name) {
@@ -66,7 +76,7 @@ public class CardsPanel extends javax.swing.JPanel {
         cardShown = name;
 
         // Show PlayerPanel and DialoguePanel only if not StartGamePanel
-        if (!name.equals("StartGamePanel")) {
+        if (!name.equals("StartCard")) {
             frame.getPlayerPanel().setVisible(true);
             frame.getDialoguePanel().setVisible(true);
         } else {
@@ -81,16 +91,16 @@ public class CardsPanel extends javax.swing.JPanel {
         updateAllPanels();
 
         // Center map on default port
-        if ("MapPanel".equals(name)) {
-            mapPanel.centerMapOnInitialPort();
+        if ("MapCard".equals(name)) {
+            mapCard.centerMapOnInitialPort();
         }
     }
     
     // Update panels
     public void updateAllPanels() {
-        portPanel.updateDisplay();
-        marketPanel.updateDisplay();
-        shipyardPanel.updateDisplay();
+        portCard.updateDisplay();
+        marketCard.updateDisplay();
+        shipyardCard.updateDisplay();
     }
 
     
@@ -101,7 +111,8 @@ public class CardsPanel extends javax.swing.JPanel {
 
     // AUTO GENERATED ==========================================================
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         setPreferredSize(new java.awt.Dimension(260, 400));
         setLayout(new java.awt.GridBagLayout());

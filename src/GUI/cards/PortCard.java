@@ -3,17 +3,18 @@ package GUI.cards;
 import GUI.*;
 import LOGIC.*;
 
-public class PortPanel extends javax.swing.JPanel {
+public class PortCard extends javax.swing.JPanel {
     
     // PROPERTIES ==============================================================
-    private final CardsPanel cardsPanel;
+    private final MainFrame frame;
     private final Game game;
 
     // CONSTRUCTOR =============================================================
-    public PortPanel(CardsPanel cardsPanel, Game game) 
+    public PortCard(MainFrame frame) 
     {
-        this.game = game;
-        this.cardsPanel = cardsPanel;
+        this.frame = frame;
+        this.game = frame.getGame();
+        
         initComponents();
     }
     
@@ -28,7 +29,8 @@ public class PortPanel extends javax.swing.JPanel {
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         labelPort = new javax.swing.JLabel();
         buttonViewMarket = new javax.swing.JButton();
@@ -39,22 +41,28 @@ public class PortPanel extends javax.swing.JPanel {
         );
 
         buttonViewMarket.setText("View Market");
-        buttonViewMarket.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonViewMarket.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonViewMarketActionPerformed(evt);
             }
         });
 
         buttonViewShipyard.setText("View Shipyard");
-        buttonViewShipyard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonViewShipyard.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonViewShipyardActionPerformed(evt);
             }
         });
 
         buttonTravel.setText("Travel");
-        buttonTravel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonTravel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonTravelActionPerformed(evt);
             }
         });
@@ -90,17 +98,17 @@ public class PortPanel extends javax.swing.JPanel {
     // COMPONENT METHODS =======================================================
     private void buttonViewMarketActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonViewMarketActionPerformed
     {//GEN-HEADEREND:event_buttonViewMarketActionPerformed
-        cardsPanel.showCard("MarketPanel");
+        frame.getCardsPanel().showCard("MarketCard");
     }//GEN-LAST:event_buttonViewMarketActionPerformed
 
     private void buttonViewShipyardActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonViewShipyardActionPerformed
     {//GEN-HEADEREND:event_buttonViewShipyardActionPerformed
-        cardsPanel.showCard("ShipyardPanel");
+        frame.getCardsPanel().showCard("ShipyardCard");
     }//GEN-LAST:event_buttonViewShipyardActionPerformed
     // When 'Travel' button is clicked set map canvas and change to 'MapPanel' card
     private void buttonTravelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTravelActionPerformed
 
-        cardsPanel.showCard("MapPanel");
+        frame.getCardsPanel().showCard("MapCard");
     }//GEN-LAST:event_buttonTravelActionPerformed
 
     // AUTO GENERATED ==========================================================

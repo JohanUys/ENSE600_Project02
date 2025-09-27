@@ -1,6 +1,6 @@
 package LOGIC.events;
 
-import GUI.CardsPanel;
+import GUI.panels.CardsPanel;
 import LOGIC.Events;
 import LOGIC.Game;
 

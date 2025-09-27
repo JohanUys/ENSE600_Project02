@@ -1,6 +1,8 @@
 package GUI;
 
+import GUI.panels.*;
 import LOGIC.Game;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JOptionPane;
@@ -10,6 +12,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     // PROPERTIES ==============================================================
     private final Game game;
+    
     private final CardsPanel cardsPanel;
     private final PlayerPanel playerPanel;
     private final DialoguePanel dialoguePanel;

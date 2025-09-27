@@ -1,5 +1,6 @@
 package LOGIC;
 
+import GUI.panels.CardsPanel;
 import GUI.*;
 
 public interface Events {
