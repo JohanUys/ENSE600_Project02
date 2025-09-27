@@ -26,7 +26,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         // Initialize the panels that will be added to the mainframe
         playerPanel = new PlayerPanel(this);
-        dialoguePanel = new DialoguePanel();
+        dialoguePanel = new DialoguePanel(this);
         cardsPanel = new CardsPanel(this);
 
         // Layout manager
@@ -67,7 +67,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         // Set visibility and sizing
         playerPanel.setVisible(false);
-        dialoguePanel.setVisible(false);
 
         setPreferredSize(new Dimension(960, 720));
         pack();
@@ -85,13 +84,14 @@ public class MainFrame extends javax.swing.JFrame {
     // METHODS =================================================================
     public void displayMessage(String message)
     {
+        //Displays a popup dialogue box 
         JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
     
-    public void showDialogue(String text, Runnable onComplete) {
-        dialoguePanel.displayText(text);
-        dialoguePanel.setVisible(true);
-    }
+//    public void showDialogue(String text, Runnable onComplete) {
+//        dialoguePanel.displayText(text);
+//        dialoguePanel.setVisible(true);
+//    }
 
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")

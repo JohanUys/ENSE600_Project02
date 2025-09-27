@@ -64,23 +64,9 @@ public class StartCard extends javax.swing.JPanel {
     // COMPONENT METHODS =======================================================
     //New Game button clicked
     private void buttonNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewGameActionPerformed
-        frame.getCardsPanel().showCard("PortCard"); // Show port card and trigger visibility in showCard()
-        frame.getDialoguePanel().displayText("""
-        Welcome to the high seas, captain!
-        Yer first ship awaits! A basic cutter, but she'll serve you well.
-        You'll start in the beautiful port of Rhymek!
-        Check out the market, and see what's for sale!
-        Buy some cheap goods, then travel to distant ports to sell them!
-        Beware: the sea is dangerous. If you're out there for too long, 
-        who knows what'll happen! If you're feeling brave, take up 
-        privateering and capture some enemy ships!
-
-        Now... If you are ready, press the 'enter' key to continue...
-        """);
-
-        frame.getDialoguePanel().requestFocusInWindow();   // Ensure it has focus to receive keys
-        frame.getDialoguePanel().repaint();
-        frame.getDialoguePanel().revalidate();
+        
+        frame.getCardsPanel().showCard("PortCard"); // Show port card 
+        
     }//GEN-LAST:event_buttonNewGameActionPerformed
 
     // AUTO GENERATED ==========================================================

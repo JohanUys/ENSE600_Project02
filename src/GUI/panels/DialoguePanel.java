@@ -1,17 +1,26 @@
 package GUI.panels;
 
+import GUI.*;
+import LOGIC.*;
+
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 
 public class DialoguePanel extends javax.swing.JPanel {
 
     // PROPERTIES ==============================================================
+    private final MainFrame frame;
+    private final Game game;
+    
+    private static final int TEXTSPEED = 40; //milliseconds per letter
     private int currentIndex;
     private String currentText;
     private Timer timer;
     
     // CONSTRUCTOR =============================================================
-    public DialoguePanel() {
+    public DialoguePanel(MainFrame frame) {
+        this.frame = frame;
+        this.game = frame.getGame();
         initComponents();
     }
 
@@ -27,8 +36,8 @@ public class DialoguePanel extends javax.swing.JPanel {
         currentText = displayString;
         textAreaDialogue.setText("");
         
-        // 50ms between characters
-        timer = new Timer(50, (ActionEvent e) -> {
+        
+        timer = new Timer(TEXTSPEED, (ActionEvent e) -> {
             if (currentIndex < currentText.length()) {
                 textAreaDialogue.append(String.valueOf(currentText.charAt(currentIndex)));
                 currentIndex++;
@@ -38,6 +47,95 @@ public class DialoguePanel extends javax.swing.JPanel {
         });
 
         timer.start();
+    }
+    
+    // Display text using a 'typing' style. Show a card when the text is finished. 
+    public void displayTextThenCard(String displayString, String cardToShow) {
+        if (timer != null && timer.isRunning()) {
+            timer.stop();
+        }
+
+        currentIndex = 0;
+        currentText = displayString;
+        textAreaDialogue.setText("");
+        
+
+        timer = new Timer(TEXTSPEED, (ActionEvent e) -> {
+            if (currentIndex < currentText.length()) {
+                textAreaDialogue.append(String.valueOf(currentText.charAt(currentIndex)));
+                currentIndex++;
+            } else {
+                timer.stop();
+                frame.getCardsPanel().showCard("cardToShow");
+            }
+        });
+
+        timer.start();
+    }
+    
+    public void displayCardShownText(String name)
+    {
+        String text = null;
+        
+        if(name.equals("StartCard"))
+        {
+            text =  """
+                    Welcome to the high seas, captain! Your first ship awaits!"
+                    A basic cutter, but she'll serve you well. "
+                    Start a new Game!
+                    """;
+        }
+        if(name.equals("PortCard"))
+        {
+            text = "Welcome to " + game.getPort().getName() + "!"
+                    + "\nCheck out the market and see what's for sale,"
+                    + "\nor walk over to the shipyard and buy yourself a new ship!"
+                    + "\nWhen you're finished in " + game.getPort().getName() + ","
+                    + "\nhave a look at your map, and set sail!";
+        }
+        if(name.equals("MarketCard"))
+        {
+            text = """
+                   This is the market!
+                   Try to buy goods for a cheap price, and sell them for a higher price!
+                   You can see what the maximum selling price of a good is! 
+                   The prices in each port will always stay the same,
+                   inflation hasn't been invented yet.
+                   """;
+        }
+        if(name.equals("ShipyardCard"))
+        {
+            text = """
+                   This is where you can trade in your ship for a better one!
+                   Or a worse one, if you want.
+                   When you buy a ship, 
+                   the price of your current ship will be subtracted from what you need to spend!
+                   The cargo in your hold will transfer over to your new ship, so no need to worry!
+                   """;
+        }
+        if(name.equals("MapCard"))
+        {
+            text = """
+                   Look at all those distant ports we could travel to!
+                   The time it takes to travel will be effected by the following factors:
+                   - Wind speed 
+                     (Faster the better)
+                   - Wind direction 
+                     (Try to sail away from the wind direction)
+                   - Ship speed 
+                     (The faster your ship is, the faster you'll get there. It's pretty obvious really)
+                   - Distance to port 
+                     (If you go sailing half way across the world, don't expect to get there overnight, yeah?)
+                   
+                   The longer it takes you to travel, the more likely you are to bump into other ships. 
+                   Most of them are friendly...
+                   
+                   There are also storms... Those aren't fun. 
+                   """;
+        }
+        
+        //Display the message. 
+        if(text != null) {displayText(text);}
     }
     
     

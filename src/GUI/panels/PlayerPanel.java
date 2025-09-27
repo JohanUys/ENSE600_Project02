@@ -206,7 +206,7 @@ public class PlayerPanel extends javax.swing.JPanel {
 
             //Update displays
             updateDisplay();
-            frame.getCardsPanel().getMarketPanel().updateDisplay();
+            frame.getCardsPanel().getMarketCard().updateDisplay();
         }
     }//GEN-LAST:event_listHoldMouseClicked
    

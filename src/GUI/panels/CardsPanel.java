@@ -23,6 +23,7 @@ public class CardsPanel extends javax.swing.JPanel {
     private final MarketCard marketCard;
     private final ShipyardCard shipyardCard;
     private final MapCard mapCard;
+    private final TravelCard travelCard;
     private final EventMerchantCard eventMerchantCard;
     private final EventPirateCard eventPirateCard;
     private final EventStormCard eventStormCard;
@@ -44,6 +45,7 @@ public class CardsPanel extends javax.swing.JPanel {
         this.marketCard = new MarketCard(frame);
         this.shipyardCard = new ShipyardCard(frame);
         this.mapCard = new MapCard(frame);
+        this.travelCard = new TravelCard(frame);
         this.eventMerchantCard = new EventMerchantCard(frame);
         this.eventPirateCard = new EventPirateCard(frame);
         this.eventStormCard = new EventStormCard(frame);
@@ -54,6 +56,7 @@ public class CardsPanel extends javax.swing.JPanel {
         add(marketCard, "MarketCard");
         add(shipyardCard, "ShipyardCard");
         add(mapCard, "MapCard");
+        add(travelCard, "TravelCard");
         add(eventMerchantCard, "EventMerchantCard");
         add(eventPirateCard, "EventPirateCard");
         add(eventStormCard, "EventStormCard");
@@ -65,39 +68,40 @@ public class CardsPanel extends javax.swing.JPanel {
     // GETTERS =================================================================
     public MainFrame getMainFrame() {return this.frame;}
     
-    public PortCard getPortPanel() {return this.portCard;}
-    public MarketCard getMarketPanel() {return this.marketCard;}
-    public ShipyardCard getShipYardPanel() {return this.shipyardCard;}
-    public MapCard getMapPanel() {return this.mapCard;}
+    public PortCard getPortCard() {return this.portCard;}
+    public MarketCard getMarketCard() {return this.marketCard;}
+    public ShipyardCard getShipyardCard() {return this.shipyardCard;}
+    public MapCard getMapCard() {return this.mapCard;}
     
     // METHODS =================================================================
     public final void showCard(String name) {
         cardLayout.show(this, name);
         cardShown = name;
+        
+        // Display help text for the shown card. 
+        frame.getDialoguePanel().displayCardShownText(name);
 
-        // Show PlayerPanel and DialoguePanel only if not StartGamePanel
+        // Show PlayerPanel and only if not StartGamePanel
         if (!name.equals("StartCard")) {
             frame.getPlayerPanel().setVisible(true);
-            frame.getDialoguePanel().setVisible(true);
         } else {
             frame.getPlayerPanel().setVisible(false);
-            frame.getDialoguePanel().setVisible(false);
         }
+        
         frame.getPlayerPanel().revalidate();
         frame.getPlayerPanel().repaint();
         frame.getDialoguePanel().revalidate();
         frame.getDialoguePanel().repaint();
 
-        updateAllPanels();
-
-        // Center map on default port
-        if ("MapCard".equals(name)) {
-            mapCard.centerMapOnInitialPort();
-        }
+        // Update everything that could need updating every time a card is changed. 
+        updateCards();
+        frame.getPlayerPanel().updateDisplay();
+        frame.getPlayerPanel().getCompassInlay().repaint();
     }
     
     // Update panels
-    public void updateAllPanels() {
+    public void updateCards() {
+        mapCard.updateDisplay();
         portCard.updateDisplay();
         marketCard.updateDisplay();
         shipyardCard.updateDisplay();
