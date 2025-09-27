@@ -72,6 +72,10 @@ public class CardsPanel extends javax.swing.JPanel {
     public MarketCard getMarketCard() {return this.marketCard;}
     public ShipyardCard getShipyardCard() {return this.shipyardCard;}
     public MapCard getMapCard() {return this.mapCard;}
+    public TravelCard getTravelCard() {return this.travelCard;}
+    public EventMerchantCard getEventMerchantCard() {return this.eventMerchantCard;}
+    public EventPirateCard getEventPirateCard() {return this.eventPirateCard;}
+    public EventStormCard getEventStormCard() {return this.eventStormCard;}
     
     // METHODS =================================================================
     public final void showCard(String name) {

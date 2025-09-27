@@ -22,7 +22,7 @@
                   <Component id="labelPort" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonViewMarket" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonViewShipyard" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonTravel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonMap" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="849" max="32767" attributes="0"/>
           </Group>
@@ -38,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="buttonViewShipyard" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="buttonTravel" min="-2" max="-2" attributes="0"/>
+              <Component id="buttonMap" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="611" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -68,12 +68,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonViewShipyardActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonTravel">
+    <Component class="javax.swing.JButton" name="buttonMap">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Travel"/>
+        <Property name="text" type="java.lang.String" value="Map"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTravelActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonMapActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

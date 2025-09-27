@@ -22,25 +22,4 @@ public class Game
     public Port getPort() {return this.port;}
     
     public void setPort(Port port) {this.port = port;}
-    
-    // Travel to selected Port and reset market upon arrival
-    public void travelToPort(Port destination) {
-        if (destination == null) return;
-
-        setPort(destination);
-
-        // Reset the market when arriving at a new port
-        destination.resetMarket();
-    }
-    // Calculates travel time using the calculation in the map class
-    public int calculatePortTravelTime(Port origin, Port destination) {
-        if (origin == null || destination == null) return 0;
-
-        String originName = origin.getName();
-        String destinationName = destination.getName();
-
-        Ship ship = player.getShip();
-        return map.calculatePortTravelTime(originName, destinationName, wind, ship);
-    }
-
 }

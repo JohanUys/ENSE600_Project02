@@ -1,41 +1,43 @@
 package LOGIC;
 
-import GUI.panels.CardsPanel;
-import LOGIC.events.PirateEvent;
-import LOGIC.events.StormEvent;
+import LOGIC.events.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class EventManager {
-    private static final double chancePerDay = 10.0; // 10% per day
-    private static final int maxEvents = 5;
+    private static final double CHANCEPERDAY = 10.0; // 10% per day
+    private static final int MAXEVENTS = 5;
     
     private static final Random random = new Random();
 
-    private static List<Events> eventsList = List.of(
-        new StormEvent(), new PirateEvent()
+    private static final List<Events> eventsList = List.of(
+        new MerchantEvent(), new StormEvent(), new PirateEvent()
     );
 
-    public static void triggerEvents(Game game, int travelTimeInHours, CardsPanel cardsPanel) {
+    public static ArrayList<Events> generateEvents(Game game, int travelTimeInHours) {
         int numEvents = 0;
         int days = travelTimeInHours / 24;
+        
+        //Stores events that will occur. 
+        ArrayList<Events> occuringEvents = new ArrayList<>();
 
         for (int i = 0; i < days; i++) {
             int roll = random.nextInt(100) + 1; // 1-100
-            if (roll <= chancePerDay) {
+            if (roll <= CHANCEPERDAY) {
                 Events event = selectRandomEventByWeight();
-                if (event != null) {
-                    event.trigger(game, cardsPanel);
-                    numEvents++;
-                }
+                // Set all the necessary ships, etc. in the event. 
+                event.initializeObjects();
+                occuringEvents.add(event);
 
-                if (game.getPlayer().checkGameStatus() == Player.GameStatus.LOSE || numEvents >= maxEvents) {
+                if (game.getPlayer().checkGameStatus() == Player.GameStatus.LOSE || numEvents >= MAXEVENTS) {
                     break;
                 }
             }
         }
+        
+        return occuringEvents;
     }
-
 
     private static Events selectRandomEventByWeight() {
         int totalWeight = eventsList.stream().mapToInt(Events::getWeighting).sum();

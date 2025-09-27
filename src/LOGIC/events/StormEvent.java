@@ -1,42 +1,35 @@
 package LOGIC.events;
 
-import GUI.panels.CardsPanel;
-import java.util.Random;
 import LOGIC.*;
-import GUI.*;
 
 public class StormEvent implements Events
 {
-    @Override
-    public int getWeighting() 
+    @Override 
+    public int getWeighting()
     {
-        return 100; // Frequency weight
+        return 20;
     }
-
-
+    
     @Override
-    public void trigger(Game game, CardsPanel cardsPanel) 
+    public void initializeObjects()
     {
-        Player player = game.getPlayer();
-        Ship ship = player.getShip();
-        Random random = new Random();
         
-        int roll = random.nextInt(100);
-        
-        // The bigger this number, the more likely we are to sink
-        int shipWeakness = ship.getHold().size()*5 + ship.getMaxSpeed();
-
-        if(roll < shipWeakness) 
-        {
-            // Clear cargo and deduct gold repair cost
-            int repairCost = random.nextInt(30); //0-29 gold
-            if(repairCost > player.getGold())
-                repairCost = player.getGold();
-
-            player.subtractGold(repairCost);
-            ship.getHold().clear();
-        }
-        
-        cardsPanel.getMainFrame().getDialoguePanel().displayText("You have encountered a storm");
+    }
+    
+    @Override
+    public String getIntroText()
+    {
+        return """
+               Captain! There's a massive storm on the horizon!
+               The faster our ship is, the worse it is at handling storms!
+               The more cargo we have, the more likely we are to sustain damages!
+               What should we do?
+               """;
+    }
+    
+    @Override
+    public String getCardName()
+    {
+        return "EventStormCard";
     }
 }

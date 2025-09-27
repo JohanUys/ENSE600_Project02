@@ -12,7 +12,7 @@ public class DialoguePanel extends javax.swing.JPanel {
     private final MainFrame frame;
     private final Game game;
     
-    private static final int TEXTSPEED = 40; //milliseconds per letter
+    private static final int TEXTSPEED = 50; //milliseconds per letter
     private int currentIndex;
     private String currentText;
     private Timer timer;
@@ -66,7 +66,7 @@ public class DialoguePanel extends javax.swing.JPanel {
                 currentIndex++;
             } else {
                 timer.stop();
-                frame.getCardsPanel().showCard("cardToShow");
+                frame.getCardsPanel().showCard(cardToShow);
             }
         });
 

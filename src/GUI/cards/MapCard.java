@@ -86,82 +86,6 @@ public class MapCard extends javax.swing.JPanel {
         scrollPaneMap.getViewport().setViewPosition(new Point(viewX, viewY));
     }
 
-    
-    
-    
-    
-    
-    // Player travels to the selected port and the map is updated
-    private void travelToSelectedPort(Object selectedItem) {
-        if (selectedItem == null) return;
-
-        // Get the selected port
-        Port selectedPort = game.getMap().getPorts().get((String) selectedItem);
-        if (selectedPort == null) return;
-
-        // Capture current port traveling
-        Port originPort = game.getPort();
-
-        // THIS STUFF COULD BE DONE IN A TRAVEL PANEL
-        
-        // Travel
-        game.travelToPort(selectedPort);
-
-        
-
-        // Show travel info
-        String travelInfo = travelInformationDialogue(originPort, selectedPort);
-        frame.getDialoguePanel().displayText(travelInfo);
-        
-        // Determine travel time
-        int travelTimeInHours = game.calculatePortTravelTime(originPort, selectedPort);
-        
-        // Trigger any events that may occur.
-        EventManager.triggerEvents(game, travelTimeInHours, frame.getCardsPanel());
-    }
-
-
-    
-    
-    // Could be moved to a travel panel 
-    // Travel information dialogue
-    private String travelInformationDialogue(Port originPort, Port destinationPort) {
-        if (originPort == null || destinationPort == null) {
-            return "Travel information is unavailable.";
-        }
-
-        String originName = originPort.getName();
-        String destinationName = destinationPort.getName();
-
-        Wind wind = game.getWind();
-        Ship ship = game.getPlayer().getShip();
-
-        int distance = game.getMap().calculatePortDistance(originName, destinationName);
-        int travelTimeHours = game.getMap().calculatePortTravelTime(originName, destinationName, wind, ship);
-
-        int days = travelTimeHours / 24;
-        int hours = travelTimeHours % 24;
-
-        StringBuilder info = new StringBuilder();
-        info.append("You depart from ").append(originName).append(".\n");
-        info.append("The wind is blowing ").append(wind.getDirection().getName())
-            .append(" at ").append(wind.getSpeed()).append(" knots.\n");
-        info.append("You have arrived at ").append(destinationName).append(", a distance of ")
-            .append(distance).append(" nautical miles.\n");
-        info.append("The journey took: ");
-
-        if (days > 0) {
-            info.append(days).append(" day").append(days > 1 ? "s" : "");
-            if (hours > 0) info.append(" and ");
-        }
-        if (hours > 0 || days == 0) {
-            info.append(hours).append(" hour").append(hours != 1 ? "s" : "");
-        }
-
-        info.append(".\nSafe travels, captain!");
-        return info.toString();
-    }
-
 
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
@@ -228,12 +152,19 @@ public class MapCard extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // COMPONENT METHODS =======================================================
-    // When the 'travel' button is clicked the player panel is updated and the player travels to the selected port
+    // When the 'travel' button is clicked, the player travels to the port. 
     private void buttonTravelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTravelActionPerformed
 
-        travelToSelectedPort(comboBoxPortList.getSelectedItem()); // Travel to port
+        // Get the object from the combo box
+        Object destinationObject = comboBoxPortList.getSelectedItem();
         
-        //frame.getCardsPanel().showCard("TravelPanel");
+        // Get the destination from that object
+        Port destination = game.getMap().getPorts().get((String) destinationObject);
+        if (destination == null) {return;}
+        
+        // Hand over to travel card to handle the travel. 
+        frame.getCardsPanel().getTravelCard().setDestination(destination);
+        frame.getCardsPanel().getTravelCard().leavePort();
     }//GEN-LAST:event_buttonTravelActionPerformed
     
     // When the 'view port' button is clicked the port, market and shipyard panels are updated and the card changes to the current port

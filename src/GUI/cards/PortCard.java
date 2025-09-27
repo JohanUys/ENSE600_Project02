@@ -35,7 +35,7 @@ public class PortCard extends javax.swing.JPanel {
         labelPort = new javax.swing.JLabel();
         buttonViewMarket = new javax.swing.JButton();
         buttonViewShipyard = new javax.swing.JButton();
-        buttonTravel = new javax.swing.JButton();
+        buttonMap = new javax.swing.JButton();
 
         labelPort.setText(game.getPort().getName()
         );
@@ -58,12 +58,12 @@ public class PortCard extends javax.swing.JPanel {
             }
         });
 
-        buttonTravel.setText("Travel");
-        buttonTravel.addActionListener(new java.awt.event.ActionListener()
+        buttonMap.setText("Map");
+        buttonMap.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                buttonTravelActionPerformed(evt);
+                buttonMapActionPerformed(evt);
             }
         });
 
@@ -77,7 +77,7 @@ public class PortCard extends javax.swing.JPanel {
                     .addComponent(labelPort)
                     .addComponent(buttonViewMarket)
                     .addComponent(buttonViewShipyard)
-                    .addComponent(buttonTravel))
+                    .addComponent(buttonMap))
                 .addContainerGap(849, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -90,7 +90,7 @@ public class PortCard extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonViewShipyard)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonTravel)
+                .addComponent(buttonMap)
                 .addContainerGap(611, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -106,14 +106,14 @@ public class PortCard extends javax.swing.JPanel {
         frame.getCardsPanel().showCard("ShipyardCard");
     }//GEN-LAST:event_buttonViewShipyardActionPerformed
     // When 'Travel' button is clicked set map canvas and change to 'MapPanel' card
-    private void buttonTravelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTravelActionPerformed
+    private void buttonMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMapActionPerformed
 
         frame.getCardsPanel().showCard("MapCard");
-    }//GEN-LAST:event_buttonTravelActionPerformed
+    }//GEN-LAST:event_buttonMapActionPerformed
 
     // AUTO GENERATED ==========================================================
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonTravel;
+    private javax.swing.JButton buttonMap;
     private javax.swing.JButton buttonViewMarket;
     private javax.swing.JButton buttonViewShipyard;
     private javax.swing.JLabel labelPort;
