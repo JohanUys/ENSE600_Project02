@@ -69,9 +69,6 @@ public class TravelCard extends javax.swing.JPanel
 
             //Get the cardName of the event
             String cardName = event.getCardName();
-
-            //Get the intro text for the event
-            String introText = event.getIntroText();
             
             //Give the event object to the necessary event card
             if(cardName.equals("EventMerchantCard")) {
@@ -85,7 +82,7 @@ public class TravelCard extends javax.swing.JPanel
             }
 
             //Hand over to the event card
-            frame.getDialoguePanel().displayTextThenCard(outroText + "\n\n" + introText, cardName);
+            frame.getDialoguePanel().displayTextThenCard(outroText, cardName);
         }
         else
         {
@@ -101,9 +98,10 @@ public class TravelCard extends javax.swing.JPanel
         int days = travelTimeHours / 24;
         int hours = travelTimeHours % 24;
 
-        // CHANGE THE PORT AND THE WIND
+        // CHANGE THE PORT AND THE WIND AND UPDATE MARKET
         game.getWind().windChange();
         game.setPort(destination);
+        game.getPort().resetMarket();
         
         String arrivalText = "\nArrived in " + game.getPort().getName() + "."
                              + "\nLogbook says the journey took " + days + " days and " + hours + " hours."

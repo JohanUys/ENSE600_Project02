@@ -73,6 +73,7 @@ public class DialoguePanel extends javax.swing.JPanel {
         timer.start();
     }
     
+    // Display the intro text of cards. This function is called in the CardsPanel.showCard() method.
     public void displayCardShownText(String name)
     {
         String text = null;
@@ -132,6 +133,18 @@ public class DialoguePanel extends javax.swing.JPanel {
                    
                    There are also storms... Those aren't fun. 
                    """;
+        }
+        if(name.equals("EventMerchantCard"))
+        {
+            text = frame.getCardsPanel().getEventMerchantCard().getEvent().getIntroText();
+        }
+        if(name.equals("EventPirateCard"))
+        {
+            text = frame.getCardsPanel().getEventPirateCard().getEvent().getIntroText();
+        }
+        if(name.equals("EventStormCard"))
+        {
+            text = frame.getCardsPanel().getEventStormCard().getEvent().getIntroText();
         }
         if(name.equals("LootingCard"))
         {

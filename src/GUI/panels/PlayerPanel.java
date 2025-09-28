@@ -206,20 +206,16 @@ public class PlayerPanel extends javax.swing.JPanel {
     // COMPONENT METHODS =======================================================
     private void listHoldMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_listHoldMouseClicked
     {//GEN-HEADEREND:event_listHoldMouseClicked
+        //Find the index of the item to sell
+        int index = listHold.getSelectedIndex();
+        String message = null;
+
         //If market panel is being displayed
         if(frame.getCardsPanel().isShown("MarketCard"))
         {
-            //Find the index of the item to sell
-            int index = listHold.getSelectedIndex();
             //Sell that item
-            String message = game.getPort().getMarket().sell(index, game.getPlayer());
+            message = game.getPort().getMarket().sell(index, game.getPlayer());
             
-            //If an error message found, display that error message
-            if(message != null)
-            {
-                frame.displayMessage(message);
-            }
-
             //Update displays
             updateDisplay();
             frame.getCardsPanel().getMarketCard().updateDisplay();
@@ -229,11 +225,6 @@ public class PlayerPanel extends javax.swing.JPanel {
             Ship playerShip = game.getPlayer().getShip();
             Ship lootedShip = frame.getCardsPanel().getLootingCard().getLootedShip();
             boolean isDumping = frame.getCardsPanel().getLootingCard().getIsDumping();
-
-            //Find the index of the item to transfer
-            int index = listHold.getSelectedIndex();
-            
-            String message;
            
             if(!isDumping) //Looting card is in transferring mode
             {
@@ -245,16 +236,26 @@ public class PlayerPanel extends javax.swing.JPanel {
                 message = EventManager.dump(index, playerShip);
             }
             
-            
-            //If an error message found, display that error message
-            if(message != null)
-            {
-                frame.displayMessage(message);
-            }
-
             //Update displays
             updateDisplay();
             frame.getCardsPanel().getLootingCard().updateDisplay();
+        }
+        if(frame.getCardsPanel().isShown("EventStormCard"))
+        {
+            Ship playerShip = game.getPlayer().getShip();
+            
+            //Dump the item
+            message = EventManager.dump(index, playerShip);
+            
+            //Update displays
+            updateDisplay();
+            frame.getCardsPanel().getEventStormCard().updateDisplay();
+        }
+        
+        //If an error message found, display that error message
+        if(message != null)
+        {
+            frame.displayMessage(message);
         }
     }//GEN-LAST:event_listHoldMouseClicked
    

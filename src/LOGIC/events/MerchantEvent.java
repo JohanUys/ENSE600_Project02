@@ -29,7 +29,7 @@ public class MerchantEvent implements Events
     
     @Override
     public String getIntroText()
-    {
+    { 
         return  "Captain! I see a merchant ship on the horizon!"
                 + "\nLooks to be a " + merchantShip.getGuns() + " gun " + merchantShip.getName()
                 + " sailing about " + merchantShip.getMaxSpeed() + " knots!"

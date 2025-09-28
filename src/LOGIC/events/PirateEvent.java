@@ -7,9 +7,14 @@ import java.util.Random;
 
 public class PirateEvent implements Events
 {
+    // PROPERTIES ==============================================================
     private final Random random = new Random();
     private Ship pirateShip;
     
+    // GETTERS =================================================================
+    public Ship getPirateShip() {return this.pirateShip;}
+    
+    // METHODS =================================================================
     @Override 
     public int getWeighting()
     {

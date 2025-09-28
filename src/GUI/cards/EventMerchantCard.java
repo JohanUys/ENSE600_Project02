@@ -21,11 +21,9 @@ public class EventMerchantCard extends javax.swing.JPanel
         initComponents();
     }
     
-    // SETTERS =================================================================
+    // GETTERS & SETTERS =======================================================
     public void setEvent(Events event) {this.event = (MerchantEvent)event;}
-    
-    // METHODS =================================================================
-
+    public Events getEvent() {return event;}
     
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
@@ -76,6 +74,7 @@ public class EventMerchantCard extends javax.swing.JPanel
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // COMPONENT METHODS =======================================================
     private void buttonAvoidActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonAvoidActionPerformed
     {//GEN-HEADEREND:event_buttonAvoidActionPerformed
         String outroText = "Good plan captain, that would have been a difficult fight!";

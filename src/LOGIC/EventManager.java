@@ -57,8 +57,25 @@ public class EventManager {
     //Determine if the chasing ship catches the chased ship.
     public static boolean chase(Ship chaserShip, Ship chasedShip)
     {
-        //Is the chaser faster than the chasee? This is deterministic. 
-        return chaserShip.getMaxSpeed() > chasedShip.getMaxSpeed();
+        int chaserSpeed = chaserShip.getGuns(); 
+        int chasedSpeed = chasedShip.getGuns();
+
+        int roll = random.nextInt(chaserSpeed + chasedSpeed);
+
+        //Returns true if chased ship is caught
+        return (roll < chaserSpeed);
+    }
+    
+    public static int chaseChance(Ship chaserShip, Ship chasedShip)
+    {
+        int chaserSpeed = chaserShip.getMaxSpeed(); 
+        int chasedSpeed = chasedShip.getMaxSpeed();
+        
+        double total = (double)chaserSpeed + (double)chasedSpeed;
+        
+        double chance = (double)chaserSpeed/total * 100;
+        
+        return (int)chance;
     }
     
     //Determine which ship wins in a fight 
@@ -69,8 +86,22 @@ public class EventManager {
 
         int roll = random.nextInt(playerPower + enemyPower);
 
+        //Returns true if player ship wins
         return (roll < playerPower);
     }
+    
+    public static int fightChance(Ship playerShip, Ship enemyShip)
+    {
+        int playerGuns = playerShip.getGuns(); 
+        int enemyGuns = enemyShip.getGuns();
+        
+        double total = (double)playerGuns + (double)enemyGuns;
+        
+        double chance = (double)playerGuns/total * 100;
+        
+        return (int)chance;
+    }
+    
     
     //Steal all the player's cargo and loot a certain amount of Gold. 
     public static int lootPlayer(Player player)
@@ -118,5 +149,22 @@ public class EventManager {
         
         //This will be assigned to the looting ship
         return playerShip;
+    }
+    
+    public static boolean storm(Ship playerShip)
+    {
+        int roll = random.nextInt(100);
+
+        //The bigger this number, the more likely we are to sink
+        int shipWeakness = playerShip.getHold().size()*5 + playerShip.getMaxSpeed();
+        
+        //Returns true if the ship is damaged.
+        return (roll < shipWeakness);
+    }
+    
+    public static int stormChance(Ship playerShip)
+    {
+        //The bigger this number, the more likely we are to sink
+        return playerShip.getHold().size()*5 + playerShip.getMaxSpeed();
     }
 }

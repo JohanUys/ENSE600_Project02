@@ -13,7 +13,7 @@ public class StormEvent implements Events
     @Override
     public void reset()
     {
-        
+        //Storm has nothing that needs resetting. 
     }
     
     @Override
@@ -23,7 +23,7 @@ public class StormEvent implements Events
                Captain! There's a massive storm on the horizon!
                The faster our ship is, the worse it is at handling storms!
                The more cargo we have, the more likely we are to sustain damages!
-               What should we do?
+               Now's our chance! Dump any cargo we don't need!
                """;
     }
     

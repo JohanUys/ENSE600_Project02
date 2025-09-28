@@ -105,13 +105,15 @@ public class CardsPanel extends javax.swing.JPanel {
         frame.getPlayerPanel().getCompassInlay().repaint();
     }
     
-    // Update panels
-    public void updateCards() {
+    // Update cards that need updating.
+    public void updateCards() 
+    {
         mapCard.updateDisplay();
         portCard.updateDisplay();
         marketCard.updateDisplay();
         lootingCard.updateDisplay();
         shipyardCard.updateDisplay();
+        eventStormCard.updateDisplay();
     }
 
     
