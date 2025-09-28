@@ -32,6 +32,9 @@ public class EventManager {
                 if (game.getPlayer().checkGameStatus() == Player.GameStatus.LOSE || numEvents >= MAXEVENTS) {
                     break;
                 }
+                
+                //Cap the number of events at 5
+                if (i >= MAXEVENTS) {return occuringEvents;}
             }
         }
         
