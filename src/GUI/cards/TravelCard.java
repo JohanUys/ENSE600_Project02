@@ -48,26 +48,32 @@ public class TravelCard extends javax.swing.JPanel
         events = EventManager.generateEvents(game, travelTimeHours);
         
         // Trigger events
-        triggerEvent();
+        triggerEvent("Setting sail for " + destination.getName());
     }
     
-    public void triggerEvent()
+    public void triggerEvent(String outroText)
     {
         // Increment the trigger index so the next event will be triggered.
         triggerIndex++;
         
         if(triggerIndex < events.size())
         {
+            //Ensure this card is showing
+            frame.getCardsPanel().showCard("TravelCard");
+            
             //Get the event
             Events event = events.get(triggerIndex);
+            
+            //Reset the event
+            event.reset();
 
             //Get the cardName of the event
             String cardName = event.getCardName();
 
             //Get the intro text for the event
-            String intro = event.getIntroText();
+            String introText = event.getIntroText();
             
-            //Give the event to the necessary event card
+            //Give the event object to the necessary event card
             if(cardName.equals("EventMerchantCard")) {
                 frame.getCardsPanel().getEventMerchantCard().setEvent(event);
             }
@@ -79,15 +85,15 @@ public class TravelCard extends javax.swing.JPanel
             }
 
             //Hand over to the event card
-            frame.getDialoguePanel().displayTextThenCard(intro, cardName);
+            frame.getDialoguePanel().displayTextThenCard(outroText + "\n\n" + introText, cardName);
         }
         else
         {
-            arriveAtDestination();
+            arriveAtDestination(outroText);
         }
     }
     
-    public void arriveAtDestination()
+    public void arriveAtDestination(String outroText)
     {
         // Determine travel time & distance
         int distance = game.getMap().calculatePortDistance(game.getPort().getName(), destination.getName());
@@ -99,12 +105,13 @@ public class TravelCard extends javax.swing.JPanel
         game.getWind().windChange();
         game.setPort(destination);
         
-        // Display arrival message to user
-        String arrivalText = "Arrived in " + game.getPort().getName() + "."
+        String arrivalText = "\nArrived in " + game.getPort().getName() + "."
                              + "\nLogbook says the journey took " + days + " days and " + hours + " hours."
                              + "\nWe travelled " + distance + " nautical miles."
                              + "\nDocking ship....................";
-        frame.getDialoguePanel().displayTextThenCard(arrivalText,"PortCard");
+        
+        //Hand over to the port card.
+        frame.getDialoguePanel().displayTextThenCard(outroText + arrivalText, "PortCard");
     }
     
     // AUTO GENERATED ==========================================================

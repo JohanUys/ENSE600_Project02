@@ -27,6 +27,7 @@ public class CardsPanel extends javax.swing.JPanel {
     private final EventMerchantCard eventMerchantCard;
     private final EventPirateCard eventPirateCard;
     private final EventStormCard eventStormCard;
+    private final LootingCard lootingCard;
 
     // CONSTRUCTOR =============================================================
     public CardsPanel(MainFrame frame) 
@@ -49,6 +50,7 @@ public class CardsPanel extends javax.swing.JPanel {
         this.eventMerchantCard = new EventMerchantCard(frame);
         this.eventPirateCard = new EventPirateCard(frame);
         this.eventStormCard = new EventStormCard(frame);
+        this.lootingCard = new LootingCard(frame);
 
         //Add cards panels to card layout
         add(startCard, "StartCard");
@@ -60,14 +62,13 @@ public class CardsPanel extends javax.swing.JPanel {
         add(eventMerchantCard, "EventMerchantCard");
         add(eventPirateCard, "EventPirateCard");
         add(eventStormCard, "EventStormCard");
+        add(lootingCard, "LootingCard");
         
         // Start game
         showCard("StartCard");
     }
     
-    // GETTERS =================================================================
-    public MainFrame getMainFrame() {return this.frame;}
-    
+    // GETTERS ================================================================= 
     public PortCard getPortCard() {return this.portCard;}
     public MarketCard getMarketCard() {return this.marketCard;}
     public ShipyardCard getShipyardCard() {return this.shipyardCard;}
@@ -76,6 +77,7 @@ public class CardsPanel extends javax.swing.JPanel {
     public EventMerchantCard getEventMerchantCard() {return this.eventMerchantCard;}
     public EventPirateCard getEventPirateCard() {return this.eventPirateCard;}
     public EventStormCard getEventStormCard() {return this.eventStormCard;}
+    public LootingCard getLootingCard() {return this.lootingCard;}
     
     // METHODS =================================================================
     public final void showCard(String name) {
@@ -108,6 +110,7 @@ public class CardsPanel extends javax.swing.JPanel {
         mapCard.updateDisplay();
         portCard.updateDisplay();
         marketCard.updateDisplay();
+        lootingCard.updateDisplay();
         shipyardCard.updateDisplay();
     }
 

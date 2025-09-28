@@ -17,7 +17,7 @@ public class PirateEvent implements Events
     }
     
     @Override
-    public void initializeObjects()
+    public void reset()
     {
         pirateShip = generateRandomPirateShip();
         pirateShip.fillHoldRandomly();

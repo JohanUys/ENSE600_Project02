@@ -12,7 +12,7 @@ public class DialoguePanel extends javax.swing.JPanel {
     private final MainFrame frame;
     private final Game game;
     
-    private static final int TEXTSPEED = 50; //milliseconds per letter
+    private static final int TEXTSPEED = 10; //milliseconds per letter
     private int currentIndex;
     private String currentText;
     private Timer timer;
@@ -80,8 +80,8 @@ public class DialoguePanel extends javax.swing.JPanel {
         if(name.equals("StartCard"))
         {
             text =  """
-                    Welcome to the high seas, captain! Your first ship awaits!"
-                    A basic cutter, but she'll serve you well. "
+                    Welcome to the high seas, captain! Your first ship awaits!
+                    A basic cutter, but she'll serve you well. 
                     Start a new Game!
                     """;
         }
@@ -131,6 +131,15 @@ public class DialoguePanel extends javax.swing.JPanel {
                    Most of them are friendly...
                    
                    There are also storms... Those aren't fun. 
+                   """;
+        }
+        if(name.equals("LootingCard"))
+        {
+            text = """
+                   Victory! The ship is ours!
+                   Now, take whatever cargo you want from the captured ship. 
+                   Dump any cargo you don't need from your hold into the ocean.
+                   You can even take the ship itself!
                    """;
         }
         

@@ -21,11 +21,8 @@ public class EventPirateCard extends javax.swing.JPanel
         initComponents();
     }
     
-    // METHODS =================================================================
-    public void setEvent(Events event)
-    {
-        this.event = (PirateEvent)event;
-    }
+    // SETTERS =================================================================
+    public void setEvent(Events event) {this.event = (PirateEvent)event;}
     
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")

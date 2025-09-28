@@ -115,12 +115,12 @@ public class MarketCard extends javax.swing.JPanel {
         if(message != null)
         {
             //Display message to user.
-            frame.getCardsPanel().getMainFrame().displayMessage(message);
+            frame.displayMessage(message);
         }
         
         //Update displays
         updateDisplay();
-        frame.getCardsPanel().getMainFrame().getPlayerPanel().updateDisplay();
+        frame.getPlayerPanel().updateDisplay();
     }//GEN-LAST:event_listGoodsMouseClicked
 
     // AUTO GENERATED ==========================================================

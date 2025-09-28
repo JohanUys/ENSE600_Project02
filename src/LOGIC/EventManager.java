@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EventManager {
+    
     private static final double CHANCEPERDAY = 10.0; // 10% per day
     private static final int MAXEVENTS = 5;
     
@@ -26,8 +27,6 @@ public class EventManager {
             int roll = random.nextInt(100) + 1; // 1-100
             if (roll <= CHANCEPERDAY) {
                 Events event = selectRandomEventByWeight();
-                // Set all the necessary ships, etc. in the event. 
-                event.initializeObjects();
                 occuringEvents.add(event);
 
                 if (game.getPlayer().checkGameStatus() == Player.GameStatus.LOSE || numEvents >= MAXEVENTS) {
@@ -53,5 +52,71 @@ public class EventManager {
             }
         }
         return null;
+    }
+    
+    //Determine if the chasing ship catches the chased ship.
+    public static boolean chase(Ship chaserShip, Ship chasedShip)
+    {
+        //Is the chaser faster than the chasee? This is deterministic. 
+        return chaserShip.getMaxSpeed() > chasedShip.getMaxSpeed();
+    }
+    
+    //Determine which ship wins in a fight 
+    public static boolean fight(Ship playerShip, Ship enemyShip)
+    {
+        int playerPower = playerShip.getGuns(); 
+        int enemyPower = enemyShip.getGuns();
+
+        int roll = random.nextInt(playerPower + enemyPower);
+
+        return (roll < playerPower);
+    }
+    
+    //Steal all the player's cargo and loot a certain amount of Gold. 
+    public static int lootPlayer(Player player)
+    {
+        int goldLost = random.nextInt(30);
+        if (goldLost > player.getGold()) goldLost = player.getGold();
+
+        player.subtractGold(goldLost);
+        player.getShip().getHold().clear();
+        
+        return goldLost;
+    }
+    
+    public static String transfer(int index, Ship givingShip, Ship takingShip)
+    {
+        Good good = givingShip.getHold().get(index);
+        
+        if(!givingShip.hasInHold(good)) {return "ERROR: SHOULD NOT BE REACHABLE";}
+        if(!takingShip.hasHoldSpace()) {return "Not enough space in the other ship for that, sorry!";}
+        
+        givingShip.unload(good);
+        takingShip.load(good);
+        
+        return null;
+    }
+    
+    public static String dump(int index, Ship dumpingShip)
+    {
+        Good good = dumpingShip.getHold().get(index);
+        
+        if(!dumpingShip.hasInHold(good)) {return "ERROR: SHOULD NOT BE REACHABLE";}
+        
+        dumpingShip.unload(good);
+        
+        return null;
+    }
+    
+    public static Ship swapShips(Player player, Ship lootedShip)
+    {
+        // Store enemy ship temporarily
+        Ship playerShip = player.getShip();
+
+        // Swap the ships
+        player.setShip(lootedShip);
+        
+        //This will be assigned to the looting ship
+        return playerShip;
     }
 }

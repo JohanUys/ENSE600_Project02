@@ -2,7 +2,7 @@ package LOGIC;
 
 public interface Events {
     int getWeighting();
-    void initializeObjects();
+    void reset();
     String getIntroText();
     String getCardName();
 }

@@ -6,11 +6,14 @@ import java.util.Random;
 
 public class MerchantEvent implements Events
 {
-    //========== PROPERTIES ==========
+    // PROPERTIES ==============================================================
     private final Random random = new Random();
-    
     private Ship merchantShip;
     
+    // GETTERS =================================================================
+    public Ship getMerchantShip() {return this.merchantShip;}
+    
+    // METHODS =================================================================
     @Override
     public int getWeighting()
     {
@@ -18,7 +21,7 @@ public class MerchantEvent implements Events
     }
     
     @Override
-    public void initializeObjects()
+    public void reset()
     {
         merchantShip = generateRandomMerchantShip();
         merchantShip.fillHoldRandomly();
@@ -38,7 +41,6 @@ public class MerchantEvent implements Events
     {
         return "EventMerchantCard";
     }
-    
     
     
     // Weighted random merchant ship generator

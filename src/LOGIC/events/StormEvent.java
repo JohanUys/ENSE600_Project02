@@ -11,7 +11,7 @@ public class StormEvent implements Events
     }
     
     @Override
-    public void initializeObjects()
+    public void reset()
     {
         
     }

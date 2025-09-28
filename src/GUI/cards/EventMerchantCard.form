@@ -43,11 +43,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Avoid!"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAvoidActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonChase">
       <Properties>
         <Property name="text" type="java.lang.String" value="Chase!"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonChaseActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

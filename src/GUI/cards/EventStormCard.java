@@ -21,11 +21,8 @@ public class EventStormCard extends javax.swing.JPanel
         initComponents();
     }
     
-    // METHODS =================================================================
-    public void setEvent(Events event)
-    {
-        this.event = (StormEvent)event;
-    }
+    // SETTERS =================================================================
+    public void setEvent(Events event) {this.event = (StormEvent)event;}
     
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")

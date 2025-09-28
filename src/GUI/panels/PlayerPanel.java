@@ -61,8 +61,24 @@ public class PlayerPanel extends javax.swing.JPanel {
         //Add each good into the default list model
         for(Good g : game.getPlayer().getShip().getHold())
         {
-            int adjustedPrice = g.getAdjustedPrice(game.getPort().getMarket());
-            dlm.addElement(g.getName() + " : $" + adjustedPrice + " (Maximum price : " + (int)g.getMaxPrice() + ")");
+            CardsPanel cardsPanel = frame.getCardsPanel();
+            
+            //If the ship is not travelling, include adjusted price
+            if(!  (cardsPanel.isShown("LootingCard") 
+                || cardsPanel.isShown("DumpingCard")
+                || cardsPanel.isShown("TravelCard")
+                || cardsPanel.isShown("EventMerchantCard")
+                || cardsPanel.isShown("EventPirateCard")
+                || cardsPanel.isShown("EventStormCard"))
+              )
+            {
+                int adjustedPrice = g.getAdjustedPrice(game.getPort().getMarket());
+                dlm.addElement(g.getName() + " : $" + adjustedPrice + " (Maximum price : " + (int)g.getMaxPrice() + ")");
+            }
+            else //Ship is travelling, don't include adjusted price (it makes no sense to have an adjusted price if not in a port)
+            {
+                dlm.addElement(g.getName() + " (Maximum price : " + (int)g.getMaxPrice() + ")");
+            }
         }
         //Set the list to default list model.
         listHold.setModel(dlm);
@@ -207,6 +223,38 @@ public class PlayerPanel extends javax.swing.JPanel {
             //Update displays
             updateDisplay();
             frame.getCardsPanel().getMarketCard().updateDisplay();
+        }
+        if(frame.getCardsPanel().isShown("LootingCard"))
+        {
+            Ship playerShip = game.getPlayer().getShip();
+            Ship lootedShip = frame.getCardsPanel().getLootingCard().getLootedShip();
+            boolean isDumping = frame.getCardsPanel().getLootingCard().getIsDumping();
+
+            //Find the index of the item to transfer
+            int index = listHold.getSelectedIndex();
+            
+            String message;
+           
+            if(!isDumping) //Looting card is in transferring mode
+            {
+                //transfer that item
+                message = EventManager.transfer(index, playerShip, lootedShip);
+            }
+            else //Looting card is in dumping mode 
+            {
+                message = EventManager.dump(index, playerShip);
+            }
+            
+            
+            //If an error message found, display that error message
+            if(message != null)
+            {
+                frame.displayMessage(message);
+            }
+
+            //Update displays
+            updateDisplay();
+            frame.getCardsPanel().getLootingCard().updateDisplay();
         }
     }//GEN-LAST:event_listHoldMouseClicked
    
