@@ -72,6 +72,7 @@ public class ShipyardCard extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(listShips);
 
+        labelPortShipyard.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelPortShipyard.setText(game.getPort().getName() + " Shipyard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

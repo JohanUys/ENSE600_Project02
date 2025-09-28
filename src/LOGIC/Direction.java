@@ -9,9 +9,9 @@ public enum Direction
     private final String name;
     
     //========== CONSTRUCTOR ==========
-    Direction(int ID, String acronym)
+    Direction(int ID, String name)
     {
-        this.name = acronym;
+        this.name = name;
         this.ID = ID;
     }
     

@@ -66,6 +66,7 @@ public class EventManager {
         return (roll < chaserSpeed);
     }
     
+    //This method is currently unused. 
     public static int chaseChance(Ship chaserShip, Ship chasedShip)
     {
         int chaserSpeed = chaserShip.getMaxSpeed(); 
@@ -90,6 +91,7 @@ public class EventManager {
         return (roll < playerPower);
     }
     
+    //This method is currently unused. 
     public static int fightChance(Ship playerShip, Ship enemyShip)
     {
         int playerGuns = playerShip.getGuns(); 
@@ -101,7 +103,6 @@ public class EventManager {
         
         return (int)chance;
     }
-    
     
     //Steal all the player's cargo and loot a certain amount of Gold. 
     public static int lootPlayer(Player player)

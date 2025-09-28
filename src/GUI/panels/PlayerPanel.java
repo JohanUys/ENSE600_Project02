@@ -48,7 +48,6 @@ public class PlayerPanel extends javax.swing.JPanel {
         //Update components 
         labelPlayerName.setText(game.getPlayer().getName());
         labelPlayerGold.setText("Gold: $" + String.valueOf(game.getPlayer().getGold()));
-        labelPlayerPort.setText("Port: " + String.valueOf(game.getPort().getName()));
         labelMyShip.setText("My " + game.getPlayer().getShip().getName());
         labelShipPrice.setText("Worth: $" + game.getPlayer().getShip().getPrice());
         labelShipGuns.setText("Guns: " + game.getPlayer().getShip().getGuns());
@@ -100,9 +99,11 @@ public class PlayerPanel extends javax.swing.JPanel {
         labelShipMaxSpeed = new javax.swing.JLabel();
         labelShipHoldSpace = new javax.swing.JLabel();
         labelShipPrice = new javax.swing.JLabel();
-        labelPlayerPort = new javax.swing.JLabel();
         CompassInlayPanel = new javax.swing.JPanel();
+        labelWind = new javax.swing.JLabel();
+        labelWindDetails = new javax.swing.JLabel();
 
+        labelPlayerName.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelPlayerName.setText(game.getPlayer().getName());
 
         labelPlayerGold.setText("Gold: $" + String.valueOf(game.getPlayer().getGold()));
@@ -116,7 +117,7 @@ public class PlayerPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(listHold);
 
-        labelMyShip.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelMyShip.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelMyShip.setText("My " + game.getPlayer().getShip().getName());
 
         labelShipGuns.setText("Guns: " + game.getPlayer().getShip().getGuns()
@@ -130,17 +131,21 @@ public class PlayerPanel extends javax.swing.JPanel {
 
         labelShipPrice.setText("Worth: $" + game.getPlayer().getShip().getPrice());
 
-        labelPlayerPort.setText("Port: " + String.valueOf(game.getPort().getName()));
-
         javax.swing.GroupLayout CompassInlayPanelLayout = new javax.swing.GroupLayout(CompassInlayPanel);
         CompassInlayPanel.setLayout(CompassInlayPanelLayout);
         CompassInlayPanelLayout.setHorizontalGroup(
             CompassInlayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 111, Short.MAX_VALUE)
+            .addGap(0, 83, Short.MAX_VALUE)
         );
         CompassInlayPanelLayout.setVerticalGroup(
             CompassInlayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
+
+        labelWind.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labelWind.setText("Wind:");
+
+        labelWindDetails.setText(game.getWind().getSpeed() + " knots from the " + game.getWind().getDirection().name()
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -148,48 +153,57 @@ public class PlayerPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelPlayerName)
-                                    .addComponent(labelPlayerGold)
-                                    .addComponent(labelPlayerPort)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(labelShipHoldSpace)
-                                            .addComponent(labelShipPrice))
-                                        .addGap(39, 39, 39)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(labelShipMaxSpeed)
-                                            .addComponent(labelShipGuns)))))
+                                    .addComponent(labelWind)
+                                    .addComponent(labelWindDetails))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CompassInlayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(labelMyShip)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CompassInlayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelMyShip)
+                                    .addComponent(labelPlayerGold)
+                                    .addComponent(labelPlayerName)
+                                    .addComponent(labelShipHoldSpace, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(52, 52, 52))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(labelShipMaxSpeed))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelShipPrice)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelShipGuns)))
+                        .addGap(70, 70, 70))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2)))
-                .addContainerGap())
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(23, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelPlayerName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelPlayerGold)
-                        .addGap(2, 2, 2)
-                        .addComponent(labelPlayerPort)
-                        .addGap(18, 18, 18)
-                        .addComponent(labelMyShip))
-                    .addComponent(CompassInlayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(labelPlayerName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelPlayerGold)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(labelWind)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelWindDetails))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(CompassInlayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(labelMyShip)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelShipGuns)
                     .addComponent(labelShipPrice))
@@ -197,9 +211,9 @@ public class PlayerPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelShipHoldSpace)
                     .addComponent(labelShipMaxSpeed))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(123, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -266,11 +280,12 @@ public class PlayerPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labelMyShip;
     private javax.swing.JLabel labelPlayerGold;
     private javax.swing.JLabel labelPlayerName;
-    private javax.swing.JLabel labelPlayerPort;
     private javax.swing.JLabel labelShipGuns;
     private javax.swing.JLabel labelShipHoldSpace;
     private javax.swing.JLabel labelShipMaxSpeed;
     private javax.swing.JLabel labelShipPrice;
+    private javax.swing.JLabel labelWind;
+    private javax.swing.JLabel labelWindDetails;
     private javax.swing.JList<String> listHold;
     // End of variables declaration//GEN-END:variables
 }

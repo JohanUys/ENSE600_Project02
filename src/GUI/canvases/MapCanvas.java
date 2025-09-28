@@ -1,7 +1,6 @@
 package GUI.canvases;
 
-import LOGIC.Map;
-import LOGIC.Port;
+import LOGIC.*;
 
 import java.awt.*;
 
@@ -93,9 +92,21 @@ public class MapCanvas extends javax.swing.JPanel {
 
             // Set color to black for the port name text
             g2d.setColor(Color.BLACK);
-
-            // Draw the port name just above the circle
-            g2d.drawString(port.getName(), x, y - 5);
+            
+            // If the port isn't the current port, draw the name & direction
+            // Else just draw the name
+            if(port != currentPort) 
+            {
+                Direction direction = map.calculatePortDirection(currentPort.getName(), port.getName());
+            
+                // Draw the port name just above the circle
+                g2d.drawString(port.getName() + " (" + direction.getName() + ")", x, y - 5);
+            }
+            else
+            {
+                // Draw the port name just above the circle
+                g2d.drawString(port.getName(), x, y - 5);
+            }
         }
     }
 

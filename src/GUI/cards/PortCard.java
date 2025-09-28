@@ -37,6 +37,7 @@ public class PortCard extends javax.swing.JPanel {
         buttonViewShipyard = new javax.swing.JButton();
         buttonMap = new javax.swing.JButton();
 
+        labelPort.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelPort.setText(game.getPort().getName()
         );
 
@@ -91,7 +92,7 @@ public class PortCard extends javax.swing.JPanel {
                 .addComponent(buttonViewShipyard)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonMap)
-                .addContainerGap(611, Short.MAX_VALUE))
+                .addContainerGap(607, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

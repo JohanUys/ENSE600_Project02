@@ -49,6 +49,7 @@ public class MarketCard extends javax.swing.JPanel {
         listGoods = new javax.swing.JList<>();
         buttonLeaveMarket = new javax.swing.JButton();
 
+        labelPortMarket.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelPortMarket.setText(game.getPort().getName() + " Market"
         );
         labelPortMarket.setName("labelPortNameMarket"); // NOI18N
