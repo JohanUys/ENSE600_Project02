@@ -25,6 +25,14 @@ public class EventPirateCard extends javax.swing.JPanel
     public void setEvent(Events event) {this.event = (PirateEvent)event;}
     public Events getEvent() {return event;}
     
+    // METHODS =================================================================
+    public void updateDisplay()
+    {
+        //Set the buttons to become clickable
+        runButton.setEnabled(true);
+        fightButton.setEnabled(true);
+    }
+    
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -78,6 +86,9 @@ public class EventPirateCard extends javax.swing.JPanel
     // COMPONENT METHODS =======================================================
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_runButtonActionPerformed
     {//GEN-HEADEREND:event_runButtonActionPerformed
+        //Set the buttons to become unclickable
+        runButton.setEnabled(false);
+        fightButton.setEnabled(false);
         
         Ship playerShip = game.getPlayer().getShip();
         Ship pirateShip = event.getPirateShip();
@@ -123,6 +134,10 @@ public class EventPirateCard extends javax.swing.JPanel
 
     private void fightButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_fightButtonActionPerformed
     {//GEN-HEADEREND:event_fightButtonActionPerformed
+        //Set the buttons to become unclickable
+        runButton.setEnabled(false);
+        fightButton.setEnabled(false);
+        
         Ship playerShip = game.getPlayer().getShip();
         Ship pirateShip = event.getPirateShip();
         

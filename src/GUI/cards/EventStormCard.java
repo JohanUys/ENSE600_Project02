@@ -28,6 +28,15 @@ public class EventStormCard extends javax.swing.JPanel
     // METHODS =================================================================
     public void updateDisplay()
     {
+        updateLabelStormChance();
+        
+        //Set the button to become unclickable
+        buttonFaceStorm.setEnabled(true);
+    }
+    
+    //Called by the player panel.
+    public void updateLabelStormChance()
+    {
         labelStormChance.setText("Chance of storm damaging ship: " + EventManager.stormChance(game.getPlayer().getShip()) + "%");
     }
     
@@ -80,6 +89,9 @@ public class EventStormCard extends javax.swing.JPanel
     // COMPONENT METHODS =======================================================
     private void buttonFaceStormActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonFaceStormActionPerformed
     {//GEN-HEADEREND:event_buttonFaceStormActionPerformed
+        
+        //Set button to become unclickable
+        buttonFaceStorm.setEnabled(false);
         
         String outroText;
         

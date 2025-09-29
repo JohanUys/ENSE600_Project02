@@ -36,6 +36,7 @@ public class LootingCard extends javax.swing.JPanel
     public final void updateDisplay()
     {
         labelLootedShip.setText(lootedShip.getName());
+        labelLootedShipDescription.setText(lootedShip.getGuns() + " guns, " + lootedShip.getMaxSpeed() + " knots, " + lootedShip.getMaxHoldSpace() + " hold space, worth " + lootedShip.getPrice() + "$");
         
         //Initialize a default list model to store the goods
         DefaultListModel<String> dlm = new DefaultListModel();
@@ -61,6 +62,7 @@ public class LootingCard extends javax.swing.JPanel
         buttonContinueSailing = new javax.swing.JButton();
         labelIsDumping = new javax.swing.JLabel();
         buttonIsDumping = new javax.swing.JButton();
+        labelLootedShipDescription = new javax.swing.JLabel();
 
         listLootedShipHold.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -71,6 +73,7 @@ public class LootingCard extends javax.swing.JPanel
         });
         jScrollPane1.setViewportView(listLootedShipHold);
 
+        labelLootedShip.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelLootedShip.setText(lootedShip.getName());
 
         buttonSwapShips.setText("Swap Ships!");
@@ -102,6 +105,9 @@ public class LootingCard extends javax.swing.JPanel
             }
         });
 
+        labelLootedShipDescription.setText(lootedShip.getGuns() + " guns, " + lootedShip.getMaxSpeed() + " knots, " + lootedShip.getMaxHoldSpace() + " hold space, worth " + lootedShip.getPrice() + "$"
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,23 +118,26 @@ public class LootingCard extends javax.swing.JPanel
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonSwapShips)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonContinueSailing))
+                        .addComponent(buttonContinueSailing)
+                        .addGap(23, 23, 23))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelLootedShip)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buttonIsDumping)
-                                .addGap(40, 40, 40)
-                                .addComponent(labelIsDumping)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(325, Short.MAX_VALUE))
+                        .addComponent(buttonIsDumping)
+                        .addGap(40, 40, 40)
+                        .addComponent(labelIsDumping))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelLootedShip)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelLootedShipDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(302, 302, 302))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelLootedShip)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelLootedShip)
+                    .addComponent(labelLootedShipDescription))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -139,7 +148,7 @@ public class LootingCard extends javax.swing.JPanel
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonContinueSailing)
                     .addComponent(buttonSwapShips))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -215,6 +224,7 @@ public class LootingCard extends javax.swing.JPanel
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelIsDumping;
     private javax.swing.JLabel labelLootedShip;
+    private javax.swing.JLabel labelLootedShipDescription;
     private javax.swing.JList<String> listLootedShipHold;
     // End of variables declaration//GEN-END:variables
 }

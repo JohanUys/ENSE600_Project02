@@ -114,6 +114,8 @@ public class CardsPanel extends javax.swing.JPanel {
         lootingCard.updateDisplay();
         shipyardCard.updateDisplay();
         eventStormCard.updateDisplay();
+        eventPirateCard.updateDisplay();
+        eventMerchantCard.updateDisplay();
     }
 
     

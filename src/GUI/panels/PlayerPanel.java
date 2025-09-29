@@ -264,7 +264,7 @@ public class PlayerPanel extends javax.swing.JPanel {
             
             //Update displays
             updateDisplay();
-            frame.getCardsPanel().getEventStormCard().updateDisplay();
+            frame.getCardsPanel().getEventStormCard().updateLabelStormChance();
         }
         
         //If an error message found, display that error message

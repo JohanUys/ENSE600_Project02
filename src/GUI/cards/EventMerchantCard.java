@@ -25,6 +25,14 @@ public class EventMerchantCard extends javax.swing.JPanel
     public void setEvent(Events event) {this.event = (MerchantEvent)event;}
     public Events getEvent() {return event;}
     
+    // METHODS =================================================================
+    public void updateDisplay()
+    {
+        //Set the buttons to be clickable again for the next event
+        buttonAvoid.setEnabled(true);
+        buttonChase.setEnabled(true);
+    }
+    
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -77,6 +85,11 @@ public class EventMerchantCard extends javax.swing.JPanel
     // COMPONENT METHODS =======================================================
     private void buttonAvoidActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonAvoidActionPerformed
     {//GEN-HEADEREND:event_buttonAvoidActionPerformed
+        
+        //Set the buttons to be unclickable
+        buttonAvoid.setEnabled(false);
+        buttonChase.setEnabled(false);
+        
         String outroText = "Good plan captain, that would have been a difficult fight!";
         
         // Hand back to the travel card for the next event. 
@@ -86,6 +99,10 @@ public class EventMerchantCard extends javax.swing.JPanel
 
     private void buttonChaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonChaseActionPerformed
     {//GEN-HEADEREND:event_buttonChaseActionPerformed
+        
+        //Set the buttons to be unclickable
+        buttonAvoid.setEnabled(false);
+        buttonChase.setEnabled(false);
         
         Ship playerShip = game.getPlayer().getShip();
         Ship merchantShip = event.getMerchantShip();
@@ -124,6 +141,7 @@ public class EventMerchantCard extends javax.swing.JPanel
             // Hand back to the travel card for the next event. 
             frame.getCardsPanel().getTravelCard().triggerEvent(outroText);
         }
+        
     }//GEN-LAST:event_buttonChaseActionPerformed
 
 

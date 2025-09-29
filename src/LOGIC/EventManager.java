@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class EventManager {
     
-    private static final double CHANCEPERDAY = 10.0; // 10% per day
+    private static final double CHANCEPERDAY = 15.0; // 10% per day
     private static final int MAXEVENTS = 5;
     
     private static final Random random = new Random();
