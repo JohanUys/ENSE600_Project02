@@ -19,7 +19,7 @@ public class Player
     // Default player constructor
     public Player() 
     {
-        this(2000, new Cutter());
+        this(20, new Cutter());
     }
 
     public Player(int gold, Ship ship) 
