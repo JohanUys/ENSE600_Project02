@@ -19,7 +19,7 @@ public class PlayerPanel extends javax.swing.JPanel {
     // CONSTRUCTOR =============================================================
     public PlayerPanel(MainFrame frame) 
     {
-        //Store frame and game as fields 
+        // Store frame and game as fields 
         this.frame = frame;
         this.game = frame.getGame();
         
@@ -28,24 +28,28 @@ public class PlayerPanel extends javax.swing.JPanel {
         Color color = new Color(110, 94, 75);
         setBackground(color);
         
-        //Draw Compass 
+        // Draw Compass 
         Wind wind = game.getWind();
         compassInlay = new CompassInlayCanvas(wind);
         CompassInlayPanel.setLayout(new java.awt.BorderLayout());
         CompassInlayPanel.add(compassInlay, java.awt.BorderLayout.CENTER);
         CompassInlayPanel.setBackground(color);
         
+        // Compass and wind details initially invisible
         updateDisplay();
+        labelWindDetails.setVisible(false);
+        compassInlay.setVisible(false);
     }
     
     // GETTERS =================================================================
     public MainFrame getMainFrame() {return this.frame;}
     public CompassInlayCanvas getCompassInlay() {return compassInlay;}
+    public javax.swing.JLabel getLabelWindDetails() {return labelWindDetails;}
     
     // METHODS =================================================================
     public final void updateDisplay()
     {
-        //Update components 
+        // Update components 
         labelPlayerName.setText(game.getPlayer().getName());
         labelPlayerGold.setText("Gold: $" + String.valueOf(game.getPlayer().getGold()));
         labelWindDetails.setText(game.getWind().getSpeed() + " knots from the " + game.getWind().getDirection().name());
@@ -55,15 +59,15 @@ public class PlayerPanel extends javax.swing.JPanel {
         labelShipMaxSpeed.setText("Max Speed: " + game.getPlayer().getShip().getMaxSpeed() + " knots");
         labelShipHoldSpace.setText("Hold Space: (" + game.getPlayer().getShip().getHold().size() + "/" + game.getPlayer().getShip().getMaxHoldSpace() + ")");
         
-        //DISPLAY THE HOLD
-        //Initialize a default list model to store the goods
+        // DISPLAY THE HOLD
+        // Initialise a default list model to store the goods
         DefaultListModel<String> dlm = new DefaultListModel();
-        //Add each good into the default list model
+        // Add each good into the default list model
         for(Good g : game.getPlayer().getShip().getHold())
         {
             CardsPanel cardsPanel = frame.getCardsPanel();
             
-            //If the ship is not travelling, include adjusted price
+            // If the ship is not travelling, include adjusted price
             if(!  (cardsPanel.isShown("LootingCard") 
                 || cardsPanel.isShown("DumpingCard")
                 || cardsPanel.isShown("TravelCard")
@@ -75,15 +79,25 @@ public class PlayerPanel extends javax.swing.JPanel {
                 int adjustedPrice = g.getAdjustedPrice(game.getPort().getMarket());
                 dlm.addElement(g.getName() + " : $" + adjustedPrice + " (Maximum price : " + (int)g.getMaxPrice() + ")");
             }
-            else //Ship is travelling, don't include adjusted price (it makes no sense to have an adjusted price if not in a port)
+            else // Ship is travelling, don't include adjusted price (it makes no sense to have an adjusted price if not in a port)
             {
                 dlm.addElement(g.getName() + " (Maximum price : " + (int)g.getMaxPrice() + ")");
             }
         }
-        //Set the list to default list model.
+        // Set the list to default list model.
         listHold.setModel(dlm);
 
     }
+    
+    // Updates wind related UI display
+    public void updateWindDisplay() {
+        Wind wind = game.getWind();
+        labelWindDetails.setText(wind.getSpeed() + " knots from the " + wind.getDirection().name());
+        compassInlay.repaint();
+        labelWindDetails.setVisible(true);
+        compassInlay.setVisible(true);
+    }
+
 
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")

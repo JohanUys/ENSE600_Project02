@@ -18,54 +18,38 @@ public class CardsPanel extends javax.swing.JPanel {
     private String cardShown;
     
     //Card Layout Panels
-    private final PortCard portCard;
-    private final MarketCard marketCard;
-    private final ShipyardCard shipyardCard;
-    private final MapCard mapCard;
-    private final TravelCard travelCard;
-    private final EventMerchantCard eventMerchantCard;
-    private final EventPirateCard eventPirateCard;
-    private final EventStormCard eventStormCard;
-    private final LootingCard lootingCard;
+    private final StartCard startCard;
+    private PortCard portCard;
+    private MarketCard marketCard;
+    private ShipyardCard shipyardCard;
+    private MapCard mapCard;
+    private TravelCard travelCard;
+    private EventMerchantCard eventMerchantCard;
+    private EventPirateCard eventPirateCard;
+    private EventStormCard eventStormCard;
+    private LootingCard lootingCard;
 
     // CONSTRUCTOR =============================================================
     public CardsPanel(MainFrame frame) 
     {
-        //Store frame and game as fields 
+        // Store frame and game as fields 
         this.frame = frame;
         this.game = frame.getGame();
         
-        //Initialise card layout 
+        // Initialise card layout 
         cardLayout = new CardLayout();
         setLayout(cardLayout);
         
-        //Initialize card panels
-        this.portCard = new PortCard(frame);
-        this.marketCard = new MarketCard(frame);
-        this.shipyardCard = new ShipyardCard(frame);
-        this.mapCard = new MapCard(frame);
-        this.travelCard = new TravelCard(frame);
-        this.eventMerchantCard = new EventMerchantCard(frame);
-        this.eventPirateCard = new EventPirateCard(frame);
-        this.eventStormCard = new EventStormCard(frame);
-        this.lootingCard = new LootingCard(frame);
+        // Initialise StartCard immediately
+        this.startCard = new StartCard(frame);
+        add(startCard, "StartCard");
 
-        //Add cards panels to card layout
-        add(portCard, "PortCard");
-        add(marketCard, "MarketCard");
-        add(shipyardCard, "ShipyardCard");
-        add(mapCard, "MapCard");
-        add(travelCard, "TravelCard");
-        add(eventMerchantCard, "EventMerchantCard");
-        add(eventPirateCard, "EventPirateCard");
-        add(eventStormCard, "EventStormCard");
-        add(lootingCard, "LootingCard");
-        
-        // Start game at Port
-        showCard("PortCard");
+        // Show StartCard first
+        showCard("StartCard");
     }
     
     // GETTERS ================================================================= 
+    public StartCard getStartCard() {return this.startCard;}
     public PortCard getPortCard() {return this.portCard;}
     public MarketCard getMarketCard() {return this.marketCard;}
     public ShipyardCard getShipyardCard() {return this.shipyardCard;}
@@ -97,14 +81,40 @@ public class CardsPanel extends javax.swing.JPanel {
     // Update cards that need updating.
     public void updateCards() 
     {
-        mapCard.updateDisplay();
-        portCard.updateDisplay();
-        marketCard.updateDisplay();
-        lootingCard.updateDisplay();
-        shipyardCard.updateDisplay();
-        eventStormCard.updateDisplay();
-        eventPirateCard.updateDisplay();
-        eventMerchantCard.updateDisplay();
+        if (mapCard != null) mapCard.updateDisplay();
+        if (portCard != null) portCard.updateDisplay();
+        if (marketCard != null) marketCard.updateDisplay();
+        if (lootingCard != null) lootingCard.updateDisplay();
+        if (shipyardCard != null) shipyardCard.updateDisplay();
+        if (eventStormCard != null) eventStormCard.updateDisplay();
+        if (eventPirateCard != null) eventPirateCard.updateDisplay();
+        if (eventMerchantCard != null) eventMerchantCard.updateDisplay();
+    }
+    
+    public void createGameCards() {
+        // Only create if not already created
+        if (portCard != null) return;
+
+        this.portCard = new PortCard(frame);
+        this.marketCard = new MarketCard(frame);
+        this.shipyardCard = new ShipyardCard(frame);
+        this.mapCard = new MapCard(frame);
+        this.travelCard = new TravelCard(frame);
+        this.eventMerchantCard = new EventMerchantCard(frame);
+        this.eventPirateCard = new EventPirateCard(frame);
+        this.eventStormCard = new EventStormCard(frame);
+        this.lootingCard = new LootingCard(frame);
+
+        // Add to layout
+        add(portCard, "PortCard");
+        add(marketCard, "MarketCard");
+        add(shipyardCard, "ShipyardCard");
+        add(mapCard, "MapCard");
+        add(travelCard, "TravelCard");
+        add(eventMerchantCard, "EventMerchantCard");
+        add(eventPirateCard, "EventPirateCard");
+        add(eventStormCard, "EventStormCard");
+        add(lootingCard, "LootingCard");
     }
 
     

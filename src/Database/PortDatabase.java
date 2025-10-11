@@ -2,6 +2,7 @@ package Database;
 
 import LOGIC.Port;
 import java.sql.*;
+import java.util.HashMap;
 
 // Methods to interact with the database storing the port objects
 public class PortDatabase {
@@ -46,5 +47,28 @@ public class PortDatabase {
             System.err.println("Error clearing ports: " + e.getMessage());
         }
     }
+    
+    // Load all ports stored in the port table
+    public static HashMap<String, Port> loadPorts() {
+        HashMap<String, Port> ports = new HashMap<>();
 
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT * FROM ports")) {
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                int latitude = rs.getInt("latitude");
+                int longitude = rs.getInt("longitude");
+
+                Port port = new Port(name, latitude, longitude);
+                ports.put(name, port);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error loading ports: " + e.getMessage());
+        }
+
+        return ports;
+    }
 }

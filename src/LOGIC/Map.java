@@ -15,27 +15,42 @@ public class Map
     //port properties
     private final HashMap<String,Port> ports = new HashMap<>();
     private final String[] defaultPortNames = {"Rhymek", "HavenPort", "Iglag", "Ludwig", "Port Royal"}; // Default port names used for generation
-   
-  
-    // ========== CONSTRUCTOR ==========
-    public Map()
-    {
-        generateMap();
-    }
     
     //========== GETTERS AND SETTERS ==========
     public String[] getPortNames() {
     return ports.keySet().toArray(new String[0]);} // Returns port names from the HashMap
     public HashMap<String,Port> getPorts() {return this.ports;}
     
-    //========== METHODS ==========
-    //Generates the game map by randomly creating ports and saving them to the database.
-    public final void generateMap() {
-        // Clear existing ports from the database before generating new ones
-        PortDatabase.clearPorts();
-
-        // Generate a fresh set of ports and save them to the database
+    //========== METHODS ==========   
+    // Clear ports and DB and generate a New Map
+    public void generateNewMap() {
+        ports.clear(); // Reset in-memory ports
+        PortDatabase.clearPorts(); // Clear from DB
         generateRandomPortsAndSave();
+    }
+    
+    // Returns true if an existing map was loaded, false if a new map was generated
+    public boolean loadOrGenerateMap() {
+        HashMap<String, Port> loadedPorts = PortDatabase.loadPorts(); // This must exist in PortDatabase
+
+        if (loadedPorts != null && !loadedPorts.isEmpty()) {
+            ports.clear();
+            ports.putAll(loadedPorts);
+            markGridOccupied(); // Mark the map grid so it's accurate
+            System.out.println("Loaded existing ports from the database.");
+            return true;
+        } else {
+            System.out.println("No saved map found. Generating a new one...");
+            generateNewMap();
+            return false;
+        }
+    }
+    
+    // Helper method to mark grid cells as occupied based on loaded ports
+    private void markGridOccupied() {
+        for (Port port : ports.values()) {
+            grid[port.getLatitude()][port.getLongitude()] = 1;
+        }
     }
 
     //Randomly generates ports ensuring a minimum distance between them,
