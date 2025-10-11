@@ -16,6 +16,8 @@ public class DialoguePanel extends javax.swing.JPanel {
     private int currentIndex;
     private String currentText;
     private Timer timer;
+    private String pendingCardToShow = null;
+
     
     // CONSTRUCTOR =============================================================
     public DialoguePanel(MainFrame frame) {
@@ -58,7 +60,7 @@ public class DialoguePanel extends javax.swing.JPanel {
         currentIndex = 0;
         currentText = displayString;
         textAreaDialogue.setText("");
-        
+        pendingCardToShow = cardToShow;
 
         timer = new Timer(TEXTSPEED, (ActionEvent e) -> {
             if (currentIndex < currentText.length()) {
@@ -66,12 +68,16 @@ public class DialoguePanel extends javax.swing.JPanel {
                 currentIndex++;
             } else {
                 timer.stop();
-                frame.getCardsPanel().showCard(cardToShow);
+                if (pendingCardToShow != null) {
+                    frame.getCardsPanel().showCard(pendingCardToShow);
+                    pendingCardToShow = null;
+                }
             }
         });
 
         timer.start();
     }
+
     
     // Display the intro text of cards. This function is called in the CardsPanel.showCard() method.
     public void displayCardShownText(String name)
@@ -206,16 +212,23 @@ public class DialoguePanel extends javax.swing.JPanel {
     // When 'enter' button is hit the dialogue fills immediately, if it is pressed again, the dialogue box empties
     private void textAreaDialogueKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textAreaDialogueKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                if (timer != null && timer.isRunning()) {
-                    // If still animating, stop and fill text immediately
-                    timer.stop();
-                    textAreaDialogue.setText(currentText);
-                } else {
-                    // If already done, clear the dialogue box
-                    textAreaDialogue.setText("");
+            if (timer != null && timer.isRunning()) {
+                // If still animating, stop and fill text immediately
+                timer.stop();
+                textAreaDialogue.setText(currentText);
+
+                // Check if a card needs to be shown immediately
+                if (pendingCardToShow != null) {
+                    frame.getCardsPanel().showCard(pendingCardToShow);
+                    pendingCardToShow = null;
                 }
-                evt.consume(); // prevent newline
+
+            } else {
+                // If already done, clear the dialogue box
+                textAreaDialogue.setText("");
             }
+            evt.consume();
+        }
     }//GEN-LAST:event_textAreaDialogueKeyPressed
 
 
