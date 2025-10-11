@@ -63,6 +63,7 @@ public class ShipyardCard extends javax.swing.JPanel {
             }
         });
 
+        listShips.setBackground(new java.awt.Color(184, 167, 127));
         listShips.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)

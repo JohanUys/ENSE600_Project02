@@ -49,6 +49,8 @@ public class EventStormCard extends javax.swing.JPanel
         buttonFaceStorm = new javax.swing.JButton();
         labelStormChance = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(26, 30, 36));
+
         buttonFaceStorm.setText("Sail Into the Storm!");
         buttonFaceStorm.addActionListener(new java.awt.event.ActionListener()
         {
@@ -58,6 +60,7 @@ public class EventStormCard extends javax.swing.JPanel
             }
         });
 
+        labelStormChance.setForeground(new java.awt.Color(255, 255, 255));
         labelStormChance.setText("Chance of storm damaging ship: " + EventManager.stormChance(game.getPlayer().getShip()) + "%"
         );
 
@@ -65,12 +68,12 @@ public class EventStormCard extends javax.swing.JPanel
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
-                .addComponent(buttonFaceStorm)
-                .addContainerGap(136, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonFaceStorm)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(labelStormChance)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

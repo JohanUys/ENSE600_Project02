@@ -64,6 +64,7 @@ public class LootingCard extends javax.swing.JPanel
         buttonIsDumping = new javax.swing.JButton();
         labelLootedShipDescription = new javax.swing.JLabel();
 
+        listLootedShipHold.setBackground(new java.awt.Color(184, 167, 127));
         listLootedShipHold.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)

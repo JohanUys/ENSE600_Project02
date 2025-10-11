@@ -54,6 +54,7 @@ public class MarketCard extends javax.swing.JPanel {
         );
         labelPortMarket.setName("labelPortNameMarket"); // NOI18N
 
+        listGoods.setBackground(new java.awt.Color(184, 167, 127));
         listGoods.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -92,10 +93,10 @@ public class MarketCard extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(labelPortMarket)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonLeaveMarket)
-                .addGap(17, 17, 17))
+                .addGap(39, 39, 39))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -9,11 +9,18 @@ public class MapCanvas extends javax.swing.JPanel {
     // Properties ==============================================================
     private final Map map;
     private Port currentPort;
+    private final int OFFSET = 100; //To keep ports from going off the page
+    
+    Color waterColor = new Color(28,75,105);
+    Color portColor = new Color(29,110,37);
+    Color selectedPortColor = new Color(48,194,80);
+    Color lineColor = new Color(10,90,122);
+    Color textColor = Color.WHITE;
     
     // Constructor =============================================================
     public MapCanvas(Map map) {
         this.map = map;
-        this.setBackground(Color.WHITE);
+        this.setBackground(waterColor);
         this.setPreferredSize(new Dimension(1200, 1200));
 
         initComponents();
@@ -65,10 +72,10 @@ public class MapCanvas extends javax.swing.JPanel {
                         drawnPairs.add(pairKey);
 
                         // Set the drawing color to gray for the connection lines
-                        g2d.setColor(Color.GRAY);
+                        g2d.setColor(lineColor);
 
                         // Draw a line between the two ports using their longitude and latitude as coordinates
-                        g2d.drawLine(port1.getLongitude(), port1.getLatitude(), port2.getLongitude(), port2.getLatitude());
+                        g2d.drawLine(port1.getLongitude(), port1.getLatitude()+OFFSET, port2.getLongitude(), port2.getLatitude()+OFFSET);
                     }
                 }
             }
@@ -81,17 +88,17 @@ public class MapCanvas extends javax.swing.JPanel {
         for (Port port : ports.values()) {
             // Calculate the top-left x and y coordinates for the circle so it's centered on the port location
             int x = port.getLongitude() - portDiameter / 2;
-            int y = port.getLatitude() - portDiameter / 2;
-
+            int y = port.getLatitude() - portDiameter / 2 + OFFSET;
+            
             // Set color of the port circle:
             // Red if this port is the current active port, otherwise blue
-            g2d.setColor((currentPort != null && port.getName().equals(currentPort.getName())) ? Color.RED : Color.BLUE);
+            g2d.setColor((currentPort != null && port.getName().equals(currentPort.getName())) ? selectedPortColor : portColor);
 
             // Draw the filled circle representing the port
             g2d.fillOval(x, y, portDiameter, portDiameter);
 
             // Set color to black for the port name text
-            g2d.setColor(Color.BLACK);
+            g2d.setColor(textColor);
             
             // If the port isn't the current port, draw the name & direction
             // Else just draw the name
