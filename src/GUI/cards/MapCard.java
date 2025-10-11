@@ -97,6 +97,7 @@ public class MapCard extends javax.swing.JPanel {
         comboBoxPortList = new javax.swing.JComboBox<>();
         buttonTravel = new javax.swing.JButton();
         buttonStayInPort = new javax.swing.JButton();
+        labelNM = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(394, 299));
 
@@ -120,6 +121,8 @@ public class MapCard extends javax.swing.JPanel {
             }
         });
 
+        labelNM.setText("NM = Nautical Mile");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,7 +135,9 @@ public class MapCard extends javax.swing.JPanel {
                         .addComponent(comboBoxPortList, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonTravel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelNM)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                         .addComponent(buttonStayInPort)))
                 .addContainerGap())
         );
@@ -145,8 +150,9 @@ public class MapCard extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxPortList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonTravel)
-                    .addComponent(buttonStayInPort))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonStayInPort)
+                    .addComponent(labelNM))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -178,6 +184,7 @@ public class MapCard extends javax.swing.JPanel {
     private javax.swing.JButton buttonStayInPort;
     private javax.swing.JButton buttonTravel;
     private javax.swing.JComboBox<String> comboBoxPortList;
+    private javax.swing.JLabel labelNM;
     private javax.swing.JScrollPane scrollPaneMap;
     // End of variables declaration//GEN-END:variables
 }

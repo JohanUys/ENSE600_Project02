@@ -29,7 +29,9 @@
                       <Component id="comboBoxPortList" min="-2" pref="137" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonTravel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labelNM" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="32" max="32767" attributes="0"/>
                       <Component id="buttonStayInPort" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -47,8 +49,9 @@
                   <Component id="comboBoxPortList" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonTravel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonStayInPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelNM" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,6 +93,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStayInPortActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelNM">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="NM = Nautical Mile"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

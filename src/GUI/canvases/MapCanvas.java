@@ -104,10 +104,11 @@ public class MapCanvas extends javax.swing.JPanel {
             // Else just draw the name
             if(port != currentPort) 
             {
-                Direction direction = map.calculatePortDirection(currentPort.getName(), port.getName());
+                Direction direction = Map.calculatePortDirection(currentPort, port);
+                int distance = Map.calculatePortDistance(currentPort, port);
             
                 // Draw the port name just above the circle
-                g2d.drawString(port.getName() + " (" + direction.getName() + ")", x, y - 5);
+                g2d.drawString(port.getName() + " (" + distance + "NM "+ direction.getName() + ")", x, y - 5);
             }
             else
             {
