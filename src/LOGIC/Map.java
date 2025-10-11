@@ -10,7 +10,7 @@ public class Map
     
     //map properties
     private final int mapSize = 1000;
-    private final int[][] map = new int[mapSize][mapSize];
+    private final int[][] grid = new int[mapSize][mapSize];
     
     //port properties
     private final HashMap<String,Port> ports = new HashMap<>();
@@ -39,14 +39,14 @@ public class Map
             int longitude = random.nextInt(mapSize);
 
             // Check if location is reserved or too close to existing ports
-            while(this.map[latitude][longitude] == 1 || isTooClose(latitude, longitude, minDistance))
+            while(this.grid[latitude][longitude] == 1 || isTooClose(latitude, longitude, minDistance))
             {
                 latitude = random.nextInt(mapSize);
                 longitude = random.nextInt(mapSize);
             }
 
             // Reserve the map location
-            this.map[latitude][longitude] = 1;
+            this.grid[latitude][longitude] = 1;
 
             // Create port
             Port port = new Port(portName, latitude, longitude);
@@ -71,13 +71,18 @@ public class Map
         return false;
     }
     
-    public int calculatePortDistance(String port1, String port2)
+    public int calculatePortDistance(String portName1, String portName2)
+    {
+        return calculatePortDistance(this.ports.get(portName1), this.ports.get(portName2));
+    }
+    
+    public static int calculatePortDistance(Port port1, Port port2)
     {
         //store coordinates of both ports
-        int port1Longitude = this.ports.get(port1).getLongitude();
-        int port1Latitude = this.ports.get(port1).getLatitude();
-        int port2Longitude = this.ports.get(port2).getLongitude();
-        int port2Latitude = this.ports.get(port2).getLatitude();
+        int port1Latitude = port1.getLatitude();
+        int port1Longitude = port1.getLongitude();
+        int port2Latitude = port2.getLatitude();
+        int port2Longitude = port2.getLongitude();
         
         //Find differences in coordinates
         double latitudeDifference = Math.abs(port1Latitude - port2Latitude);
@@ -89,13 +94,18 @@ public class Map
         return distance;
     }
     
-    public Direction calculatePortDirection(String port1, String port2)
+    public Direction calculatePortDirection(String portName1, String portName2)
+    {
+        return calculatePortDirection(this.ports.get(portName1), this.ports.get(portName2));
+    }
+    
+    public static Direction calculatePortDirection(Port port1, Port port2)
     {
         //store coordinates of both ports
-        int port1Longitude = this.ports.get(port1).getLongitude();
-        int port1Latitude = this.ports.get(port1).getLatitude();
-        int port2Longitude = this.ports.get(port2).getLongitude();
-        int port2Latitude = this.ports.get(port2).getLatitude();
+        int port1Latitude = port1.getLatitude();
+        int port1Longitude = port1.getLongitude();
+        int port2Latitude = port2.getLatitude();
+        int port2Longitude = port2.getLongitude();
         
         //Find differences in coordinates
         double latitudeDifference = port2Latitude - port1Latitude;
@@ -114,21 +124,24 @@ public class Map
         }
         
         //find the cardinal direction from the angle. This is unit circle angles, not compass angles. 
-        if(67.5<=angle && angle<112.5)  {return Direction.NORTH;} //
-        if(112.5<=angle && angle<157.5) {return Direction.NORTHWEST;} //
+        //North and south are flipped, because the positive y axis is downwards when drawing. 
+        if(67.5<=angle && angle<112.5)  {return Direction.SOUTH;} 
+        if(112.5<=angle && angle<157.5) {return Direction.SOUTHWEST;} 
         if(157.5<=angle && angle<202.5) {return Direction.WEST;}
-        if(202.5<=angle && angle<247.5) {return Direction.SOUTHWEST;}
-        if(247.5<=angle && angle<292.5) {return Direction.SOUTH;}
-        if(292.5<=angle && angle<337.5) {return Direction.SOUTHEAST;}
+        if(202.5<=angle && angle<247.5) {return Direction.NORTHWEST;}
+        if(247.5<=angle && angle<292.5) {return Direction.NORTH;}
+        if(292.5<=angle && angle<337.5) {return Direction.NORTHEAST;}
         if(337.5<=angle || angle<22.5)  {return Direction.EAST;}
-        if(22.5<=angle && angle<67.5)   {return Direction.NORTHEAST;}//
-        
-        System.out.println("Error Finding Direction");
-        System.exit(0);
-        return Direction.NORTH; //should never reach this
+        if(22.5<=angle && angle<67.5)   {return Direction.SOUTHEAST;}
+        else return null;
     }
     
-    public int calculatePortTravelTime(String port1, String port2 , Wind wind, Ship ship)
+    public int calculatePortTravelTime(String portName1, String portName2, Wind wind, Ship ship)
+    {
+        return calculatePortTravelTime(ports.get(portName1), ports.get(portName2), wind, ship);
+    }
+    
+    public static int calculatePortTravelTime(Port port1, Port port2 , Wind wind, Ship ship)
     {
         //CALCULATE WIND SPEED FACTOR-------------------------------------------
         
@@ -157,19 +170,17 @@ public class Map
         
         switch(windDifference)
         {
-            case 0 -> windDirectionFactor = 0;      //Wind coming from bow
-            case 1 -> windDirectionFactor = 0.25;   //Wind coming from port/starboard bow
-            case 2 -> windDirectionFactor = 0.50;   //Wind coming from port/starboard
-            case 3 -> windDirectionFactor = 0.75;   //Wind coming from port/starboard quarter  
-            case 4 -> windDirectionFactor = 1;      //Wind coming from stern
-            default -> System.out.println("Error finding windDirectionFactor");
+            case 0 -> windDirectionFactor = 0.2;    //Wind coming from bow
+            case 1 -> windDirectionFactor = 0.4;    //Wind coming from port/starboard bow
+            case 2 -> windDirectionFactor = 0.6;    //Wind coming from port/starboard
+            case 3 -> windDirectionFactor = 0.8;    //Wind coming from port/starboard quarter  
+            case 4 -> windDirectionFactor = 1.0;    //Wind coming from stern
+            default -> System.err.println("Error finding windDirectionFactor");
         }
         
         //CALCULATE TRAVEL TIME-------------------------------------------------
         
         double modifiedShipSpeed = ship.getMaxSpeed()*windDirectionFactor*windSpeedFactor;
-        
-        if(modifiedShipSpeed == 0) {modifiedShipSpeed = 0.1;}
         
         //find the distance between the ports
         int portDistance = calculatePortDistance(port1,port2);
@@ -177,6 +188,4 @@ public class Map
         //time (hours) = distance/speed
         return (int)(portDistance/modifiedShipSpeed);
     }
-    
-
 }

@@ -12,7 +12,7 @@ public class DialoguePanel extends javax.swing.JPanel {
     private final MainFrame frame;
     private final Game game;
     
-    private static final int TEXTSPEED = 10; //milliseconds per letter
+    private static final int TEXTSPEED = 30; //milliseconds per letter
     private int currentIndex;
     private String currentText;
     private Timer timer;

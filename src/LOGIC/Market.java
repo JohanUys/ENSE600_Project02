@@ -9,7 +9,7 @@ public class Market {
     private final ArrayList<Good> goods = new ArrayList<>();
     private final int[] numStocks = new int[Good.values().length];
     private final double[] priceModifiers = new double[Good.values().length];
-    private final int maxNumStock = 4;
+    private final int maxNumStock = 15;
 
     private final String portName;
 

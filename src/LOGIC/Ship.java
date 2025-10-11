@@ -32,6 +32,7 @@ public class Ship
     public int getGuns() {return this.guns;}
     public ArrayList<Good> getHold() {return this.hold;}
     public void setHold(ArrayList<Good> hold) {this.hold = hold;}
+    public void setMaxSpeed(int speed) {this.maxSpeed = speed;}
     
     //========== METHODS ==========
     
