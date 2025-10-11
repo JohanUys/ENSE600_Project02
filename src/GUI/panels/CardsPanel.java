@@ -18,7 +18,6 @@ public class CardsPanel extends javax.swing.JPanel {
     private String cardShown;
     
     //Card Layout Panels
-    private final StartCard startCard;
     private final PortCard portCard;
     private final MarketCard marketCard;
     private final ShipyardCard shipyardCard;
@@ -41,7 +40,6 @@ public class CardsPanel extends javax.swing.JPanel {
         setLayout(cardLayout);
         
         //Initialize card panels
-        this.startCard = new StartCard (frame);
         this.portCard = new PortCard(frame);
         this.marketCard = new MarketCard(frame);
         this.shipyardCard = new ShipyardCard(frame);
@@ -53,7 +51,6 @@ public class CardsPanel extends javax.swing.JPanel {
         this.lootingCard = new LootingCard(frame);
 
         //Add cards panels to card layout
-        add(startCard, "StartCard");
         add(portCard, "PortCard");
         add(marketCard, "MarketCard");
         add(shipyardCard, "ShipyardCard");
@@ -64,8 +61,8 @@ public class CardsPanel extends javax.swing.JPanel {
         add(eventStormCard, "EventStormCard");
         add(lootingCard, "LootingCard");
         
-        // Start game
-        showCard("StartCard");
+        // Start game at Port
+        showCard("PortCard");
     }
     
     // GETTERS ================================================================= 
@@ -85,15 +82,7 @@ public class CardsPanel extends javax.swing.JPanel {
         cardShown = name;
         
         // Display help text for the shown card. 
-        frame.getDialoguePanel().displayCardShownText(name);
-
-        // Show PlayerPanel and only if not StartGamePanel
-        if (!name.equals("StartCard")) {
-            frame.getPlayerPanel().setVisible(true);
-        } else {
-            frame.getPlayerPanel().setVisible(false);
-        }
-        
+        frame.getDialoguePanel().displayCardShownText(name);  
         frame.getPlayerPanel().revalidate();
         frame.getPlayerPanel().repaint();
         frame.getDialoguePanel().revalidate();

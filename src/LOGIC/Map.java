@@ -1,8 +1,8 @@
 package LOGIC;
 
 import java.util.HashMap;
+import Database.*;
 import java.util.Random;
-
 
 public class Map
 {
@@ -14,7 +14,7 @@ public class Map
     
     //port properties
     private final HashMap<String,Port> ports = new HashMap<>();
-    private final String[] portNames = {"Rhymek", "HavenPort", "Iglag", "Ludwig", "Port Royal"};
+    private final String[] defaultPortNames = {"Rhymek", "HavenPort", "Iglag", "Ludwig", "Port Royal"}; // Default port names used for generation
    
   
     // ========== CONSTRUCTOR ==========
@@ -24,36 +24,49 @@ public class Map
     }
     
     //========== GETTERS AND SETTERS ==========
-    public String[] getPortNames() {return this.portNames;}
+    public String[] getPortNames() {
+    return ports.keySet().toArray(new String[0]);} // Returns port names from the HashMap
     public HashMap<String,Port> getPorts() {return this.ports;}
     
     //========== METHODS ==========
-    public final void generateMap()
-    {
-        Random random = new Random();
-        final int minDistance = 50;
+    //Generates the game map by randomly creating ports and saving them to the database.
+    public final void generateMap() {
+        // Clear existing ports from the database before generating new ones
+        PortDatabase.clearPorts();
 
-        for(String portName : portNames)
-        {
+        // Generate a fresh set of ports and save them to the database
+        generateRandomPortsAndSave();
+    }
+
+    //Randomly generates ports ensuring a minimum distance between them,
+    private void generateRandomPortsAndSave() {
+        System.out.println("Generating new ports and saving to database...");
+
+        Random random = new Random();
+        final int minDistance = 50;  // Minimum distance between any two ports
+
+        for (String portName : defaultPortNames) {
             int latitude = random.nextInt(mapSize);
             int longitude = random.nextInt(mapSize);
 
-            // Check if location is reserved or too close to existing ports
-            while(this.grid[latitude][longitude] == 1 || isTooClose(latitude, longitude, minDistance))
-            {
+            // Ensure the selected location is not already taken and not too close to other ports
+            while (grid[latitude][longitude] == 1 || isTooClose(latitude, longitude, minDistance)) {
                 latitude = random.nextInt(mapSize);
                 longitude = random.nextInt(mapSize);
             }
 
-            // Reserve the map location
-            this.grid[latitude][longitude] = 1;
+            // Mark this location as occupied
+            grid[latitude][longitude] = 1;
 
-            // Create port
+            // Create and store the new port
             Port port = new Port(portName, latitude, longitude);
-            ports.put(portName, port);  
+            ports.put(portName, port);
+
+            // Save the new port to the database
+            PortDatabase.insertPort(port);
         }
     }
-
+    
     // Method to check minimum distance to all existing ports
     private boolean isTooClose(int latitude, int longitude, int minDistance)
     {

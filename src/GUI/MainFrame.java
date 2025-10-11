@@ -2,6 +2,7 @@ package GUI;
 
 import GUI.panels.*;
 import LOGIC.Game;
+import Database.*;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -13,13 +14,14 @@ public class MainFrame extends javax.swing.JFrame {
     // PROPERTIES ==============================================================
     private final Game game;
     
-    private final CardsPanel cardsPanel;
     private final PlayerPanel playerPanel;
+    private final CardsPanel cardsPanel;
     private final DialoguePanel dialoguePanel;
     
     // CONSTRUCTOR =============================================================
     public MainFrame() {
         initComponents(); // Sets up menu bar
+        DBSetup.initDatabase(); // Initialise Database
 
         // Initialize a game to store all of the game data and the game objects
         game = new Game();
@@ -64,9 +66,6 @@ public class MainFrame extends javax.swing.JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.anchor = GridBagConstraints.EAST;
         getContentPane().add(playerPanel, gbc);
-
-        // Set visibility and sizing
-        playerPanel.setVisible(false);
 
         setPreferredSize(new Dimension(960, 720));
         pack();
