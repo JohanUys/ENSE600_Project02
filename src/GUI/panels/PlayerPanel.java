@@ -224,53 +224,56 @@ public class PlayerPanel extends javax.swing.JPanel {
         //Find the index of the item to sell
         int index = listHold.getSelectedIndex();
         String message = null;
-
-        //If market panel is being displayed
-        if(frame.getCardsPanel().isShown("MarketCard"))
-        {
-            //Sell that item
-            message = game.getPort().getMarket().sell(index, game.getPlayer());
-            
-            //Update displays
-            updateDisplay();
-            frame.getCardsPanel().getMarketCard().updateDisplay();
-        }
-        if(frame.getCardsPanel().isShown("LootingCard"))
-        {
-            Ship playerShip = game.getPlayer().getShip();
-            Ship lootedShip = frame.getCardsPanel().getLootingCard().getLootedShip();
-            boolean isDumping = frame.getCardsPanel().getLootingCard().getIsDumping();
-           
-            if(!isDumping) //Looting card is in transferring mode
-            {
-                //transfer that item
-                message = EventManager.transfer(index, playerShip, lootedShip);
-            }
-            else //Looting card is in dumping mode 
-            {
-                message = EventManager.dump(index, playerShip);
-            }
-            
-            //Update displays
-            updateDisplay();
-            frame.getCardsPanel().getLootingCard().updateDisplay();
-        }
-        if(frame.getCardsPanel().isShown("EventStormCard"))
-        {
-            Ship playerShip = game.getPlayer().getShip();
-            
-            //Dump the item
-            message = EventManager.dump(index, playerShip);
-            
-            //Update displays
-            updateDisplay();
-            frame.getCardsPanel().getEventStormCard().updateLabelStormChance();
-        }
         
-        //If an error message found, display that error message
-        if(message != null)
+        if(index >= 0) //Prevents error throwing when empty
         {
-            frame.displayMessage(message);
+            //If market panel is being displayed
+            if(frame.getCardsPanel().isShown("MarketCard"))
+            {
+                //Sell that item
+                message = game.getPort().getMarket().sell(index, game.getPlayer());
+
+                //Update displays
+                updateDisplay();
+                frame.getCardsPanel().getMarketCard().updateDisplay();
+            }
+            if(frame.getCardsPanel().isShown("LootingCard"))
+            {
+                Ship playerShip = game.getPlayer().getShip();
+                Ship lootedShip = frame.getCardsPanel().getLootingCard().getLootedShip();
+                boolean isDumping = frame.getCardsPanel().getLootingCard().getIsDumping();
+
+                if(!isDumping) //Looting card is in transferring mode
+                {
+                    //transfer that item
+                    message = EventManager.transfer(index, playerShip, lootedShip);
+                }
+                else //Looting card is in dumping mode 
+                {
+                    message = EventManager.dump(index, playerShip);
+                }
+
+                //Update displays
+                updateDisplay();
+                frame.getCardsPanel().getLootingCard().updateDisplay();
+            }
+            if(frame.getCardsPanel().isShown("EventStormCard"))
+            {
+                Ship playerShip = game.getPlayer().getShip();
+
+                //Dump the item
+                message = EventManager.dump(index, playerShip);
+
+                //Update displays
+                updateDisplay();
+                frame.getCardsPanel().getEventStormCard().updateLabelStormChance();
+            }
+
+            //If an error message found, display that error message
+            if(message != null)
+            {
+                frame.displayMessage(message);
+            }
         }
     }//GEN-LAST:event_listHoldMouseClicked
    

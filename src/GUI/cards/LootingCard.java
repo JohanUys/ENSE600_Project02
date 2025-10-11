@@ -156,30 +156,32 @@ public class LootingCard extends javax.swing.JPanel
     {//GEN-HEADEREND:event_listLootedShipHoldMouseClicked
         //Find index of good to take
         int index = listLootedShipHold.getSelectedIndex();
-        
         String message;
         
-        if(!isDumping) //Looting card is in transferring mode
+        if(index >= 0) //Prevents error throwing if other ship is empty
         {
-            //Transfer that good from the lootedShip to the playerShip.  
-            message = EventManager.transfer(index, lootedShip, game.getPlayer().getShip()); 
-        }
-        else //Looting card is in dumping mode
-        {
-            message = EventManager.dump(index, lootedShip);
-        }
+            if(!isDumping) //Looting card is in transferring mode
+            {
+                //Transfer that good from the lootedShip to the playerShip.  
+                message = EventManager.transfer(index, lootedShip, game.getPlayer().getShip()); 
+            }
+            else //Looting card is in dumping mode
+            {
+                message = EventManager.dump(index, lootedShip);
+            }
 
-        
-        //If an error message found, display that error message
-        if(message != null)
-        {
-            //Display message to user.
-            frame.displayMessage(message);
+
+            //If an error message found, display that error message
+            if(message != null)
+            {
+                //Display message to user.
+                frame.displayMessage(message);
+            }
+
+            //Update displays
+            updateDisplay();
+            frame.getPlayerPanel().updateDisplay();
         }
-        
-        //Update displays
-        updateDisplay();
-        frame.getPlayerPanel().updateDisplay();
     }//GEN-LAST:event_listLootedShipHoldMouseClicked
 
     private void buttonSwapShipsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonSwapShipsActionPerformed

@@ -109,19 +109,23 @@ public class MarketCard extends javax.swing.JPanel {
     {//GEN-HEADEREND:event_listGoodsMouseClicked
         //Find index of item to buy
         int index = listGoods.getSelectedIndex();
-        //Buy that item 
-        String message = game.getPort().getMarket().buy(index, game.getPlayer());
         
-        //If an error message found, display that error message
-        if(message != null)
+        if(index >= 0) //Prevents error throwing if market is empty
         {
-            //Display message to user.
-            frame.displayMessage(message);
+            //Buy that item 
+            String message = game.getPort().getMarket().buy(index, game.getPlayer());
+
+            //If an error message found, display that error message
+            if(message != null)
+            {
+                //Display message to user.
+                frame.displayMessage(message);
+            }
+
+            //Update displays
+            updateDisplay();
+            frame.getPlayerPanel().updateDisplay();
         }
-        
-        //Update displays
-        updateDisplay();
-        frame.getPlayerPanel().updateDisplay();
     }//GEN-LAST:event_listGoodsMouseClicked
 
     // AUTO GENERATED ==========================================================
