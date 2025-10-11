@@ -81,7 +81,7 @@ public class MapTest
                 int latitude2 = map.getPorts().get(portName2).getLatitude();
                 int longitude2 = map.getPorts().get(portName2).getLongitude();
                 
-                assertFalse(latitude1 == latitude2 && longitude1 == latitude2);
+                assertFalse(latitude1 == latitude2 && longitude1 == longitude2);
             }
         }
     }
