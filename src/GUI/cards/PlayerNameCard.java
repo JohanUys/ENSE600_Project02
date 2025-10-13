@@ -6,8 +6,8 @@ public class PlayerNameCard extends javax.swing.JPanel {
 
     // Properties ==============================================================
     private final MainFrame frame;
-    // Constructor =============================================================
     
+// Constructor =============================================================
     public PlayerNameCard(MainFrame frame) {
         this.frame = frame;
         initComponents();
@@ -85,9 +85,6 @@ public class PlayerNameCard extends javax.swing.JPanel {
 
         // Greet player
         javax.swing.JOptionPane.showMessageDialog(this, "Welcome, " + name + "!");
-        
-        // Set player name label to visible
-        //labelPlayerName.setVisible(true);
         
         // Switch to StartCard
         frame.getCardsPanel().showCard("StartCard");
