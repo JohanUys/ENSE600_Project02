@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 public class MainFrame extends javax.swing.JFrame {
 
     // PROPERTIES ==============================================================
-    private final Game game;
+    private Game game;
     
-    private final PlayerPanel playerPanel;
-    private final CardsPanel cardsPanel;
-    private final DialoguePanel dialoguePanel;
+    private PlayerPanel playerPanel;
+    private CardsPanel cardsPanel;
+    private  DialoguePanel dialoguePanel;
     
     // CONSTRUCTOR =============================================================
     public MainFrame() {
@@ -31,6 +31,24 @@ public class MainFrame extends javax.swing.JFrame {
         dialoguePanel = new DialoguePanel(this);
         cardsPanel = new CardsPanel(this);
 
+        //Initialise the layout
+        initLayout();
+    }
+
+    // GETTERS =================================================================
+    public Game getGame() {return this.game;}
+    public CardsPanel getCardsPanel() {return this.cardsPanel;}
+    public PlayerPanel getPlayerPanel() {return this.playerPanel;}
+    public DialoguePanel getDialoguePanel() {return this.dialoguePanel;}
+    
+    // METHODS =================================================================
+    public void displayMessage(String message)
+    {
+        //Displays a popup dialogue box 
+        JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void initLayout(){
         // Layout manager
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -73,24 +91,36 @@ public class MainFrame extends javax.swing.JFrame {
         setResizable(false);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // Close handled in event listener
     }
+    
+    // Restart the game - create new game and panels removing old instances
+    private void resetGame(){
+        // Create an Option Pane confirming if they want to start a new game
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to start a new game?",
+            "Confirm New Game",
+            JOptionPane.YES_NO_OPTION
+        );
 
-    // GETTERS =================================================================
-    public Game getGame() {return this.game;}
-    public CardsPanel getCardsPanel() {return this.cardsPanel;}
-    public PlayerPanel getPlayerPanel() {return this.playerPanel;}
-    public DialoguePanel getDialoguePanel() {return this.dialoguePanel;}
-    
-    // METHODS =================================================================
-    public void displayMessage(String message)
-    {
-        //Displays a popup dialogue box 
-        JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
+        if (confirm == JOptionPane.YES_OPTION) {
+            WindDatabase.saveWind(game.getWind());
+
+            // Reset game and panels
+            game = new Game();
+            playerPanel = new PlayerPanel(this);
+            dialoguePanel = new DialoguePanel(this);
+            cardsPanel = new CardsPanel(this);
+
+            // Remove old components and re-initialise layout
+            getContentPane().removeAll();
+            initLayout();
+
+            // Refresh GUI
+            revalidate();
+            repaint();
+        }
     }
-    
-//    public void showDialogue(String text, Runnable onComplete) {
-//        dialoguePanel.displayText(text);
-//        dialoguePanel.setVisible(true);
-//    }
+
 
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")
@@ -98,7 +128,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        JMenuFile = new javax.swing.JMenu();
+        JMenuItemNewGame = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -109,8 +140,17 @@ public class MainFrame extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        JMenuFile.setText("File");
+
+        JMenuItemNewGame.setText("New Game");
+        JMenuItemNewGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItemNewGameActionPerformed(evt);
+            }
+        });
+        JMenuFile.add(JMenuItemNewGame);
+
+        jMenuBar1.add(JMenuFile);
 
         setJMenuBar(jMenuBar1);
 
@@ -126,6 +166,11 @@ public class MainFrame extends javax.swing.JFrame {
         System.exit(0);
 
     }//GEN-LAST:event_formWindowClosing
+
+    // Starts a new game by resetting the game
+    private void JMenuItemNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemNewGameActionPerformed
+        resetGame(); // Resets game
+    }//GEN-LAST:event_JMenuItemNewGameActionPerformed
 
     // MAIN METHOD =============================================================
     public static void main(String args[]) {
@@ -165,7 +210,8 @@ public class MainFrame extends javax.swing.JFrame {
     
     // AUTO GENERATED ==========================================================
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu JMenuFile;
+    private javax.swing.JMenuItem JMenuItemNewGame;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
