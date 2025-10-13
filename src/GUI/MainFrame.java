@@ -3,6 +3,7 @@ package GUI;
 import GUI.panels.*;
 import LOGIC.Game;
 import Database.*;
+import LOGIC.Player;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -120,7 +121,52 @@ public class MainFrame extends javax.swing.JFrame {
             repaint();
         }
     }
+    
+    // Checks to see if the player has won the game
+    public void checkWinCondition() {
+        Player player = game.getPlayer();
 
+        Player.GameStatus status = player.checkGameStatus();
+
+        // Player win
+        if (status == Player.GameStatus.WIN) {
+            int choice = JOptionPane.showOptionDialog(
+                this,
+                "Congratulations! You reached 1000 gold and have won the game!\n\nWhat would you like to do?",
+                "You Won!",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new Object[] { "Start New Game", "Quit" },
+                "Start New Game"
+            );
+
+            if (choice == JOptionPane.YES_OPTION) {
+                resetGame();
+            } else {
+                System.exit(0);
+            }
+
+        // Player lose
+        } else if (status == Player.GameStatus.LOSE) {
+            int choice = JOptionPane.showOptionDialog(
+                this,
+                "You have no gold and your ship's hold is empty.\n\nGame over.\nWhat would you like to do?",
+                "Game Over",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.ERROR_MESSAGE,
+                null,
+                new Object[] { "Start New Game", "Quit" },
+                "Start New Game"
+            );
+
+            if (choice == JOptionPane.YES_OPTION) {
+                resetGame();
+            } else {
+                System.exit(0);
+            }
+        }
+    }
 
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")

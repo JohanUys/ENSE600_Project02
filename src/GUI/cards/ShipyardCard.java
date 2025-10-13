@@ -1,4 +1,4 @@
-
+  
 package GUI.cards;
 
 import GUI.*;
@@ -128,6 +128,9 @@ public class ShipyardCard extends javax.swing.JPanel {
         //Update displays
         updateDisplay();
         frame.getPlayerPanel().updateDisplay();
+        
+        //Check to see if the player has won the game
+        frame.checkWinCondition();
     }//GEN-LAST:event_listShipsMouseClicked
    
     // AUTO GENERATED ==========================================================
