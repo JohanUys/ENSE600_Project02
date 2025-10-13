@@ -1,4 +1,3 @@
-
 package GUI.cards;
 
 import GUI.*;
@@ -109,6 +108,9 @@ public class TravelCard extends javax.swing.JPanel
                              + "\nWe travelled " + distance + " nautical miles."
                              + "\nDocking ship....................";
         
+        //Check if player has won/lost
+        frame.checkWinCondition();
+
         //Hand over to the port card.
         frame.getDialoguePanel().displayTextThenCard(outroText + arrivalText, "PortCard");
     }

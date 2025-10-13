@@ -126,6 +126,9 @@ public class MarketCard extends javax.swing.JPanel {
             //Update displays
             updateDisplay();
             frame.getPlayerPanel().updateDisplay();
+            
+            //Check to see if the player has won the game
+            frame.checkWinCondition();
         }
     }//GEN-LAST:event_listGoodsMouseClicked
 

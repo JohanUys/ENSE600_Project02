@@ -287,6 +287,9 @@ public class PlayerPanel extends javax.swing.JPanel {
                 frame.displayMessage(message);
             }
         }
+        
+        //Check to see if the player has won the game
+        frame.checkWinCondition();
     }//GEN-LAST:event_listHoldMouseClicked
    
     // AUTO GENERATED ==========================================================
