@@ -71,7 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // Close handled in event listener
     }
 
     // GETTERS =================================================================
@@ -103,6 +103,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jMenu1.setText("File");
@@ -115,6 +120,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    // When player exits window, the current wind state is saved and the app is closed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+
+        WindDatabase.saveWind(game.getWind()); // Save current wind
+        
+        // Exit the app
+        System.exit(0);
+
+    }//GEN-LAST:event_formWindowClosing
 
     // MAIN METHOD =============================================================
     public static void main(String args[]) {

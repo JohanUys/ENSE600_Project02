@@ -20,7 +20,7 @@ public class Map
     public String[] getPortNames() {
     return ports.keySet().toArray(new String[0]);} // Returns port names from the HashMap
     public HashMap<String,Port> getPorts() {return this.ports;}
-    
+      
     //========== METHODS ==========   
     // Clear ports and DB and generate a New Map
     public void generateNewMap() {
@@ -28,23 +28,32 @@ public class Map
         PortDatabase.clearPorts(); // Clear from DB
         generateRandomPortsAndSave();
     }
-    
+
     // Returns true if an existing map was loaded, false if a new map was generated
     public boolean loadOrGenerateMap() {
-        HashMap<String, Port> loadedPorts = PortDatabase.loadPorts(); // This must exist in PortDatabase
+        // First check if ports exist in the database
+        if (PortDatabase.portsExist()) {
+            HashMap<String, Port> loadedPorts = PortDatabase.loadPorts();
 
-        if (loadedPorts != null && !loadedPorts.isEmpty()) {
-            ports.clear();
-            ports.putAll(loadedPorts);
-            markGridOccupied(); // Mark the map grid so it's accurate
-            System.out.println("Loaded existing ports from the database.");
-            return true;
+            if (loadedPorts != null && !loadedPorts.isEmpty()) {
+                ports.clear();
+                ports.putAll(loadedPorts);
+                markGridOccupied();
+                System.out.println("Loaded existing ports from the database.");
+                return true;
+            } else {
+                System.err.println("Ports exist in DB but failed to load.");
+                generateNewMap();
+                return false;
+            }
         } else {
-            System.out.println("No saved map found. Generating a new one...");
+            // No ports exist, so generate new ones
+            System.out.println("No saved ports found. Generating a new map...");
             generateNewMap();
             return false;
         }
     }
+
     
     // Helper method to mark grid cells as occupied based on loaded ports
     private void markGridOccupied() {

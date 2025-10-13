@@ -25,6 +25,22 @@ public class WindDatabase {
         }
     }
 
+    // Checks whether a wind record exists in the database.
+    public static boolean windExists() {
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM wind WHERE id = 1")) {
+
+            rs.next();
+            // If count > 0, a record exists
+            return rs.getInt(1) > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error checking if wind exists: " + e.getMessage());
+            return false;
+        }
+    }
+
     // Saves current wind data to database
     public static void saveWind(Wind wind) {
         try (Connection conn = DriverManager.getConnection(DB_URL)) {

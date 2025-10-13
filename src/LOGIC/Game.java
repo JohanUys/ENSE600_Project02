@@ -28,28 +28,30 @@ public class Game
     public Port getPort() {return this.port;}
 
     public void setPort(Port port) {this.port = port;}
-    
-    
+
+
     // METHODS =================================================================
-    // Ensures the map is loaded if possible, otherwise generates a new map.
+    // Ensures the map is loaded if possible, otherwise generates a new map
     public boolean initialiseMap() {
         boolean mapLoaded = map.loadOrGenerateMap();
 
         if (mapLoaded) {
-            Wind loadedWind = WindDatabase.loadWind();
-            if (loadedWind != null) {
-                this.wind = loadedWind;
+            // Check if a wind record exists in the database
+            if (WindDatabase.windExists()) {
+                this.wind = WindDatabase.loadWind();
             } else {
                 this.wind = new Wind();
-                WindDatabase.saveWind(this.wind);
+                WindDatabase.saveWind(this.wind); // Save new wind for next time
             }
         } else {
-            // No saved map, generate wind only
+            // Map could not be loaded, so generate new wind
             this.wind = new Wind();
             WindDatabase.saveWind(this.wind);
         }
 
-        this.port = map.getPorts().get("Rhymek");  // Default starting port
+        // Set default starting port
+        this.port = map.getPorts().get("Rhymek");
+
         return mapLoaded;
     }
 
