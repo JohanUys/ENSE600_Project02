@@ -8,7 +8,7 @@ import java.awt.*;
 public class CompassInlayCanvas extends javax.swing.JPanel {
 
     // PROPERTIES ==============================================================
-    private final Wind wind;
+    private Wind wind;
 
     // CONSTRUCTOR =============================================================
     public CompassInlayCanvas(Wind wind) {
@@ -19,7 +19,15 @@ public class CompassInlayCanvas extends javax.swing.JPanel {
     }
 
     // METHODS =================================================================
+    
+    // Sets wind and redraws the canvas
+    public void setWind(Wind newWind) {
+        this.wind = newWind;
+        repaint(); // Force canvas redraw
+    }
+
     // Draw the compass
+    // In CompassInlayCanvas
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

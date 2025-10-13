@@ -92,12 +92,11 @@ public class PlayerPanel extends javax.swing.JPanel {
     // Updates wind related UI display
     public void updateWindDisplay() {
         Wind wind = game.getWind();
+        compassInlay.setWind(wind); // Update wind reference
         labelWindDetails.setText(wind.getSpeed() + " knots from the " + wind.getDirection().name());
-        compassInlay.repaint();
         labelWindDetails.setVisible(true);
         compassInlay.setVisible(true);
     }
-
 
     // AUTO GENERATED ==========================================================
     @SuppressWarnings("unchecked")

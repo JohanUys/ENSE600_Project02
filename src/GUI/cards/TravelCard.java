@@ -100,6 +100,7 @@ public class TravelCard extends javax.swing.JPanel
 
         // CHANGE THE PORT AND THE WIND AND UPDATE MARKET
         game.getWind().windChange();
+        frame.getPlayerPanel().updateWindDisplay(); // Updates wind direction in the GUI
         game.setPort(destination);
         game.getPort().resetMarket();
         
