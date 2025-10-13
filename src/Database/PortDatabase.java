@@ -19,6 +19,7 @@ public class PortDatabase {
             return rs.getInt(1) > 0;
 
         } catch (SQLException e) {
+            System.err.println("Error checking if ports exist: " + e.getMessage());
             return false;
         }
     }
@@ -35,6 +36,7 @@ public class PortDatabase {
             ps.executeUpdate();
 
         } catch (SQLException e) {
+            System.err.println("Error inserting port '" + port.getName() + "': " + e.getMessage());
         }
     }
     

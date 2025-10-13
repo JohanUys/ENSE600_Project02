@@ -7,23 +7,7 @@ import java.sql.*;
 // Methods to interact with the database storing the wind objects
 public class WindDatabase {
     // JDBC URL for embedded derby database
-    private static final String DB_URL = "jdbc:derby:gameDB;create=true";
-
-    // Creates wind table in database if it doesn't already exist
-    public static void initWindTable() {
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             Statement statement = conn.createStatement()) {
-            statement.executeUpdate("CREATE TABLE wind (" +
-                               "id INT PRIMARY KEY, " +
-                               "direction VARCHAR(20), " +
-                               "speed INT" +
-                               ")");
-        } catch (SQLException e) {
-            if (!e.getSQLState().equals("X0Y32")) {  // "X0Y32" means Table already exists - this is fine
-                System.err.println("Error creating wind table: " + e.getMessage());
-            }
-        }
-    }
+    private static final String DB_URL = "jdbc:derby:gameDB;create=true";   
 
     // Checks whether a wind record exists in the database.
     public static boolean windExists() {
