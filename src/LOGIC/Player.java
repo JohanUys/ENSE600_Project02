@@ -5,7 +5,7 @@ import LOGIC.ships.*;
 public class Player
 {
     //========== PROPERTIES ==========
-    private final String name = "DefaultName";
+    private String name;
     private int gold;
     private Ship ship;
     public enum GameStatus 
@@ -33,6 +33,7 @@ public class Player
     public Ship getShip() {return this.ship;}
     public void setShip(Ship ship){this.ship = ship;}
     public String getName() {return this.name;}
+    public void setName(String name) {this.name = name;}
 
     //========== ECONOMY HELPERS ==========
     public void addGold(int amount) 

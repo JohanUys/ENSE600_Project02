@@ -18,6 +18,7 @@ public class CardsPanel extends javax.swing.JPanel {
     private String cardShown;
     
     //Card Layout Panels
+    private final PlayerNameCard playerNameCard;
     private final StartCard startCard;
     private PortCard portCard;
     private MarketCard marketCard;
@@ -40,15 +41,18 @@ public class CardsPanel extends javax.swing.JPanel {
         cardLayout = new CardLayout();
         setLayout(cardLayout);
         
-        // Initialise StartCard immediately
+        // Initialise StartCard and PlayerNameCard immediately
+        this.playerNameCard = new PlayerNameCard(frame);
+        add(playerNameCard, "PlayerNameCard");
         this.startCard = new StartCard(frame);
         add(startCard, "StartCard");
 
-        // Show StartCard first
-        showCard("StartCard");
+        // Show PlayerNameCard first
+        showCard("PlayerNameCard");
     }
     
-    // GETTERS ================================================================= 
+    // GETTERS =================================================================
+    public PlayerNameCard getPlayerNameCard() {return this.playerNameCard;}
     public StartCard getStartCard() {return this.startCard;}
     public PortCard getPortCard() {return this.portCard;}
     public MarketCard getMarketCard() {return this.marketCard;}

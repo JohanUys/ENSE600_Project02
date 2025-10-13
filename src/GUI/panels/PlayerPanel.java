@@ -50,9 +50,9 @@ public class PlayerPanel extends javax.swing.JPanel {
     public final void updateDisplay()
     {
         // Update components 
+        labelPlayerName.setVisible(true);
         labelPlayerName.setText(game.getPlayer().getName());
         labelPlayerGold.setText("Gold: $" + String.valueOf(game.getPlayer().getGold()));
-        labelWindDetails.setText(game.getWind().getSpeed() + " knots from the " + game.getWind().getDirection().name());
         labelMyShip.setText("My " + game.getPlayer().getShip().getName());
         labelShipPrice.setText("Worth: $" + game.getPlayer().getShip().getPrice());
         labelShipGuns.setText("Guns: " + game.getPlayer().getShip().getGuns());
